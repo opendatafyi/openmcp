@@ -51,6 +51,14 @@ SOURCE_REGISTRY: Dict[str, SourceConfig] = {
         page_template="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid={native_id}01",
         language_priority=("en", "fr"),
     ),
+    "boc": SourceConfig(
+        id="boc",
+        name="Bank of Canada Valet API",
+        source_type="boc_valet",
+        api_base="https://www.bankofcanada.ca/valet",
+        page_template="https://www.bankofcanada.ca/valet/series/{native_id}",
+        language_priority=("en",),
+    ),
 }
 
 CKAN_SOURCE_IDS = tuple(

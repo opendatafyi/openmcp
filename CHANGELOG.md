@@ -4,6 +4,17 @@ All notable changes to opendata.fyi OpenMCP are documented here.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- `query_boc_valet`, a validated read-only gateway to the Bank of Canada
+  Valet API (series, groups, and observations) for interest rates, exchange
+  rates, and other financial series. No API key required. Live-query only —
+  not part of the semantic index or `get_dataset`.
+- Tests for the Valet request builder, mutually-exclusive range parameters,
+  and response bounding.
+
 ## [1.1.0] - 2026-08-03
 
 ### Added
