@@ -6,9 +6,9 @@ An open-source MCP server that lets AI assistants and MCP clients (Claude,
 Cursor, Codex, ChatGPT, Gemini CLI, Zed, and others) discover and query public
 datasets from [open.canada.ca](https://open.canada.ca),
 [open.alberta.ca](https://open.alberta.ca),
-[data.ontario.ca](https://data.ontario.ca), and the complete
+[data.ontario.ca](https://data.ontario.ca), the complete
 [Statistics Canada Web Data Service](https://www.statcan.gc.ca/en/developers/wds)
-table inventory.
+table inventory, and the [Bank of Canada Valet API](https://www.bankofcanada.ca/valet/docs).
 
 Ask *"how do interest rates affect housing prices?"* and your AI assistant can
 use opendata.fyi to find relevant datasets, query their resources, and answer
@@ -39,6 +39,13 @@ path. Live CKAN keyword discovery still searches the broader portal catalogues.
 The Statistics Canada count is the complete inventory exposed by WDS, which is
 smaller than the broader table count shown by the Statistics Canada website.
 
+The [Bank of Canada Valet API](https://www.bankofcanada.ca/valet/docs)
+(interest rates, exchange rates, and other financial series) is accessed live
+via `query_boc_valet` and is not part of the semantic index or the counts
+above — its series and group catalogues are large enough that discovery is
+left to Valet's own `series_list`/`group_list` endpoints rather than a local
+embedding index.
+
 ## How it works
 
 ```
@@ -58,6 +65,10 @@ get_dataset ────────────────── resources + w
         ├─ StatCan series?   ──▶ query_statcan_wds  (official WDS metadata + data points)
         ├─ Excel?            ──▶ list_excel_sheets → query_excel_sheet
         └─ PDF report?       ──▶ read_pdf           (page-ranged text extraction)
+
+query_boc_valet ─────────────── Bank of Canada interest rate, FX, and other
+                                 series — series/group metadata + observations,
+                                 outside the semantic-search flow above
 ```
 
 Every result preserves its authoritative catalog or publication page.
@@ -122,6 +133,7 @@ Add this standard JSON block to your client's MCP configuration file (e.g. `clau
 | `search_datasets(query, source_id)` | Plain keyword search of one CKAN portal (`canada`, `alberta`, or `ontario`) |
 | `get_dataset(id)` | A dataset's resources + which are API-queryable |
 | `query_statcan_wds(method, ...)` | Read-only access to the official StatCan WDS methods |
+| `query_boc_valet(resource, ...)` | Read-only access to the Bank of Canada Valet API (series, groups, observations) |
 | `get_resource_fields(resource_id, source_id)` | Columns/types of a datastore resource, no download |
 | `query_datastore(resource_id, ..., source_id)` | **Server-side** filter/search — the fast path |
 | `get_file_schema(url)` | Schema of a remote file (DuckDB `DESCRIBE`, minimal download) |
@@ -180,6 +192,39 @@ Use WDS for discrete metadata and data-point requests. For whole-table analysis,
 `get_dataset("statcan:17100009")` returns the official CSV ZIP resource for
 `query_remote_file`.
 
+### Bank of Canada Valet API
+
+`query_boc_valet` is a read-only, allowlisted gateway to the
+[Bank of Canada Valet API](https://www.bankofcanada.ca/valet/docs) — interest
+rates, exchange rates, monetary aggregates, and other financial and economic
+series. No API key is required. It is a live-query tool: series and group
+names are Valet identifiers, not opendata.fyi dataset IDs, and this source is
+not part of semantic search or `get_dataset`.
+
+```text
+query_boc_valet(resource="series", series_names="FXUSDCAD")
+
+query_boc_valet(
+  resource="observations",
+  series_names="FXUSDCAD,FXEURCAD",
+  recent=10
+)
+
+query_boc_valet(
+  resource="group_observations",
+  group_name="FX_RATES_DAILY",
+  start_date="2026-01-01",
+  end_date="2026-01-31",
+  order_dir="desc"
+)
+
+query_boc_valet(resource="series_list")   # discover series names
+query_boc_valet(resource="group_list")    # discover group names
+```
+
+`recent`, `recent_weeks`, `recent_months`, and `recent_years` are mutually
+exclusive with each other and with `start_date`/`end_date`.
+
 ## Design notes
 
 - **Server-side first.** Resources with `datastore_active: true` are filtered by
@@ -189,6 +234,9 @@ Use WDS for discrete metadata and data-point requests. For whole-table analysis,
 - **StatCan WDS access.** `query_statcan_wds` exposes the official allowlisted
   metadata, vector, coordinate, change-list, range, and full-table methods with
   validated inputs and bounded MCP responses.
+- **Bank of Canada Valet access.** `query_boc_valet` exposes the allowlisted
+  series, group, and observation resources with validated inputs and bounded
+  MCP responses, mirroring the StatCan WDS gateway's design.
 - **The vector "database" is one DuckDB file.** Records from every enabled
   source share 384-dimensional vectors; no external vector service is needed.
 - **Real-world Excel/CSV handling**: multi-sheet workbooks, title rows before

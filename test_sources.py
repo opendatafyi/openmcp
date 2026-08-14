@@ -6,6 +6,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 import duckdb
+import requests
 
 import mcp_server
 from semantic import build_index
@@ -307,7 +308,144 @@ class TestStatCanWDSTool(unittest.TestCase):
         )
 
 
+class TestBoCValetTool(unittest.TestCase):
+
+    @patch("mcp_server._dl_session.get")
+    def test_observations_routes_multiple_series_and_bounds_response(self, get):
+        response = Mock()
+        response.json.return_value = {
+            "terms": {"url": "https://www.bankofcanada.ca/terms/"},
+            "seriesDetail": {
+                "FXUSDCAD": {"label": "USD/CAD"},
+                "FXEURCAD": {"label": "EUR/CAD"},
+            },
+            "observations": [
+                {"d": "2026-01-01", "FXUSDCAD": {"v": "1.35"}},
+                {"d": "2026-01-02", "FXUSDCAD": {"v": "1.36"}},
+                {"d": "2026-01-03", "FXUSDCAD": {"v": "1.37"}},
+            ],
+        }
+        get.return_value = response
+
+        result = mcp_server.query_boc_valet(
+            "observations", series_names="FXUSDCAD, FXEURCAD", recent=3, max_items=2
+        )
+
+        self.assertFalse(result.isError)
+        self.assertEqual(
+            result.structuredContent["sources"][0]["dataset_id"], "boc:FXUSDCAD"
+        )
+        self.assertTrue(result.structuredContent["warnings"])
+        get.assert_called_once_with(
+            "https://www.bankofcanada.ca/valet/observations/FXUSDCAD,FXEURCAD/json",
+            params={"recent": 3},
+            timeout=mcp_server.HTTP_TIMEOUT,
+        )
+        response.raise_for_status.assert_called_once()
+
+    @patch("mcp_server._dl_session.get")
+    def test_group_metadata_routes_to_group_endpoint(self, get):
+        response = Mock()
+        response.json.return_value = {
+            "groupDetail": {"name": "FX_RATES_DAILY", "label": "Daily exchange rates"},
+        }
+        get.return_value = response
+
+        result = mcp_server.query_boc_valet("group", group_name="FX_RATES_DAILY")
+
+        self.assertFalse(result.isError)
+        self.assertEqual(
+            result.structuredContent["sources"][0]["dataset_id"], "boc:FX_RATES_DAILY"
+        )
+        get.assert_called_once_with(
+            "https://www.bankofcanada.ca/valet/groups/FX_RATES_DAILY/json",
+            params={},
+            timeout=mcp_server.HTTP_TIMEOUT,
+        )
+
+    @patch("mcp_server._dl_session.get")
+    def test_series_list_does_not_require_names(self, get):
+        response = Mock()
+        response.json.return_value = {"series": {"FXUSDCAD": {"label": "USD/CAD"}}}
+        get.return_value = response
+
+        result = mcp_server.query_boc_valet("series_list")
+
+        self.assertFalse(result.isError)
+        get.assert_called_once_with(
+            "https://www.bankofcanada.ca/valet/lists/series/json",
+            params={},
+            timeout=mcp_server.HTTP_TIMEOUT,
+        )
+
+    @patch("mcp_server._dl_session.get")
+    def test_series_list_is_bounded_by_max_items_not_just_truncated_strings(self, get):
+        # Valet's catalogue is a dict keyed by series name, not a list — the
+        # generic list truncator can't see it, so this must be bounded
+        # explicitly or max_items is silently ignored.
+        response = Mock()
+        response.json.return_value = {
+            "series": {
+                f"SERIES_{i}": {"label": f"Series {i}"} for i in range(10)
+            }
+        }
+        get.return_value = response
+
+        result = mcp_server.query_boc_valet("series_list", max_items=3)
+
+        self.assertFalse(result.isError)
+        self.assertEqual(len(result.structuredContent["rows"]), 3)
+        self.assertEqual(result.structuredContent["rows"][0]["name"], "SERIES_0")
+        self.assertTrue(result.structuredContent["warnings"])
+
+    @patch("mcp_server._dl_session.get")
+    def test_unknown_resource_is_rejected_without_network_access(self, get):
+        result = mcp_server.query_boc_valet("deleteEverything")
+
+        self.assertTrue(result.isError)
+        self.assertEqual(
+            result.structuredContent["error"]["code"], "InvalidBoCValetRequest"
+        )
+        get.assert_not_called()
+
+    @patch("mcp_server._dl_session.get")
+    def test_unknown_series_name_is_not_found_not_retryable(self, get):
+        response = Mock()
+        response.raise_for_status.side_effect = requests.HTTPError(response=Mock(status_code=404))
+        get.return_value = response
+
+        result = mcp_server.query_boc_valet("series", series_names="NOT_A_REAL_SERIES")
+
+        self.assertTrue(result.isError)
+        self.assertEqual(result.structuredContent["error"]["code"], "BoCValetNotFound")
+        self.assertFalse(result.structuredContent["error"]["retryable"])
+
+    @patch("mcp_server._dl_session.get")
+    def test_recent_and_date_range_are_mutually_exclusive(self, get):
+        result = mcp_server.query_boc_valet(
+            "observations",
+            series_names="FXUSDCAD",
+            recent=5,
+            start_date="2026-01-01",
+        )
+
+        self.assertTrue(result.isError)
+        self.assertEqual(
+            result.structuredContent["error"]["code"], "InvalidBoCValetRequest"
+        )
+        get.assert_not_called()
+
+
 class TestSourceRouting(unittest.TestCase):
+
+    def test_boc_dataset_id_redirects_to_query_boc_valet(self):
+        result = mcp_server.get_dataset("boc:FXUSDCAD")
+
+        self.assertTrue(result.isError)
+        self.assertEqual(
+            result.structuredContent["error"]["code"], "UnsupportedDatasetSource"
+        )
+        self.assertIn("query_boc_valet", result.structuredContent["error"]["recovery"])
 
     @patch("mcp_server._ckan_get")
     def test_alberta_dataset_routes_to_alberta_and_keeps_provenance(self, ckan_get):

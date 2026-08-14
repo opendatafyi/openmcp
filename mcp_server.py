@@ -104,6 +104,19 @@ STATCAN_WDS_METHODS = frozenset({
 MAX_STATCAN_WDS_BATCH = 25
 MAX_STATCAN_WDS_ITEMS = 100
 
+BOC_VALET_DOCS_URL = "https://www.bankofcanada.ca/valet/docs"
+BOC_VALET_RESOURCES = frozenset({
+    "series",
+    "observations",
+    "group",
+    "group_observations",
+    "series_list",
+    "group_list",
+})
+MAX_BOC_VALET_BATCH = 10
+MAX_BOC_VALET_RECENT = 1000
+MAX_BOC_VALET_ITEMS = 100
+
 MAX_PREVIEW_ROWS = 15
 MAX_RESULT_ROWS = 100
 MAX_CELL_CHARS = 200
@@ -219,8 +232,8 @@ def _statcan_vector_ids(value: str) -> List[int]:
     return [int(part) for part in raw_ids]
 
 
-def _statcan_date(value: str, name: str, *, timestamp: bool = False) -> str:
-    """Validate the ISO date forms accepted by the WDS endpoints."""
+def _iso_date(value: str, name: str, *, timestamp: bool = False) -> str:
+    """Validate an ISO date (optionally with time), shared by WDS and Valet."""
     text = str(value or "").strip()
     pattern = r"\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2})?)?" if timestamp else r"\d{4}-\d{2}-\d{2}"
     if not re.fullmatch(pattern, text):
@@ -270,7 +283,7 @@ def _statcan_wds_request(
     if method in no_argument_gets:
         pass
     elif method == "getChangedCubeList":
-        url += f"/{_statcan_date(start_date, 'start_date')}"
+        url += f"/{_iso_date(start_date, 'start_date')}"
     elif method in product_posts:
         request_method = "POST"
         request_kwargs["json"] = [{"productId": _statcan_product_id(product_id)}]
@@ -306,15 +319,15 @@ def _statcan_wds_request(
         request_method = "POST"
         request_kwargs["json"] = {
             "vectorIds": [str(value) for value in _statcan_vector_ids(vector_ids)],
-            "startDataPointReleaseDate": _statcan_date(start_date, "start_date", timestamp=True),
-            "endDataPointReleaseDate": _statcan_date(end_date, "end_date", timestamp=True),
+            "startDataPointReleaseDate": _iso_date(start_date, "start_date", timestamp=True),
+            "endDataPointReleaseDate": _iso_date(end_date, "end_date", timestamp=True),
         }
     elif method == "getDataFromVectorByReferencePeriodRange":
         vectors = _statcan_vector_ids(vector_ids)
         request_kwargs["params"] = {
             "vectorIds": ",".join(f'"{value}"' for value in vectors),
-            "startRefPeriod": _statcan_date(start_date, "start_date"),
-            "endReferencePeriod": _statcan_date(end_date, "end_date"),
+            "startRefPeriod": _iso_date(start_date, "start_date"),
+            "endReferencePeriod": _iso_date(end_date, "end_date"),
         }
     elif method == "getFullTableDownloadCSV":
         lang = str(language or "").strip().lower()
@@ -330,15 +343,144 @@ def _statcan_wds_request(
     return response.json(), request_method, url
 
 
-def _truncate_statcan_response(value: Any, limit: int, state: Dict[str, bool]) -> Any:
-    """Bound nested WDS lists and long strings so MCP responses stay usable."""
+_BOC_NAME_RE = re.compile(r"[A-Za-z0-9_.]{1,64}")
+_BOC_RECENT_PARAMS = ("recent", "recent_weeks", "recent_months", "recent_years")
+
+
+def _boc_series_names(value: str) -> List[str]:
+    """Parse and bound a comma-separated list of Valet series names."""
+    names = [part.strip() for part in str(value or "").split(",") if part.strip()]
+    if not names:
+        raise ValueError("series_names must contain at least one series name.")
+    if len(names) > MAX_BOC_VALET_BATCH:
+        raise ValueError(f"At most {MAX_BOC_VALET_BATCH} series names are permitted per call.")
+    for name in names:
+        if not _BOC_NAME_RE.fullmatch(name):
+            raise ValueError(f"Invalid series name: {name!r}.")
+    return names
+
+
+def _boc_group_name(value: str) -> str:
+    """Validate a single Valet group name."""
+    text = str(value or "").strip()
+    if not text:
+        raise ValueError("group_name is required for this resource.")
+    if not _BOC_NAME_RE.fullmatch(text):
+        raise ValueError(f"Invalid group name: {text!r}.")
+    return text
+
+
+def _boc_observation_params(start_date: str, end_date: str, recent: int,
+                            recent_weeks: int, recent_months: int,
+                            recent_years: int, order_dir: str) -> Dict[str, Any]:
+    """Validate the mutually exclusive Valet observation range parameters."""
+    recents = {
+        "recent": recent, "recent_weeks": recent_weeks,
+        "recent_months": recent_months, "recent_years": recent_years,
+    }
+    active = [name for name, val in recents.items() if val]
+    if len(active) > 1:
+        raise ValueError(f"Only one of {', '.join(_BOC_RECENT_PARAMS)} may be set.")
+    if active and (start_date or end_date):
+        raise ValueError("Use either a recent_* window or start_date/end_date, not both.")
+
+    params: Dict[str, Any] = {}
+    if active:
+        name = active[0]
+        value = recents[name]
+        if not 1 <= value <= MAX_BOC_VALET_RECENT:
+            raise ValueError(f"{name} must be between 1 and {MAX_BOC_VALET_RECENT}.")
+        params[name] = value
+    if start_date:
+        params["start_date"] = _iso_date(start_date, "start_date")
+    if end_date:
+        params["end_date"] = _iso_date(end_date, "end_date")
+    order = str(order_dir or "").strip().lower()
+    if order:
+        if order not in {"asc", "desc"}:
+            raise ValueError("order_dir must be 'asc' or 'desc'.")
+        params["order_dir"] = order
+    return params
+
+
+def _boc_valet_request(
+    resource: str,
+    *,
+    series_names: str = "",
+    group_name: str = "",
+    start_date: str = "",
+    end_date: str = "",
+    recent: int = 0,
+    recent_weeks: int = 0,
+    recent_months: int = 0,
+    recent_years: int = 0,
+    order_dir: str = "",
+) -> Tuple[Any, str]:
+    """Build and execute one allowlisted Bank of Canada Valet API request."""
+    if resource not in BOC_VALET_RESOURCES:
+        allowed = ", ".join(sorted(BOC_VALET_RESOURCES))
+        raise ValueError(f"Unsupported resource '{resource}'. Allowed resources: {allowed}")
+
+    source = get_source("boc")
+    params: Dict[str, Any] = {}
+
+    if resource == "series":
+        names = _boc_series_names(series_names)
+        url = f"{source.api_base}/series/{','.join(names)}/json"
+    elif resource == "observations":
+        names = _boc_series_names(series_names)
+        url = f"{source.api_base}/observations/{','.join(names)}/json"
+        params = _boc_observation_params(
+            start_date, end_date, recent, recent_weeks, recent_months, recent_years, order_dir
+        )
+    elif resource == "group":
+        name = _boc_group_name(group_name)
+        url = f"{source.api_base}/groups/{name}/json"
+    elif resource == "group_observations":
+        name = _boc_group_name(group_name)
+        url = f"{source.api_base}/observations/group/{name}/json"
+        params = _boc_observation_params(
+            start_date, end_date, recent, recent_weeks, recent_months, recent_years, order_dir
+        )
+    elif resource == "series_list":
+        url = f"{source.api_base}/lists/series/json"
+    else:  # group_list
+        url = f"{source.api_base}/lists/groups/json"
+
+    response = _dl_session.get(url, params=params, timeout=HTTP_TIMEOUT)
+    response.raise_for_status()
+    return response.json(), url
+
+
+def _boc_catalog_rows(
+    body: Any, key: str, limit: int
+) -> Tuple[Dict[str, Any], List[Dict[str, Any]], bool]:
+    """Bound a Valet lists/* response — thousands of entries live in a dict
+    keyed by name, not a list, so the generic list truncator can't see them.
+    """
+    catalog = body.get(key, {}) if isinstance(body, dict) else {}
+    if not isinstance(catalog, dict):
+        return body, _json_rows(body), False
+    items = list(catalog.items())
+    truncated = len(items) > limit
+    kept = items[:limit]
+    rows = [
+        {"name": name, **(details if isinstance(details, dict) else {"value": details})}
+        for name, details in kept
+    ]
+    bounded = {**{k: v for k, v in body.items() if k != key}, key: dict(kept)}
+    return bounded, rows, truncated
+
+
+def _truncate_json_response(value: Any, limit: int, state: Dict[str, bool]) -> Any:
+    """Bound nested API lists and long strings so MCP responses stay usable."""
     if isinstance(value, list):
         if len(value) > limit:
             state["truncated"] = True
-        return [_truncate_statcan_response(item, limit, state) for item in value[:limit]]
+        return [_truncate_json_response(item, limit, state) for item in value[:limit]]
     if isinstance(value, dict):
         return {
-            str(key): _truncate_statcan_response(item, limit, state)
+            str(key): _truncate_json_response(item, limit, state)
             for key, item in value.items()
         }
     if isinstance(value, str) and len(value) > 2000:
@@ -347,8 +489,8 @@ def _truncate_statcan_response(value: Any, limit: int, state: Dict[str, bool]) -
     return value
 
 
-def _statcan_rows(value: Any) -> List[Dict[str, Any]]:
-    """Represent the varying WDS response envelopes in the common rows field."""
+def _json_rows(value: Any) -> List[Dict[str, Any]]:
+    """Represent a varying JSON response envelope in the common rows field."""
     if isinstance(value, list):
         return [item if isinstance(item, dict) else {"value": item} for item in value]
     if isinstance(value, dict):
@@ -978,6 +1120,18 @@ def get_dataset(dataset_id: str) -> StructuredToolResult:
         "source_id": source_id,
         "operation": "package_show" if source.source_type == "ckan" else "catalog_lookup",
     }
+    if source.source_type == "boc_valet":
+        return make_error_result(
+            f"'{ds_id}' is a Bank of Canada Valet identifier, not an indexed dataset.",
+            code="UnsupportedDatasetSource",
+            query=query_info,
+            recovery=(
+                f"Call query_boc_valet directly — use resource='series' or "
+                f"'observations' with series_names='{native_id}', or "
+                f"resource='group'/'group_observations' with group_name='{native_id}' "
+                "if this is a group name."
+            ),
+        )
     try:
         if source.source_type == "ckan":
             raw = _ckan_get("package_show", source_id=source_id, id=native_id)
@@ -1156,8 +1310,8 @@ def query_statcan_wds(
         )
 
     state = {"truncated": False}
-    bounded = _truncate_statcan_response(body, max_items, state)
-    rows = _statcan_rows(bounded)
+    bounded = _truncate_json_response(body, max_items, state)
+    rows = _json_rows(bounded)
     warnings = []
     if state["truncated"]:
         warnings.append(
@@ -1184,6 +1338,172 @@ def query_statcan_wds(
         sources=[SourceReference(
             title=f"Statistics Canada WDS — {method}",
             url=STATCAN_WDS_GUIDE_URL,
+            dataset_id=dataset_id,
+        )],
+        query=query_info,
+        warnings=warnings,
+    )
+
+
+@mcp.tool(structured_output=True)
+@log_telemetry("query_boc_valet")
+def query_boc_valet(
+    resource: str,
+    series_names: str = "",
+    group_name: str = "",
+    start_date: str = "",
+    end_date: str = "",
+    recent: int = 0,
+    recent_weeks: int = 0,
+    recent_months: int = 0,
+    recent_years: int = 0,
+    order_dir: str = "",
+    max_items: int = 25,
+) -> StructuredToolResult:
+    """Call the Bank of Canada Valet API for interest rate, FX, and other series.
+
+    A read-only, allowlisted gateway to Valet's REST resources. No API key is
+    required. Series and group names are Valet identifiers (e.g. "FXUSDCAD",
+    "FX_RATES_DAILY"), not opendata.fyi dataset IDs — use resource="series_list"
+    or resource="group_list" to discover them.
+
+    Common examples:
+      - resource="series", series_names="FXUSDCAD"
+      - resource="observations", series_names="FXUSDCAD,FXEURCAD", recent=10
+      - resource="observations", series_names="FXUSDCAD",
+        start_date="2026-01-01", end_date="2026-01-31", order_dir="desc"
+      - resource="group", group_name="FX_RATES_DAILY"
+      - resource="group_observations", group_name="FX_RATES_DAILY", recent_weeks=2
+      - resource="series_list"  (full series catalogue, bounded by max_items)
+      - resource="group_list"   (full group catalogue, bounded by max_items)
+
+    Args:
+        resource: One of series, observations, group, group_observations,
+            series_list, group_list.
+        series_names: Comma-separated Valet series names (series/observations).
+        group_name: A single Valet group name (group/group_observations).
+        start_date: ISO start date for observations.
+        end_date: ISO end date for observations.
+        recent: Most recent N observations. Mutually exclusive with the other
+            recent_* parameters and with start_date/end_date.
+        recent_weeks: Most recent N weeks of observations.
+        recent_months: Most recent N months of observations.
+        recent_years: Most recent N years of observations.
+        order_dir: Observation sort order, asc or desc.
+        max_items: Maximum items retained in each response list (1-100).
+    """
+    query_info: Dict[str, Any] = {
+        "source_id": "boc",
+        "operation": "valet",
+        "resource": resource,
+        "series_names": series_names,
+        "group_name": group_name,
+        "start_date": start_date,
+        "end_date": end_date,
+        "recent": recent,
+        "recent_weeks": recent_weeks,
+        "recent_months": recent_months,
+        "recent_years": recent_years,
+        "order_dir": order_dir,
+        "max_items": max_items,
+    }
+    if not 1 <= max_items <= MAX_BOC_VALET_ITEMS:
+        return make_error_result(
+            f"max_items must be between 1 and {MAX_BOC_VALET_ITEMS}.",
+            code="InvalidBoCValetRequest",
+            query=query_info,
+            recovery="Choose a max_items value in the supported range.",
+        )
+
+    try:
+        body, endpoint = _boc_valet_request(
+            resource,
+            series_names=series_names,
+            group_name=group_name,
+            start_date=start_date,
+            end_date=end_date,
+            recent=recent,
+            recent_weeks=recent_weeks,
+            recent_months=recent_months,
+            recent_years=recent_years,
+            order_dir=order_dir,
+        )
+    except ValueError as error:
+        return make_error_result(
+            str(error),
+            code="InvalidBoCValetRequest",
+            query=query_info,
+            recovery="Use an allowed resource and provide the parameters it requires.",
+        )
+    except requests.HTTPError as error:
+        status = error.response.status_code if error.response is not None else None
+        if status == 404:
+            return make_error_result(
+                f"Bank of Canada Valet found no match for this series or group: {error}",
+                code="BoCValetNotFound",
+                query=query_info,
+                recovery="Verify the exact name with resource='series_list' or resource='group_list'.",
+            )
+        return make_error_result(
+            f"Bank of Canada Valet request failed: {error}",
+            code="BoCValetUnavailable",
+            query=query_info,
+            retryable=True,
+            recovery="Retry the request; Valet may be temporarily unavailable.",
+        )
+    except requests.RequestException as error:
+        return make_error_result(
+            f"Bank of Canada Valet request failed: {error}",
+            code="BoCValetUnavailable",
+            query=query_info,
+            retryable=True,
+            recovery="Retry the request; Valet may be temporarily unavailable.",
+        )
+    except Exception as error:
+        return make_error_result(
+            f"Bank of Canada Valet returned an invalid response: {error}",
+            code="InvalidBoCValetResponse",
+            query=query_info,
+            retryable=True,
+            recovery="Retry the request and verify the resource parameters against the Valet docs.",
+        )
+
+    state = {"truncated": False}
+    if resource == "series_list":
+        bounded, rows, state["truncated"] = _boc_catalog_rows(body, "series", max_items)
+    elif resource == "group_list":
+        bounded, rows, state["truncated"] = _boc_catalog_rows(body, "groups", max_items)
+    else:
+        bounded = _truncate_json_response(body, max_items, state)
+        rows = _json_rows(bounded)
+    warnings = []
+    if state["truncated"]:
+        warnings.append(
+            f"The Valet response was truncated to {max_items} items; "
+            "narrow the request or increase max_items for more."
+        )
+
+    query_info["endpoint"] = endpoint
+    rendered = json.dumps(bounded, ensure_ascii=False, indent=2)
+    if len(rendered) > 12000:
+        rendered = rendered[:12000] + "\n…"
+        warnings.append("The Markdown rendering was shortened; structured rows contain the bounded response.")
+
+    dataset_id = None
+    try:
+        if resource in ("series", "observations") and series_names:
+            dataset_id = f"boc:{_boc_series_names(series_names)[0]}"
+        elif resource in ("group", "group_observations") and group_name:
+            dataset_id = f"boc:{_boc_group_name(group_name)}"
+    except ValueError:
+        pass
+
+    return make_tool_result(
+        f"## Bank of Canada Valet: `{resource}`\n\n```json\n{rendered}\n```",
+        rows=rows,
+        sources=[SourceReference(
+            title=f"Bank of Canada Valet API — {resource}",
+            url=BOC_VALET_DOCS_URL,
             dataset_id=dataset_id,
         )],
         query=query_info,
