@@ -1,0 +1,70 @@
+{"id": "q001", "query": "how much does the federal government owe in debt", "expected_ids": ["canada:5d9b3192-e29f-4071-8e44-94b73efd08b5", "statcan:10100002"], "lang": "en", "category": "layman"}
+{"id": "q002", "query": "consumer price index inflation tracker", "expected_ids": ["canada:007de44e-3010-4cce-a03c-92ae9f7011db", "statcan:18100018"], "lang": "en", "category": "layman"}
+{"id": "q003", "query": "how much crude oil does canada produce by province", "expected_ids": ["canada:f83f252c-bb16-439d-8441-5a4157b924fd"], "lang": "en", "category": "layman"}
+{"id": "q004", "query": "weekly cattle and livestock prices in alberta", "expected_ids": ["alberta:90297161-7a1c-4de6-b192-16f6eea98bbf"], "lang": "en", "category": "layman"}
+{"id": "q005", "query": "weekly grain and crop market prices in alberta", "expected_ids": ["alberta:b23eeb3f-8059-4dce-b23b-cf552736dc61"], "lang": "en", "category": "layman"}
+{"id": "q006", "query": "who is licensed to perform marriages in ontario", "expected_ids": ["canada:38ddc983-1bf0-4bee-ad18-07dac8cfe884", "ontario:38ddc983-1bf0-4bee-ad18-07dac8cfe884"], "lang": "en", "category": "layman"}
+{"id": "q007", "query": "certified fall protection and working at heights training providers", "expected_ids": ["ontario:26c0f241-e307-4387-a9b4-48c5522fb8f1"], "lang": "en", "category": "layman"}
+{"id": "q008", "query": "how many new houses are being built in canada", "expected_ids": ["canada:00f345a6-87ac-4efc-9735-0994574899fd", "canada:1cc59f60-12e3-44e8-84ff-9c6c3d2c73c7", "canada:2568854d-6019-4ee4-863f-805e0b63dd69", "canada:392cc982-f113-4c0c-90a4-095914f99293", "canada:440be770-8816-4956-9a9d-8c4c97e35242", "canada:55528bfa-6557-4296-a1aa-36bbb36e756d", "canada:80b0050e-7c37-4f68-8955-3c98e76f904a", "canada:930cd004-6053-4903-be8d-159c1674b461", "canada:96ace35b-4641-488f-b33d-10c390ff77e8", "canada:ca800086-37a9-4475-bbd6-02ae8ae2e942", "canada:ce77d11e-f70b-4203-ad99-b47e30378b19", "canada:d0e77820-0bd2-4fcd-9098-17fb3283ae12", "canada:dc3e885d-ad81-4280-80f7-c06d6fcadfbb", "statcan:34100096", "statcan:34100103", "statcan:34100104", "statcan:34100125", "statcan:34100126", "statcan:34100134", "statcan:34100135", "statcan:34100136", "statcan:34100138", "statcan:34100143", "statcan:34100151", "statcan:34100154", "statcan:34100155"], "lang": "en", "category": "layman"}
+{"id": "q009", "query": "alberta economic indicators dashboard", "expected_ids": ["alberta:4e2302c8-8d45-4da7-bf6b-f7617c7bc5e4"], "lang": "en", "category": "layman"}
+{"id": "q010", "query": "electric vehicle rebate program statistics", "expected_ids": ["canada:23344072-7118-4715-84a9-daf630ec76c8"], "lang": "en", "category": "layman"}
+{"id": "q011", "query": "water permits and taking in ontario", "expected_ids": ["canada:d194c6fc-ddf0-4913-a4e4-eb7144914e52", "ontario:d194c6fc-ddf0-4913-a4e4-eb7144914e52"], "lang": "en", "category": "layman"}
+{"id": "q012", "query": "fees paid by forestry companies for cutting timber in ontario", "expected_ids": ["canada:e9701604-b867-4a01-9546-e2457bc90289", "ontario:e9701604-b867-4a01-9546-e2457bc90289"], "lang": "en", "category": "layman"}
+{"id": "q013", "query": "municipal potable water assets and drinking water advisories", "expected_ids": ["canada:01fe8fa7-8cf1-40cf-9ff7-07a9f6d46078", "canada:047c2377-be5b-475d-8db9-d189626f2301", "canada:969b9309-7512-4e4c-8bab-63872abf24dd", "canada:d750abf2-9d66-47e6-a4f0-7a215f765ae0", "statcan:34100204", "statcan:34100205", "statcan:34100208", "statcan:34100209"], "lang": "en", "category": "layman"}
+{"id": "q014", "query": "summary of permanent residents admitted to canada", "expected_ids": ["canada:082f05ba-e333-4132-ba42-72828d95200b"], "lang": "en", "category": "layman"}
+{"id": "q015", "query": "tourism contribution to provincial gross domestic product", "expected_ids": ["canada:005a5def-2265-43fc-9e25-0e3003afeedb", "statcan:24100042"], "lang": "en", "category": "layman"}
+{"id": "q016", "query": "how much alcohol is sold across canadian provinces", "expected_ids": ["canada:e1fdc8ed-e0a4-4e6a-8961-2db60a9fc886", "statcan:10100010"], "lang": "en", "category": "layman"}
+{"id": "q017", "query": "police reported organized crime incidents across canada", "expected_ids": ["canada:08322e85-beea-4c69-921f-67cd87f9eb9a", "statcan:35100062"], "lang": "en", "category": "layman"}
+{"id": "q018", "query": "postsecondary student enrolments by visible minority group", "expected_ids": ["canada:161cae65-8f2f-4587-be95-0e5bfe57e878", "canada:fc3c31eb-91fa-430a-a029-c8714ed6bf73", "statcan:37100267", "statcan:37100268"], "lang": "en", "category": "layman"}
+{"id": "q019", "query": "average life expectancy at birth and age 65", "expected_ids": ["canada:006ec1cd-5682-435a-ba80-e61408f9afb9", "canada:0cb06537-2ec0-451c-81d7-d417c5e97efe", "canada:17dde99f-75ce-46b6-baa6-6ca5c8ce3f13", "canada:f0db9bca-efaf-4bcb-b33c-76695ae1fbf8", "canada:fa518eb5-609a-41b7-8724-684bcc16c3a9", "statcan:13100008", "statcan:13100010", "statcan:13100013", "statcan:13100020", "statcan:13100032"], "lang": "en", "category": "layman"}
+{"id": "q020", "query": "farm household income distribution by farm type", "expected_ids": ["canada:1066b6ba-1bf3-4a41-ab02-d633ac9711ab", "canada:3de3af5d-90ef-42a3-8f76-a92f749ec943", "statcan:32100030", "statcan:32100401"], "lang": "en", "category": "layman"}
+{"id": "q021", "query": "retail sales monthly seasonally adjusted trends", "expected_ids": ["canada:00280a6a-48d8-4b99-9a44-e4ceed819a58", "statcan:20100030"], "lang": "en", "category": "layman"}
+{"id": "q022", "query": "income of refugee and asylum claimants across provinces", "expected_ids": ["canada:47b3005b-d149-424f-a9e1-37d6c2b61c03", "canada:e217fe84-3930-48bc-8dd7-692f2800a482", "statcan:43100019", "statcan:43100028"], "lang": "en", "category": "layman"}
+{"id": "q023", "query": "monthly labour force unemployment and participation numbers", "expected_ids": ["canada:17b836c1-e7ec-48b9-b7a3-f370f1006975", "statcan:14100017"], "lang": "en", "category": "layman"}
+{"id": "q024", "query": "air quality monitoring observations and health index", "expected_ids": ["canada:28936e1b-681f-4c73-b04a-e86d4b3917c6"], "lang": "en", "category": "layman"}
+{"id": "q025", "query": "social housing near public transit stops", "expected_ids": ["canada:00f413fd-1b3a-41a1-bb13-386812c467dd", "statcan:46100014"], "lang": "en", "category": "layman"}
+{"id": "q026", "query": "CPI", "expected_ids": ["canada:007de44e-3010-4cce-a03c-92ae9f7011db", "statcan:18100018"], "lang": "en", "category": "acronym_code"}
+{"id": "q027", "query": "EVAP", "expected_ids": ["canada:23344072-7118-4715-84a9-daf630ec76c8"], "lang": "en", "category": "acronym_code"}
+{"id": "q028", "query": "10100002", "expected_ids": ["statcan:10100002"], "lang": "en", "category": "acronym_code"}
+{"id": "q029", "query": "10100001", "expected_ids": ["statcan:10100001"], "lang": "en", "category": "acronym_code"}
+{"id": "q030", "query": "10100008", "expected_ids": ["statcan:10100008"], "lang": "en", "category": "acronym_code"}
+{"id": "q031", "query": "CCOFOG", "expected_ids": ["canada:399fa7e0-8900-42db-8f34-7849fc2f647f", "statcan:10100005"], "lang": "en", "category": "acronym_code"}
+{"id": "q032", "query": "GDP by income", "expected_ids": ["canada:00742f67-edb4-449c-aa1b-0a456f1444a8", "statcan:36100430"], "lang": "en", "category": "acronym_code"}
+{"id": "q033", "query": "IRCC Permanent Residents", "expected_ids": ["canada:1d3963d6-eea9-4a4b-8e4a-5c7f2deb7f29", "canada:2fbb56bd-eae7-4582-af7d-a197d185fc93"], "lang": "en", "category": "acronym_code"}
+{"id": "q034", "query": "AQHI", "expected_ids": ["canada:28936e1b-681f-4c73-b04a-e86d4b3917c6"], "lang": "en", "category": "acronym_code"}
+{"id": "q035", "query": "10100003", "expected_ids": ["statcan:10100003"], "lang": "en", "category": "acronym_code"}
+{"id": "q036", "query": "10100004", "expected_ids": ["statcan:10100004"], "lang": "en", "category": "acronym_code"}
+{"id": "q037", "query": "FTE Full-Time Equivalents", "expected_ids": ["canada:01d58f1a-4114-43a2-b639-afcfdfde7987"], "lang": "en", "category": "acronym_code"}
+{"id": "q038", "query": "Portrait du couvert forestier du Québec", "expected_ids": ["canada:039e7efd-9a39-41a7-88bc-dcf2c40265d9"], "lang": "fr", "category": "french"}
+{"id": "q039", "query": "évaluation foncière au québec", "expected_ids": ["canada:061c8cb7-ca4e-45be-a990-61fce7e7d2dc"], "lang": "fr", "category": "french"}
+{"id": "q040", "query": "Indice de défavorisation du Québec", "expected_ids": ["canada:152ec6a1-8091-4b56-beac-f40789f34481"], "lang": "fr", "category": "french"}
+{"id": "q041", "query": "système d'information touristique hébergement et chalets québec", "expected_ids": ["canada:0cc89402-040a-47ff-a2f3-aaa29ef32f1d"], "lang": "fr", "category": "french"}
+{"id": "q042", "query": "rapports financiers annuels établissements de santé québec", "expected_ids": ["canada:116d2518-57eb-415e-8d1f-d958e8fac4df"], "lang": "fr", "category": "french"}
+{"id": "q043", "query": "cadre financier pluriannuel québec", "expected_ids": ["canada:1f74efc1-6eb8-48c7-8ffd-8abeb9102639"], "lang": "fr", "category": "french"}
+{"id": "q044", "query": "ventes de pesticides visés par prescription agronomique québec", "expected_ids": ["canada:0f145f02-230d-419a-999b-e6706e2e1c6b"], "lang": "fr", "category": "french"}
+{"id": "q045", "query": "hôtels et établissements touristiques au québec", "expected_ids": ["canada:2125099f-486b-422d-bc23-f46864d9b41c"], "lang": "fr", "category": "french"}
+{"id": "q046", "query": "liste des conventions collectives en vigueur au québec", "expected_ids": ["canada:21f39629-88f1-4cc4-bbef-cb34276d0685"], "lang": "fr", "category": "french"}
+{"id": "q047", "query": "statistiques des bibliothèques publiques québécoises", "expected_ids": ["canada:231a38a8-f28e-4bef-82ea-dc98a14c1b6f"], "lang": "fr", "category": "french"}
+{"id": "q048", "query": "zones agricoles et cadastre du québec", "expected_ids": ["canada:27ad6922-03a9-42ca-b11d-eef63537cc5a"], "lang": "fr", "category": "french"}
+{"id": "q049", "query": "population de caribous des bois au québec", "expected_ids": ["canada:257ed865-4149-4696-98cd-a516c4fc8a4b"], "lang": "fr", "category": "french"}
+{"id": "q050", "query": "statcan central government debt", "expected_ids": ["statcan:10100002"], "lang": "en", "category": "statcan"}
+{"id": "q051", "query": "chartered banks foreign claims bank of canada", "expected_ids": ["statcan:10100004"], "lang": "en", "category": "statcan"}
+{"id": "q052", "query": "statcan public sector employment reconciliation", "expected_ids": ["statcan:10100001"], "lang": "en", "category": "statcan"}
+{"id": "q053", "query": "bank of canada daily foreign exchange rates", "expected_ids": ["statcan:10100008"], "lang": "en", "category": "statcan"}
+{"id": "q054", "query": "bank of canada monthly foreign exchange rates", "expected_ids": ["statcan:10100009"], "lang": "en", "category": "statcan"}
+{"id": "q055", "query": "government of canada debt securities issues and retirements", "expected_ids": ["statcan:10100003"], "lang": "en", "category": "statcan"}
+{"id": "q056", "query": "statement of government operations and balance sheet statistics", "expected_ids": ["statcan:10100015"], "lang": "en", "category": "statcan"}
+{"id": "q057", "query": "canadian government finance statistics for federal government", "expected_ids": ["statcan:10100016"], "lang": "en", "category": "statcan"}
+{"id": "q058", "query": "government finance statistics for provincial and territorial governments", "expected_ids": ["statcan:10100017"], "lang": "en", "category": "statcan"}
+{"id": "q059", "query": "government finance statistics for colleges and universities", "expected_ids": ["statcan:10100019"], "lang": "en", "category": "statcan"}
+{"id": "q060", "query": "alberta weekly livestock market review", "expected_ids": ["alberta:90297161-7a1c-4de6-b192-16f6eea98bbf"], "lang": "en", "category": "single_portal"}
+{"id": "q061", "query": "alberta weekly crop market review", "expected_ids": ["alberta:b23eeb3f-8059-4dce-b23b-cf552736dc61"], "lang": "en", "category": "single_portal"}
+{"id": "q062", "query": "alberta weekly economic review", "expected_ids": ["alberta:b92414c4-929b-4eb0-9c21-bc7e3a5e1990"], "lang": "en", "category": "single_portal"}
+{"id": "q063", "query": "alberta oil royalties review", "expected_ids": ["alberta:35dc8c68-c6ab-47c4-881d-51f60743345a"], "lang": "en", "category": "single_portal"}
+{"id": "q064", "query": "alberta traffic collision casualties", "expected_ids": ["alberta:637075cb-e3f9-4d05-af19-ea2dc532eed3"], "lang": "en", "category": "single_portal"}
+{"id": "q065", "query": "ontario registered marriage officiants list", "expected_ids": ["ontario:38ddc983-1bf0-4bee-ad18-07dac8cfe884"], "lang": "en", "category": "single_portal"}
+{"id": "q066", "query": "ontario water taking permits registry", "expected_ids": ["ontario:d194c6fc-ddf0-4913-a4e4-eb7144914e52"], "lang": "en", "category": "single_portal"}
+{"id": "q067", "query": "ontario licensed well contractors directory", "expected_ids": ["ontario:ef416525-abb9-4805-a596-98681d34f153"], "lang": "en", "category": "single_portal"}
+{"id": "q068", "query": "ontario crown timber charges for forestry", "expected_ids": ["ontario:e9701604-b867-4a01-9546-e2457bc90289"], "lang": "en", "category": "single_portal"}
+{"id": "q069", "query": "ontario working at heights training providers", "expected_ids": ["ontario:26c0f241-e307-4387-a9b4-48c5522fb8f1"], "lang": "en", "category": "single_portal"}
+{"id": "q070", "query": "ontario moose tag allocation process results", "expected_ids": ["ontario:e9e6d7e4-cfdc-4ac2-bbe3-87e6f0504366"], "lang": "en", "category": "single_portal"}

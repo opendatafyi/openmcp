@@ -1,18 +1,18 @@
 """
 OpenMCP Canada — authoritative Canadian public-data MCP server.
 
-A focused interface over federal, Alberta, and Ontario CKAN portals plus a
-reviewed catalog of authoritative non-CKAN sources. CKAN access is GET-only.
+A focused interface across Canadian federal, provincial, and municipal open data
+portals (Canada, Alberta, Ontario, British Columbia, Toronto, Québec) plus Statistics
+Canada tables and Bank of Canada financial series. CKAN access is GET-only.
 
 Flow:
     search_datasets(query)            -> find datasets (package_search)
+    semantic_search_datasets(query)   -> hybrid semantic + BM25 + live discovery
     get_dataset(dataset_id)           -> list resources + which are queryable
     query_datastore(resource_id, ...) -> server-side filter/search (no download)
-    query_remote_file(url, sql)       -> DuckDB fallback for non-datastore files
-
-Datastore-backed resources (datastore_active: true) are queried server-side via
-datastore_search — fast, no full download. Everything else falls back to DuckDB
-streaming over the file URL.
+    query_remote_file(url, sql)       -> DuckDB streaming for tabular files
+    query_statcan_data(table_id, ...) -> Statistics Canada Web Data Service queries
+    query_boc_valet(series_name, ...) -> Bank of Canada Valet financial queries
 """
 
 import io
@@ -42,7 +42,14 @@ except ImportError:
     pass
 
 from semantic.embed import embed_texts
-from semantic.store import top_k, DB_PATH, get_by_ids
+from semantic.store import (
+    top_k,
+    DB_PATH,
+    get_by_ids,
+    check_catalog_compatibility,
+    bm25_search,
+    top_k_assets,
+)
 from telemetry import (
     is_telemetry_disabled,
     log_telemetry,
@@ -193,13 +200,17 @@ def _robust_get(url: str, timeout: int = None) -> requests.Response:
         return resp
 
 
+PORTAL_SEARCH_TIMEOUT = 5.0
+
+
 # ── helpers ────────────────────────────────────────────────────────────────────
-def _ckan_get(action: str, *, source_id: str = "canada", **params) -> Dict[str, Any]:
+def _ckan_get(action: str, *, source_id: str = "canada", timeout: Optional[float] = None, **params) -> Dict[str, Any]:
     """Call a CKAN Action API endpoint (GET) and return the `result` payload."""
     source = get_source(source_id)
     if source.source_type != "ckan" or not source.api_base:
         raise ValueError(f"Source '{source_id}' does not expose a CKAN Action API.")
-    resp = _dl_session.get(f"{source.api_base}/{action}", params=params, timeout=HTTP_TIMEOUT)
+    effective_timeout = timeout if timeout is not None else HTTP_TIMEOUT
+    resp = _dl_session.get(f"{source.api_base}/{action}", params=params, timeout=effective_timeout)
     resp.raise_for_status()
     body = resp.json()
     if not body.get("success"):
@@ -784,18 +795,20 @@ def _read_tabular(url: str, nrows: Optional[int] = None,
 def semantic_search_datasets(query: str, limit: int = 10) -> StructuredToolResult:
     """
     Find authoritative Canadian open datasets by meaning or natural-language questions.
-    Uses Reciprocal Rank Fusion (RRF) to combine local semantic vector search (bge-small-en-v1.5,
-    runs locally — no API key) with concurrent live keyword searches of the federal, Alberta,
-    and Ontario CKAN portals.
+    Uses Reciprocal Rank Fusion (RRF) to combine local semantic vector search (EmbeddingGemma 2,
+    768d, runs locally — no API key), local BM25 keyword search, schema/PDF asset vectors,
+    and concurrent live keyword searches across Canadian portals (Federal, Alberta, Ontario, BC,
+    Toronto, Québec, and Statistics Canada).
     
     Examples:
         - "how much did municipalities spend on infrastructure?"
         - "population demographics of alberta cities"
         - "water quality testing records"
+        - "NAICS 236 construction capital expenditures"
         
     Args:
         query: Plain English search term, acronym, or question.
-        limit: Max datasets to return (default 8).
+        limit: Max datasets to return (default 10).
     """
     effective_limit = max(1, min(limit, 25))
     query_info = {
@@ -812,21 +825,52 @@ def semantic_search_datasets(query: str, limit: int = 10) -> StructuredToolResul
             recovery="Download catalog.duckdb from the latest release or run python semantic/build_index.py.",
         )
 
+    mismatch = check_catalog_compatibility()
+    if mismatch:
+        return make_error_result(
+            f"Catalog embedding model mismatch: local database was built with {mismatch['catalog_model']} ({mismatch['catalog_dim']}d), but current server requires {mismatch['expected_model']} ({mismatch['expected_dim']}d).",
+            code="CatalogModelMismatch",
+            query=query_info,
+            retryable=False,
+            recovery="Rebuild catalog.duckdb by running 'python semantic/build_index.py' or download the matching release catalog.",
+        )
+
     warnings: List[str] = []
 
-    # 1. Retrieve semantic search results (top 25)
+    # 1. Retrieve semantic search results (top 25) & child asset results (schemas, PDFs)
+    asset_matched_via: Dict[str, str] = {}
+    asset_rank_list: List[str] = []
     try:
         query_vecs = embed_texts([query], is_query=True)
         if not query_vecs:
             semantic_results = []
         else:
             semantic_results = top_k(query_vecs[0], k=25)
+            raw_assets = top_k_assets(query_vecs[0], k=25)
+            for a in raw_assets:
+                ds_id = a.get("dataset_id")
+                if ds_id and ds_id not in asset_matched_via:
+                    asset_kind = a.get("kind", "asset")
+                    if asset_kind == "column_schema":
+                        cols = a.get("metadata", {}).get("columns", [])
+                        col_preview = ", ".join(cols[:4]) if cols else ""
+                        asset_matched_via[ds_id] = f"Column schema ({col_preview})" if col_preview else "Column schema"
+                    elif asset_kind == "pdf_text":
+                        asset_matched_via[ds_id] = f"PDF guide ({a.get('title', 'Document')})"
+                    else:
+                        asset_matched_via[ds_id] = a.get("title") or "Child asset"
+                    asset_rank_list.append(ds_id)
     except Exception as e:
-        # Fall back to empty list if local DB search fails
         semantic_results = []
         warnings.append(f"Semantic search was unavailable ({type(e).__name__}); results use keyword search only.")
 
-    # 2. Search all live CKAN portals concurrently. Each portal fails independently.
+    # 2. Local DuckDB BM25 keyword search
+    try:
+        bm25_results = bm25_search(query, k=25)
+    except Exception:
+        bm25_results = []
+
+    # 3. Search all live CKAN portals concurrently. Each portal fails independently.
     keyword_results: Dict[str, List[Dict[str, Any]]] = {}
     live_details: Dict[str, Dict[str, Any]] = {}
     with concurrent.futures.ThreadPoolExecutor(
@@ -835,7 +879,7 @@ def semantic_search_datasets(query: str, limit: int = 10) -> StructuredToolResul
         futures = {
             executor.submit(
                 _ckan_get, "package_search", source_id=source_id,
-                q=query, rows=25
+                q=query, rows=25, timeout=PORTAL_SEARCH_TIMEOUT
             ): source_id
             for source_id in CKAN_SOURCE_IDS
         }
@@ -858,7 +902,7 @@ def semantic_search_datasets(query: str, limit: int = 10) -> StructuredToolResul
                 )
 
     keyword_count = sum(len(results) for results in keyword_results.values())
-    if not semantic_results and not keyword_count:
+    if not semantic_results and not bm25_results and not asset_rank_list and not keyword_count:
         if len(warnings) >= len(CKAN_SOURCE_IDS) + 1:
             return make_error_result(
                 "Semantic search and all live keyword searches failed.",
@@ -874,10 +918,10 @@ def semantic_search_datasets(query: str, limit: int = 10) -> StructuredToolResul
             warnings=[*warnings, "No datasets matched the query."],
         )
 
-    # 3. Reciprocal Rank Fusion (RRF)
+    # 4. Reciprocal Rank Fusion (RRF)
     rrf_scores = {}
     
-    # Semantic Rank Fusion
+    # Primary Semantic Rank Fusion
     semantic_map: Dict[str, Dict[str, Any]] = {}
     for rank, ds in enumerate(semantic_results, start=1):
         source_id, native_id = split_dataset_id(ds["id"])
@@ -885,8 +929,19 @@ def semantic_search_datasets(query: str, limit: int = 10) -> StructuredToolResul
         ds = {**ds, "id": ds_id}
         semantic_map[ds_id] = ds
         rrf_scores[ds_id] = rrf_scores.get(ds_id, 0.0) + (1.0 / (60.0 + rank))
+
+    # Child Asset Rank Fusion
+    for rank, ds_id in enumerate(asset_rank_list, start=1):
+        rrf_scores[ds_id] = rrf_scores.get(ds_id, 0.0) + (1.0 / (60.0 + rank))
+
+    # Local DuckDB BM25 Rank Fusion
+    bm25_ids = set()
+    for rank, ds in enumerate(bm25_results, start=1):
+        ds_id = ds["id"]
+        bm25_ids.add(ds_id)
+        rrf_scores[ds_id] = rrf_scores.get(ds_id, 0.0) + (1.0 / (60.0 + rank))
         
-    # Give each portal its own rank list so a large catalog cannot swamp smaller ones.
+    # Live CKAN Portals Rank Fusion
     keyword_ids = set()
     for source_results in keyword_results.values():
         for rank, ds in enumerate(source_results, start=1):
@@ -897,7 +952,7 @@ def semantic_search_datasets(query: str, limit: int = 10) -> StructuredToolResul
     # Sort IDs by RRF score descending
     sorted_ids = sorted(rrf_scores.keys(), key=lambda x: rrf_scores[x], reverse=True)
     
-    # 4. Prefer indexed metadata, but retain live results not yet present locally.
+    # 5. Prefer indexed metadata, but retain live results not yet present locally.
     all_details = get_by_ids(sorted_ids)
     for ds_id, record in live_details.items():
         all_details.setdefault(ds_id, record)
@@ -905,13 +960,17 @@ def semantic_search_datasets(query: str, limit: int = 10) -> StructuredToolResul
     fused_results = []
     for ds_id in sorted_ids:
         if ds_id in all_details:
-            ds = all_details[ds_id]
+            ds = dict(all_details[ds_id])
             ds["rrf_score"] = rrf_scores[ds_id]
             ds["distance"] = semantic_map[ds_id]["distance"] if ds_id in semantic_map else None
             
-            # Check if this hit came from keyword, semantic, or both
-            is_semantic = ds_id in semantic_map
-            is_keyword = ds_id in keyword_ids
+            # Attach matched_via hint if hit came from child asset
+            if ds_id in asset_matched_via:
+                ds["matched_via"] = asset_matched_via[ds_id]
+
+            # Match classification
+            is_semantic = ds_id in semantic_map or ds_id in asset_matched_via
+            is_keyword = ds_id in keyword_ids or ds_id in bm25_ids
             if is_semantic and is_keyword:
                 ds["match_type"] = "Hybrid"
             elif is_semantic:
@@ -949,13 +1008,13 @@ def semantic_search_datasets(query: str, limit: int = 10) -> StructuredToolResul
     datasets: List[Dict[str, Any]] = []
     sources: List[SourceReference] = []
     for ds in fused_results:
-        title = ds["title"]
-        org = ds["org"] or "Unknown Publisher"
-        desc = _truncate_desc(ds["notes"])
-        ds_id = ds["id"]
+        title = ds.get("title", "")
+        org = ds.get("org") or "Unknown Publisher"
+        desc = _truncate_desc(ds.get("notes", ""))
+        ds_id = ds.get("id", "")
         
         # Resources summary
-        resources = ds["resources"]
+        resources = ds.get("resources", [])
         csv_count = sum(1 for r in resources if r["format"] == "CSV")
         xlsx_count = sum(1 for r in resources if r["format"] in ("XLSX", "XLS"))
         parquet_count = sum(1 for r in resources if r["format"] == "PARQUET")
@@ -1010,6 +1069,7 @@ def semantic_search_datasets(query: str, limit: int = 10) -> StructuredToolResul
             "metadata": ds.get("metadata", {}),
             "resource_counts": resource_counts,
             "match_type": ds["match_type"],
+            "matched_via": ds.get("matched_via"),
             "rrf_score": ds["rrf_score"],
             "cosine_distance": ds["distance"],
         })

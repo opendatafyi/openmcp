@@ -43,13 +43,14 @@ class TestStructuredToolContract(unittest.TestCase):
                 EXPECTED_FIELDS,
             )
 
+    @patch("mcp_server.check_catalog_compatibility", return_value=None)
     @patch("mcp_server.get_by_ids")
     @patch("mcp_server._ckan_get")
     @patch("mcp_server.top_k")
     @patch("mcp_server.embed_texts")
     @patch("mcp_server.os.path.exists", return_value=True)
     def test_semantic_search_returns_datasets_sources_and_markdown(
-        self, _exists, embed_texts, top_k, ckan_get, get_by_ids
+        self, _exists, embed_texts, top_k, ckan_get, get_by_ids, _check_compat
     ):
         native_id = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
         dataset_id = f"canada:{native_id}"

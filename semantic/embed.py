@@ -1,91 +1,114 @@
 import logging
 import os
-from typing import List
+from typing import List, Optional
 
-from fastembed import TextEmbedding
+import torch
+from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-MODEL_NAME = "BAAI/bge-small-en-v1.5"
-EMBED_DIM = 384
+MODEL_NAME = "google/embeddinggemma-2"
+EMBED_DIM = 768
+PROMPT_VERSION = "gemma2-asymmetric-v1"
 
-# Lazy-loaded local embedding model (ONNX via fastembed — no API key needed).
-_model = None
+# Lazy-loaded local embedding model
+_model: Optional[SentenceTransformer] = None
 
 
-def get_model() -> TextEmbedding:
-    """Initialize and return the local embedding model (downloads ~130MB on first run)."""
+def _get_device() -> str:
+    """Select the best available device: Apple Silicon (MPS) -> CUDA -> CPU."""
+    if torch.backends.mps.is_available():
+        return "mps"
+    if torch.cuda.is_available():
+        return "cuda"
+    return "cpu"
+
+
+def get_model() -> SentenceTransformer:
+    """Initialize and return the local EmbeddingGemma 2 model."""
     global _model
     if _model is None:
-        logger.info(f"Loading local embedding model '{MODEL_NAME}'...")
-        _model = TextEmbedding(model_name=MODEL_NAME)
+        device = _get_device()
+        logger.info(f"Loading embedding model '{MODEL_NAME}' on {device}...")
+        try:
+            _model = SentenceTransformer(MODEL_NAME, device=device, local_files_only=True)
+        except Exception:
+            _model = SentenceTransformer(MODEL_NAME, device=device)
+        max_len = int(os.environ.get("EMBED_MAX_SEQ_LENGTH", "2048"))
+        _model.max_seq_length = max_len
+        logger.info(f"EmbeddingGemma 2 max_seq_length set to {max_len}")
     return _model
 
 
-def _gpu_model():
-    """Return (SentenceTransformer, device) if torch with a GPU backend is installed.
+def format_query(query: str) -> str:
+    """Format a query with the documented EmbeddingGemma 2 instruction prefix."""
+    cleaned = query.strip().replace("\n", " ")
+    if cleaned.startswith("task: search result | query: "):
+        return cleaned
+    return f"task: search result | query: {cleaned}"
 
-    Optional fast path for bulk index builds: on Apple Silicon (MPS) or CUDA the
-    same bge model runs ~7x faster than CPU ONNX. torch is NOT a required
-    dependency — without it we fall back to fastembed multiprocessing.
+
+def format_document(text: str) -> str:
+    """Format document text for EmbeddingGemma 2: title: {title} | text: {body}"""
+    cleaned = text.strip()
+    if cleaned.startswith("title: ") and " | text: " in cleaned:
+        return cleaned.replace("\n", " ")
+
+    lines = [line.strip() for line in cleaned.split("\n") if line.strip()]
+    if not lines:
+        return "title: none | text: "
+    if len(lines) == 1:
+        # Single line: use as both or title: none | text: line
+        return f"title: {lines[0]} | text: {lines[0]}"
+    
+    # First line is typically the title
+    title = lines[0]
+    body = " ".join(lines[1:])
+    return f"title: {title} | text: {body}"
+
+
+def embed_texts(texts: List[str], is_query: bool = False, batch_size: int = 8) -> List[List[float]]:
     """
-    try:
-        import torch
-        from sentence_transformers import SentenceTransformer
-    except ImportError:
-        return None, None
-    if torch.backends.mps.is_available():
-        device = "mps"
-    elif torch.cuda.is_available():
-        device = "cuda"
-    else:
-        return None, None
-    logger.info(f"Using GPU-accelerated embedding ({device}) via sentence-transformers.")
-    return SentenceTransformer(MODEL_NAME, device=device), device
-
-
-def embed_texts(texts: List[str], is_query: bool = False) -> List[List[float]]:
-    """
-    Generate embeddings for a list of texts using a local bge-small-en-v1.5 model.
+    Generate 768-dimensional embeddings using google/embeddinggemma-2.
 
     Args:
         texts: The list of string texts to embed.
-        is_query: True for search queries — applies the BGE query instruction
-                  prefix, which materially improves retrieval. False for documents.
+        is_query: True for search queries (applies query task prefix).
+                  False for documents (applies title/text prefix).
+        batch_size: Batch size for encoding (default 8 for 8K context memory safety).
 
     Returns:
-        A list of 384-dimensional float list embeddings.
+        A list of 768-dimensional float list embeddings normalized to unit length.
     """
     if not texts:
         return []
 
-    processed = [t.replace("\n", " ") for t in texts]
+    model = get_model()
 
-    if is_query:
-        model = get_model()
-        vectors = model.query_embed(processed)
-        return [v.tolist() for v in vectors]
+    with torch.inference_mode():
+        if is_query:
+            formatted = [format_query(t) for t in texts]
+            vecs = model.encode(
+                formatted,
+                batch_size=min(len(formatted), 16),
+                truncate_dim=EMBED_DIM,
+                normalize_embeddings=True,
+                show_progress_bar=False,
+            )
+            return [v.tolist() for v in vecs]
 
-    # Bulk document path. Prefer the GPU (MPS/CUDA) if torch is installed —
-    # ~7x faster than CPU ONNX for long documents. normalize_embeddings=True
-    # matches fastembed's L2-normalised output, so the two paths produce
-    # interchangeable vectors (queries always go through fastembed).
-    st_model, _device = _gpu_model()
-    if st_model is not None:
-        vecs = st_model.encode(
-            processed, batch_size=64, normalize_embeddings=True,
-            show_progress_bar=True,
+        # Documents
+        formatted = [format_document(t) for t in texts]
+        show_progress = len(formatted) > 50
+        vecs = model.encode(
+            formatted,
+            batch_size=batch_size,
+            truncate_dim=EMBED_DIM,
+            normalize_embeddings=True,
+            show_progress_bar=show_progress,
         )
         return [v.tolist() for v in vecs]
 
-    # CPU fallback: fastembed with multiprocessing across all cores.
-    # embed() yields lazily — wrap in tqdm for live progress. Small
-    # batch_size keeps the bar ticking in small steps.
-    model = get_model()
-    parallel = 0 if len(processed) > 50 else None
-    vectors = model.embed(processed, batch_size=32, parallel=parallel)
-    desc = f"Embedding {len(processed)} docs ({MODEL_NAME}, {os.cpu_count()} cores)"
-    return [v.tolist() for v in tqdm(vectors, total=len(processed), desc=desc, unit="doc")]

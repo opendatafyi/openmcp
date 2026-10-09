@@ -8,6 +8,9 @@ openpyxl
 pyarrow
 fastembed
 torch
-sentence-transformers
+torchvision
+sentence-transformers>=6.0.0
+sentencepiece
+tiktoken
 pypdf
 tqdm

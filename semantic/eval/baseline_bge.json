@@ -1,0 +1,4198 @@
+{
+  "vector_only": {
+    "mode": "vector_only",
+    "model": "BAAI/bge-small-en-v1.5",
+    "total_queries": 70,
+    "overall": {
+      "hit@1": 0.37142857142857144,
+      "hit@5": 0.7142857142857143,
+      "hit@10": 0.8142857142857143,
+      "mrr": 0.5194784580498866
+    },
+    "by_category": {
+      "acronym_code": {
+        "count": 12,
+        "hit@1": 0.3333333333333333,
+        "hit@5": 0.4166666666666667,
+        "hit@10": 0.5,
+        "mrr": 0.3619047619047619
+      },
+      "french": {
+        "count": 12,
+        "hit@1": 0.9166666666666666,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 0.9444444444444445
+      },
+      "layman": {
+        "count": 25,
+        "hit@1": 0.32,
+        "hit@5": 0.72,
+        "hit@10": 0.84,
+        "mrr": 0.49004761904761907
+      },
+      "single_portal": {
+        "count": 11,
+        "hit@1": 0.2727272727272727,
+        "hit@5": 0.7272727272727273,
+        "hit@10": 0.9090909090909091,
+        "mrr": 0.4987373737373737
+      },
+      "statcan": {
+        "count": 10,
+        "hit@1": 0.0,
+        "hit@5": 0.7,
+        "hit@10": 0.8,
+        "mrr": 0.29500000000000004
+      }
+    },
+    "by_lang": {
+      "en": {
+        "count": 58,
+        "hit@1": 0.25862068965517243,
+        "hit@5": 0.6551724137931034,
+        "hit@10": 0.7758620689655172,
+        "mrr": 0.4315544608648057
+      },
+      "fr": {
+        "count": 12,
+        "hit@1": 0.9166666666666666,
+        "hit@5": 1.0,
+        "hit@10": 1.0,
+        "mrr": 0.9444444444444445
+      }
+    },
+    "latency_ms": {
+      "mean": 117.67925242560783,
+      "p50": 110.36254209466279,
+      "p95": 118.29137499444187,
+      "min": 102.05054213292897,
+      "max": 618.3425420895219
+    },
+    "query_details": [
+      {
+        "id": "q001",
+        "query": "how much does the federal government owe in debt",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:5d9b3192-e29f-4071-8e44-94b73efd08b5",
+          "statcan:10100002"
+        ],
+        "retrieved_ids": [
+          "canada:07ed7c29-fef1-4c3b-9119-1dfef81aa460",
+          "canada:5d9b3192-e29f-4071-8e44-94b73efd08b5",
+          "statcan:10100048",
+          "canada:4ea88dab-3b85-4c64-b2f6-17423cd5e5c1",
+          "canada:6a962654-72c6-4130-ba48-83e65042d66f",
+          "statcan:10100065",
+          "canada:132bbfdf-fef6-443b-a35f-25e52e97bb36",
+          "canada:044812e9-e459-4d2c-a25a-7c576efc09e5",
+          "canada:c5a819e1-c577-449b-87a8-d35ccace6fa0",
+          "canada:492ac052-44fe-491c-8e3b-4ad16b2235a2"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 618.3425420895219
+      },
+      {
+        "id": "q002",
+        "query": "consumer price index inflation tracker",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:007de44e-3010-4cce-a03c-92ae9f7011db",
+          "statcan:18100018"
+        ],
+        "retrieved_ids": [
+          "canada:a71262e2-0cc3-4e07-9b0f-67ffc6762349",
+          "canada:2c75c627-3eb6-41ee-bb54-7b089eade484",
+          "alberta:443b43de-b8c0-4108-9aab-bde7df7532ed",
+          "statcan:18100016",
+          "canada:d11e1d9f-9166-4595-8730-5a75c0b2d398",
+          "statcan:18100019",
+          "canada:634f0d90-25e0-4956-a3a5-1032453cec15",
+          "statcan:18100259",
+          "canada:e6bb7199-b8ed-4e2b-a75f-58aac3f1c19a",
+          "statcan:36100350"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 116.1410000640899
+      },
+      {
+        "id": "q003",
+        "query": "how much crude oil does canada produce by province",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:f83f252c-bb16-439d-8441-5a4157b924fd"
+        ],
+        "retrieved_ids": [
+          "canada:0b7bf4b3-423a-45d0-a92b-e69be0b81ce4",
+          "canada:f83f252c-bb16-439d-8441-5a4157b924fd",
+          "alberta:b8fea8da-848f-4d04-be0f-983787f88694",
+          "canada:cdfd1440-8893-11e0-a55f-6cf049291510",
+          "alberta:6b02f6db-f0df-4749-8a46-e0130cff4fb4",
+          "canada:2fd3ab44-59d8-446f-bf77-720037dcac4f",
+          "alberta:38ee531b-28fb-424d-bf6d-9eb272dcb53e",
+          "alberta:4ad7b5c8-8fdf-42a4-bec4-e57fae9f058e",
+          "canada:ccd699c3-14c8-4f81-8c1f-0713ed2a4f70",
+          "canada:1194620e-0154-4cbc-aceb-af0330976ca0"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 110.10358319617808
+      },
+      {
+        "id": "q004",
+        "query": "weekly cattle and livestock prices in alberta",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:90297161-7a1c-4de6-b192-16f6eea98bbf"
+        ],
+        "retrieved_ids": [
+          "alberta:e80740b9-1a84-4d2e-866a-f74e62436299",
+          "alberta:902547bc-7d1c-4147-b774-99a313c536a0",
+          "alberta:90297161-7a1c-4de6-b192-16f6eea98bbf",
+          "alberta:ddd55b15-02b0-475b-affc-e38e8c690bbc",
+          "alberta:38b723e8-db70-4532-8d85-d5feae64e950",
+          "alberta:4ccd8581-b6f0-4a1b-b6ab-d060440996f1",
+          "alberta:e80c46a8-8612-4166-8f06-dc80aa09cc56",
+          "alberta:1a118df8-7860-4165-8a7a-3764a944b3a7",
+          "alberta:16e6d069-037a-47d1-a5c0-0086bbbcc944",
+          "alberta:b86cd45c-5976-47c0-ad0b-f6cc08b947c9"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        "latency_ms": 105.36129213869572
+      },
+      {
+        "id": "q005",
+        "query": "weekly grain and crop market prices in alberta",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:b23eeb3f-8059-4dce-b23b-cf552736dc61"
+        ],
+        "retrieved_ids": [
+          "alberta:deae699f-7721-4f24-9573-54d3d18baf65",
+          "alberta:772c08dc-e15d-4186-a6ed-afa4b49c48a8",
+          "alberta:b23eeb3f-8059-4dce-b23b-cf552736dc61",
+          "alberta:be168f37-341a-4a78-9f57-5420b4a57433",
+          "alberta:864f86a2-a4cc-4ef6-a1e5-dc07389e4a5d",
+          "alberta:fa0eaebe-44ba-4ed6-90d6-6b29eb74be4a",
+          "alberta:1061490e-54a7-4831-9731-589886135699",
+          "alberta:bc3cd1a8-7cb7-4f4a-9db7-573b4e617502",
+          "alberta:3714a545-fe0f-4561-a586-75c2b1f3a0d3",
+          "alberta:14bb4c9f-73a7-479f-aa55-3f73efae56e5"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        "latency_ms": 106.32508411072195
+      },
+      {
+        "id": "q006",
+        "query": "who is licensed to perform marriages in ontario",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:38ddc983-1bf0-4bee-ad18-07dac8cfe884",
+          "ontario:38ddc983-1bf0-4bee-ad18-07dac8cfe884"
+        ],
+        "retrieved_ids": [
+          "canada:38ddc983-1bf0-4bee-ad18-07dac8cfe884",
+          "ontario:38ddc983-1bf0-4bee-ad18-07dac8cfe884",
+          "ontario:499472dc-8526-4ed6-b267-58cc1bd774e7",
+          "canada:499472dc-8526-4ed6-b267-58cc1bd774e7",
+          "canada:21f042c5-d6c4-44e2-9c03-f71c39b3a0e8",
+          "ontario:21f042c5-d6c4-44e2-9c03-f71c39b3a0e8",
+          "canada:46df90d5-0425-4472-b30c-c225dcd64f1e",
+          "ontario:46df90d5-0425-4472-b30c-c225dcd64f1e",
+          "canada:ec9ddfa5-22e7-4588-98fc-4d6cb335188f",
+          "ontario:ec9ddfa5-22e7-4588-98fc-4d6cb335188f"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 104.2934157885611
+      },
+      {
+        "id": "q007",
+        "query": "certified fall protection and working at heights training providers",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:26c0f241-e307-4387-a9b4-48c5522fb8f1"
+        ],
+        "retrieved_ids": [
+          "ontario:26c0f241-e307-4387-a9b4-48c5522fb8f1",
+          "alberta:3c3a0002-6c18-4b7a-804d-6ca5b62f9280",
+          "alberta:44ec45ce-84b7-4a35-ab6f-581fca5700cd",
+          "ontario:9ce8373a-4bae-4c74-be9a-d8639dea9d54",
+          "canada:9ce8373a-4bae-4c74-be9a-d8639dea9d54",
+          "alberta:1918b0f2-5faf-46be-a648-081838155ff8",
+          "alberta:e42ff11d-1a65-45a7-8f12-df7318e75e9c",
+          "alberta:70e1b3a4-114b-4b6f-9da0-67c58dafc999",
+          "alberta:ba252cdd-b500-418c-bd3c-619bf4f0bea5",
+          "alberta:9e99bc82-e782-471b-92bd-547883bc2a47"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 107.22154192626476
+      },
+      {
+        "id": "q008",
+        "query": "how many new houses are being built in canada",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:00f345a6-87ac-4efc-9735-0994574899fd",
+          "canada:1cc59f60-12e3-44e8-84ff-9c6c3d2c73c7",
+          "canada:2568854d-6019-4ee4-863f-805e0b63dd69",
+          "canada:392cc982-f113-4c0c-90a4-095914f99293",
+          "canada:440be770-8816-4956-9a9d-8c4c97e35242",
+          "canada:55528bfa-6557-4296-a1aa-36bbb36e756d",
+          "canada:80b0050e-7c37-4f68-8955-3c98e76f904a",
+          "canada:930cd004-6053-4903-be8d-159c1674b461",
+          "canada:96ace35b-4641-488f-b33d-10c390ff77e8",
+          "canada:ca800086-37a9-4475-bbd6-02ae8ae2e942",
+          "canada:ce77d11e-f70b-4203-ad99-b47e30378b19",
+          "canada:d0e77820-0bd2-4fcd-9098-17fb3283ae12",
+          "canada:dc3e885d-ad81-4280-80f7-c06d6fcadfbb",
+          "statcan:34100096",
+          "statcan:34100103",
+          "statcan:34100104",
+          "statcan:34100125",
+          "statcan:34100126",
+          "statcan:34100134",
+          "statcan:34100135",
+          "statcan:34100136",
+          "statcan:34100138",
+          "statcan:34100143",
+          "statcan:34100151",
+          "statcan:34100154",
+          "statcan:34100155"
+        ],
+        "retrieved_ids": [
+          "canada:caec84e1-f84f-4125-9554-46c7b89e9665",
+          "canada:cde5899d-7205-4d37-90dc-b0c37f848a88",
+          "canada:fac4c175-38b3-4667-b1ca-f002382f9b78",
+          "canada:a60d8e24-7ca7-4f8a-80a0-797ece622fe3",
+          "alberta:f7de8782-5384-4f72-8df8-4471fb13b1b7",
+          "alberta:b20227a4-8bbd-4e7c-9e43-4f5a8d6ed180",
+          "canada:930cd004-6053-4903-be8d-159c1674b461",
+          "canada:680add81-ca57-4816-b443-107d3912398c",
+          "canada:77ac513f-a65a-4cf0-b889-31be6ddb6f46",
+          "canada:392cc982-f113-4c0c-90a4-095914f99293"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 1.0,
+          "mrr": 0.14285714285714285
+        },
+        "latency_ms": 112.04637493938208
+      },
+      {
+        "id": "q009",
+        "query": "alberta economic indicators dashboard",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:4e2302c8-8d45-4da7-bf6b-f7617c7bc5e4"
+        ],
+        "retrieved_ids": [
+          "alberta:4e2302c8-8d45-4da7-bf6b-f7617c7bc5e4",
+          "alberta:584e78a6-c4f9-498a-9457-60641acec959",
+          "canada:601d303a-b77b-4cb4-a23e-4f872b9bc96f",
+          "alberta:51710c00-0277-47e3-b368-c8e1f8955c09",
+          "alberta:30cc4dc9-8927-4df0-a3ec-fc076b12ccc5",
+          "alberta:cfe4dfd5-ac18-4808-9623-e3f06e2ea940",
+          "alberta:b5ce80b2-fd67-498c-a7a3-0efa25c58a36",
+          "alberta:863fe59c-ec5c-4be2-b2e9-7b0195504797",
+          "alberta:3ddd0af0-da89-4b44-b378-b466ec9e38f9",
+          "alberta:d0fac07d-9789-4d87-abf5-0c813fd7b157"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 103.47479092888534
+      },
+      {
+        "id": "q010",
+        "query": "electric vehicle rebate program statistics",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:23344072-7118-4715-84a9-daf630ec76c8"
+        ],
+        "retrieved_ids": [
+          "canada:23344072-7118-4715-84a9-daf630ec76c8",
+          "canada:d70e2d11-60f0-031b-7c3d-ec05f1f4886b",
+          "canada:42986a95-be23-436e-af15-7c6bf292a2e1",
+          "alberta:15563111-60c6-428b-a110-d0d3cf3df169",
+          "canada:d99abc15-afb0-471e-b2a2-8d00d8caac2d",
+          "canada:8edfcbdd-fc20-6ac8-2d57-362283024bfd",
+          "canada:12a904df-773f-4e50-87ee-de3ac7d5da0c",
+          "canada:5c5f481e-0b3f-4bda-9e7d-01a66c8141f3",
+          "alberta:a7319f81-f4ab-4f06-9cff-42f31ef94a50",
+          "canada:30fdf9c3-b7cc-462e-bd98-3fc5499b1c37"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 115.83037488162518
+      },
+      {
+        "id": "q011",
+        "query": "water permits and taking in ontario",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:d194c6fc-ddf0-4913-a4e4-eb7144914e52",
+          "ontario:d194c6fc-ddf0-4913-a4e4-eb7144914e52"
+        ],
+        "retrieved_ids": [
+          "canada:c3413230-b784-4e4a-befd-d325840235cc",
+          "ontario:c3413230-b784-4e4a-befd-d325840235cc",
+          "canada:dfd0d1ff-961d-400b-a01e-a90831697b7e",
+          "ontario:dfd0d1ff-961d-400b-a01e-a90831697b7e",
+          "canada:d194c6fc-ddf0-4913-a4e4-eb7144914e52",
+          "ontario:d194c6fc-ddf0-4913-a4e4-eb7144914e52",
+          "canada:645356b2-2b7b-46e1-88f2-c5db2aaa0b37",
+          "ontario:645356b2-2b7b-46e1-88f2-c5db2aaa0b37",
+          "canada:af3d0f22-ce38-4137-9bc9-61bb3ea75085",
+          "alberta:6f89990b-6088-4ed6-9df9-4b0d609e7c88"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.2
+        },
+        "latency_ms": 108.87575009837747
+      },
+      {
+        "id": "q012",
+        "query": "fees paid by forestry companies for cutting timber in ontario",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:e9701604-b867-4a01-9546-e2457bc90289",
+          "ontario:e9701604-b867-4a01-9546-e2457bc90289"
+        ],
+        "retrieved_ids": [
+          "canada:e9701604-b867-4a01-9546-e2457bc90289",
+          "ontario:e9701604-b867-4a01-9546-e2457bc90289",
+          "alberta:b0952938-e29d-4340-a00f-d040118081c5",
+          "alberta:898a89fe-1f5c-4b51-9390-fb04ddf1e71d",
+          "alberta:c18ef1f7-d50f-4c6d-9889-08c33f238946",
+          "alberta:dd834bc8-91dd-4380-a5e0-daff31e4b603",
+          "alberta:64504bb0-0d90-4708-b9ba-f7ba61812e05",
+          "alberta:68a34ff1-83d3-49fc-9f83-7781db846dff",
+          "alberta:3191686b-2dd2-41d8-9863-ee13d3ee4c9c",
+          "alberta:81d9c265-dd25-496c-b589-7435e55c552e"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 110.58320780284703
+      },
+      {
+        "id": "q013",
+        "query": "municipal potable water assets and drinking water advisories",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:01fe8fa7-8cf1-40cf-9ff7-07a9f6d46078",
+          "canada:047c2377-be5b-475d-8db9-d189626f2301",
+          "canada:969b9309-7512-4e4c-8bab-63872abf24dd",
+          "canada:d750abf2-9d66-47e6-a4f0-7a215f765ae0",
+          "statcan:34100204",
+          "statcan:34100205",
+          "statcan:34100208",
+          "statcan:34100209"
+        ],
+        "retrieved_ids": [
+          "canada:85cb9e62-a388-4fd6-b669-c83fa9ff51b2",
+          "canada:01fe8fa7-8cf1-40cf-9ff7-07a9f6d46078",
+          "canada:047c2377-be5b-475d-8db9-d189626f2301",
+          "canada:969b9309-7512-4e4c-8bab-63872abf24dd",
+          "canada:a1792615-c3a8-489a-b89e-814141c67b9d",
+          "canada:d750abf2-9d66-47e6-a4f0-7a215f765ae0",
+          "canada:5efb989f-2223-43d0-9782-a2ae0dda4725",
+          "statcan:34100205",
+          "statcan:34100209",
+          "statcan:34100207"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 110.41370802558959
+      },
+      {
+        "id": "q014",
+        "query": "summary of permanent residents admitted to canada",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:082f05ba-e333-4132-ba42-72828d95200b"
+        ],
+        "retrieved_ids": [
+          "canada:0186868b-a04d-4a0e-962e-bdfbac51bfb3",
+          "canada:52e4b14b-597a-4ecf-a184-23a6e69b0d57",
+          "canada:1b026aab-edb3-4d5d-8231-270a09ed4e82",
+          "canada:f7e5498e-0ad8-4417-85c9-9b8aff9b9eda",
+          "canada:082f05ba-e333-4132-ba42-72828d95200b",
+          "canada:2fbb56bd-eae7-4582-af7d-a197d185fc93",
+          "canada:1d3963d6-eea9-4a4b-8e4a-5c7f2deb7f29",
+          "canada:2bf9f856-20fe-4644-bf74-c8e45b3d94bd",
+          "canada:052642bb-3fd9-4828-b608-c81dff7e539c",
+          "canada:9b34e712-513f-44e9-babf-9df4f7256550"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.2
+        },
+        "latency_ms": 110.36254209466279
+      },
+      {
+        "id": "q015",
+        "query": "tourism contribution to provincial gross domestic product",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:005a5def-2265-43fc-9e25-0e3003afeedb",
+          "statcan:24100042"
+        ],
+        "retrieved_ids": [
+          "canada:005a5def-2265-43fc-9e25-0e3003afeedb",
+          "statcan:24100042",
+          "canada:5388a95a-fc3c-46ca-9f73-ea7b4e06730a",
+          "ontario:2ae0a7b5-8655-42ff-8339-0b757bf9394c",
+          "statcan:24100044",
+          "canada:2ae0a7b5-8655-42ff-8339-0b757bf9394c",
+          "statcan:24100004",
+          "canada:b2aabe1d-22e0-469f-89d8-983de8f8b003",
+          "alberta:bdfecac0-0dda-4e8c-8321-7002a5edb11c",
+          "canada:b3e959e8-f1cf-443b-97e8-90a7c95fd4f8"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 113.75491600483656
+      },
+      {
+        "id": "q016",
+        "query": "how much alcohol is sold across canadian provinces",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:e1fdc8ed-e0a4-4e6a-8961-2db60a9fc886",
+          "statcan:10100010"
+        ],
+        "retrieved_ids": [
+          "canada:7bf160c9-f884-4443-bd48-fcb773b11c56",
+          "canada:cc26db54-a195-4eff-b61e-830cc191f112",
+          "canada:c5004d74-90f3-49eb-82b8-30394d00913b",
+          "statcan:10100032",
+          "statcan:10100164",
+          "canada:6168fcf1-5dbc-4216-b6ce-a7672562a840",
+          "canada:fb74ce82-afa2-45ca-acc2-83cdf8c10b85",
+          "statcan:10100035",
+          "canada:ce13ad55-1471-4a4c-9922-94a68ad15cb2",
+          "statcan:10100030"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 108.75925002619624
+      },
+      {
+        "id": "q017",
+        "query": "police reported organized crime incidents across canada",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:08322e85-beea-4c69-921f-67cd87f9eb9a",
+          "statcan:35100062"
+        ],
+        "retrieved_ids": [
+          "canada:08322e85-beea-4c69-921f-67cd87f9eb9a",
+          "alberta:2b4837f9-0877-4581-a00f-9d9c1d5a1794",
+          "alberta:0d3f05fd-9dd7-4bbc-b954-1d64e9a3a825",
+          "canada:2b4837f9-0877-4581-a00f-9d9c1d5a1794",
+          "statcan:35100062",
+          "canada:0d3f05fd-9dd7-4bbc-b954-1d64e9a3a825",
+          "canada:9671bee4-4f73-48a0-a4c1-5d23dd0e901a",
+          "canada:47466568-c38d-8bb9-26d9-331079dad727",
+          "canada:377d2c17-d92b-4135-9244-4a609cd8fb80",
+          "alberta:cd180a7a-ecd5-4602-8eb1-06d7898fa8cd"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 111.43487505614758
+      },
+      {
+        "id": "q018",
+        "query": "postsecondary student enrolments by visible minority group",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:161cae65-8f2f-4587-be95-0e5bfe57e878",
+          "canada:fc3c31eb-91fa-430a-a029-c8714ed6bf73",
+          "statcan:37100267",
+          "statcan:37100268"
+        ],
+        "retrieved_ids": [
+          "canada:c591105f-8938-40b4-bd98-07e0c64fef11",
+          "canada:161cae65-8f2f-4587-be95-0e5bfe57e878",
+          "canada:290f8991-9043-4ba9-bb1a-c3041e38a94f",
+          "canada:fc3c31eb-91fa-430a-a029-c8714ed6bf73",
+          "statcan:37100292",
+          "statcan:37100267",
+          "statcan:37100268",
+          "canada:710b5a48-8b15-4e09-9266-5d6d087fe174",
+          "statcan:37100248",
+          "canada:5de46dd1-5019-4d42-a238-d12301196a04"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 110.8919580001384
+      },
+      {
+        "id": "q019",
+        "query": "average life expectancy at birth and age 65",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:006ec1cd-5682-435a-ba80-e61408f9afb9",
+          "canada:0cb06537-2ec0-451c-81d7-d417c5e97efe",
+          "canada:17dde99f-75ce-46b6-baa6-6ca5c8ce3f13",
+          "canada:f0db9bca-efaf-4bcb-b33c-76695ae1fbf8",
+          "canada:fa518eb5-609a-41b7-8724-684bcc16c3a9",
+          "statcan:13100008",
+          "statcan:13100010",
+          "statcan:13100013",
+          "statcan:13100020",
+          "statcan:13100032"
+        ],
+        "retrieved_ids": [
+          "canada:00c99f50-4f07-4e8c-b61d-9e188a51ed82",
+          "canada:cea10eaf-d07d-428b-9586-7e6610439ffc",
+          "alberta:a20ed785-6987-406e-8792-7f675b3c1c03",
+          "canada:1662e1f0-596b-4131-8a95-c371d17a5b3a",
+          "canada:a20ed785-6987-406e-8792-7f675b3c1c03",
+          "canada:006ec1cd-5682-435a-ba80-e61408f9afb9",
+          "canada:13e027ad-2bc0-4245-82f2-12cff76674b6",
+          "canada:f72615e7-25c1-4a7e-87bc-7214d2c90e83",
+          "alberta:4ccda9ab-f3b5-4a34-86c0-5a9a6ae675cb",
+          "canada:4ccda9ab-f3b5-4a34-86c0-5a9a6ae675cb"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 1.0,
+          "mrr": 0.16666666666666666
+        },
+        "latency_ms": 114.7959588561207
+      },
+      {
+        "id": "q020",
+        "query": "farm household income distribution by farm type",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:1066b6ba-1bf3-4a41-ab02-d633ac9711ab",
+          "canada:3de3af5d-90ef-42a3-8f76-a92f749ec943",
+          "statcan:32100030",
+          "statcan:32100401"
+        ],
+        "retrieved_ids": [
+          "canada:439899ea-7ec6-4050-88af-242174b890d9",
+          "canada:1787121b-3a1c-4440-9a5e-440bd1024146",
+          "canada:84483ae3-b5c3-4bbd-8a36-5767fb0befbb",
+          "canada:50ed685e-766f-4c32-b32a-720f043a192e",
+          "canada:40a77b84-f901-495d-9519-18bd386671b1",
+          "canada:f6097fc5-bb02-4944-9050-c3b64512a9ab",
+          "canada:a750f346-f6ef-4961-a66b-db9fa8ea08ec",
+          "canada:76985b79-d7d2-4866-9f7a-2fa37886335c",
+          "canada:6e7bcf1a-141f-47f0-b878-1fc235d9f329",
+          "canada:deac3df1-034d-44b4-a522-45482ef62866"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 111.80141707882285
+      },
+      {
+        "id": "q021",
+        "query": "retail sales monthly seasonally adjusted trends",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:00280a6a-48d8-4b99-9a44-e4ceed819a58",
+          "statcan:20100030"
+        ],
+        "retrieved_ids": [
+          "canada:352bb9e6-714c-499e-9e3f-74613d1daf43",
+          "canada:13d4574a-bdc4-4a77-9769-bb5de4c186ac",
+          "canada:7a13fdb8-6221-422b-a7cd-85f49b265800",
+          "canada:aa8b1fe3-53d2-4542-96e1-1dd0a8630ccb",
+          "statcan:20100067",
+          "canada:9a72c101-0101-4fae-a404-3719b0e406df",
+          "canada:877dbd4f-f80c-4734-ad21-d135dcf4af1e",
+          "canada:00280a6a-48d8-4b99-9a44-e4ceed819a58",
+          "canada:41cc7b50-d2ea-42c1-9221-1b311a08325e",
+          "statcan:20100056"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 1.0,
+          "mrr": 0.125
+        },
+        "latency_ms": 114.4903339445591
+      },
+      {
+        "id": "q022",
+        "query": "income of refugee and asylum claimants across provinces",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:47b3005b-d149-424f-a9e1-37d6c2b61c03",
+          "canada:e217fe84-3930-48bc-8dd7-692f2800a482",
+          "statcan:43100019",
+          "statcan:43100028"
+        ],
+        "retrieved_ids": [
+          "canada:e217fe84-3930-48bc-8dd7-692f2800a482",
+          "canada:47b3005b-d149-424f-a9e1-37d6c2b61c03",
+          "statcan:43100028",
+          "statcan:43100019",
+          "canada:b6cbcf4d-f763-4924-a2fb-8cc4a06e3de4",
+          "canada:179c92d4-810c-4d3f-8586-05f3ac8af6c3",
+          "canada:395accee-37c3-47e4-b597-90f1425a11c6",
+          "alberta:b5037e42-7ccc-4a94-b9f1-66946166cd2a",
+          "canada:a25c4711-d853-4956-90b6-d95ae644ac73",
+          "canada:8c68c653-2043-4655-b40f-ed031c0aa108"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 110.86462484672666
+      },
+      {
+        "id": "q023",
+        "query": "monthly labour force unemployment and participation numbers",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:17b836c1-e7ec-48b9-b7a3-f370f1006975",
+          "statcan:14100017"
+        ],
+        "retrieved_ids": [
+          "canada:ee0c0ab7-4897-494b-a1f7-0bf0e919f126",
+          "canada:20247182-253b-4fb6-9ef2-572fa4252c84",
+          "canada:dea96934-9d93-4507-ab92-653a692c4654",
+          "canada:8b0d916a-530f-4046-95a6-ccc919ea86e8",
+          "canada:21c01404-676d-4490-b7ee-cacaf3cb5a2e",
+          "alberta:8b0d916a-530f-4046-95a6-ccc919ea86e8",
+          "canada:e787f292-9c54-4850-af0c-d0f323aa5e71",
+          "canada:442a6b08-bcd5-46af-b13d-cd02811b3b20",
+          "canada:7932d6c3-9c5f-461e-9bc8-124bf7ca4de7",
+          "canada:c47567d9-20d2-4b9e-9898-dfb4b7ca7aec"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 110.72549992240965
+      },
+      {
+        "id": "q024",
+        "query": "air quality monitoring observations and health index",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:28936e1b-681f-4c73-b04a-e86d4b3917c6"
+        ],
+        "retrieved_ids": [
+          "canada:1a2cc5c7-42b9-4448-a775-8dd5c2bde3af",
+          "alberta:f011df9e-55d9-4abd-84ad-52bfed9cc43c",
+          "alberta:1a2cc5c7-42b9-4448-a775-8dd5c2bde3af",
+          "canada:28936e1b-681f-4c73-b04a-e86d4b3917c6",
+          "alberta:85c3e7a8-a8f5-46f3-8fc2-b5c307ba95d6",
+          "canada:a563e47d-6eb9-4f7f-933c-222ae49fe57f",
+          "alberta:304aa0f8-0504-41e7-bfee-bd0bd508d869",
+          "alberta:f4b316d2-85e6-4114-9a4c-f86e4e8a1a8d",
+          "alberta:63bb8fd5-5ddc-4262-8221-22a5e7e8df09",
+          "alberta:db8c1774-4e1f-4e0e-8fcb-9eb1d3401014"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.25
+        },
+        "latency_ms": 110.19462486729026
+      },
+      {
+        "id": "q025",
+        "query": "social housing near public transit stops",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:00f413fd-1b3a-41a1-bb13-386812c467dd",
+          "statcan:46100014"
+        ],
+        "retrieved_ids": [
+          "statcan:46100013",
+          "statcan:46100014",
+          "canada:dd7afaf9-24b9-4f9d-9c6b-71733857fc5e",
+          "alberta:14c842b3-0cdf-44f3-8aef-541042e6350c",
+          "canada:00f413fd-1b3a-41a1-bb13-386812c467dd",
+          "canada:b6f070c5-2d72-4bc3-8e37-e871b40aad31",
+          "canada:749149bb-3c43-4018-bb2c-43568f272ba6",
+          "statcan:23100313",
+          "statcan:23100314",
+          "canada:7ed87145-c177-4b58-bdc2-7c4ffce1f1af"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 108.51437505334616
+      },
+      {
+        "id": "q026",
+        "query": "CPI",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:007de44e-3010-4cce-a03c-92ae9f7011db",
+          "statcan:18100018"
+        ],
+        "retrieved_ids": [
+          "canada:2c75c627-3eb6-41ee-bb54-7b089eade484",
+          "alberta:443b43de-b8c0-4108-9aab-bde7df7532ed",
+          "canada:a71262e2-0cc3-4e07-9b0f-67ffc6762349",
+          "canada:443b43de-b8c0-4108-9aab-bde7df7532ed",
+          "statcan:18100256",
+          "statcan:36100350",
+          "statcan:18100019",
+          "statcan:18100241",
+          "statcan:18100259",
+          "statcan:18100016"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 112.53716703504324
+      },
+      {
+        "id": "q027",
+        "query": "EVAP",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:23344072-7118-4715-84a9-daf630ec76c8"
+        ],
+        "retrieved_ids": [
+          "canada:23344072-7118-4715-84a9-daf630ec76c8",
+          "alberta:43a72007-d860-444c-9fe9-0892a26c3db6",
+          "alberta:95b3b990-c4fd-4b97-b6c0-ad8df920be5a",
+          "alberta:e7591494-ca2e-4215-b4c4-2e2797861d01",
+          "canada:a23140bc-51bd-40e9-a25c-67a8a912bec0",
+          "alberta:cbb5a611-495e-47bd-bc18-af93c0dc67fe",
+          "alberta:02a49796-8311-45cf-affc-c80bc08cc5bc",
+          "alberta:e74d8549-37b9-44ae-8c89-e56e77d83569",
+          "alberta:49cd2d77-4153-41bd-b0fc-059627b0a7a9",
+          "alberta:9759643e-0211-4463-84a3-4bd7c72fd62a"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 109.71866617910564
+      },
+      {
+        "id": "q028",
+        "query": "10100002",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100002"
+        ],
+        "retrieved_ids": [
+          "statcan:10100002",
+          "alberta:6562caea-dab0-4537-8d8d-f5c2c78788ec",
+          "alberta:4bd359c7-a43b-4176-89b8-6510dfc41389",
+          "alberta:6a37ea76-b7ac-4d0d-aaba-7debc6b797d6",
+          "alberta:92556a1b-9904-4bc1-8a16-9af3219cf537",
+          "alberta:9b41d89e-c94b-40ab-99a9-215a4d300e10",
+          "alberta:33a01bee-c9b7-46b9-aa01-205c49d7c341",
+          "canada:10a23a4b-06f7-4a31-82af-c0c65f0ff7f2",
+          "alberta:3edd91c3-8f52-47ef-a368-134b3ad68c4e",
+          "alberta:dc3efeb4-8768-40d9-a83a-25fef41b8c85"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 110.85820803418756
+      },
+      {
+        "id": "q029",
+        "query": "10100001",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100001"
+        ],
+        "retrieved_ids": [
+          "statcan:10100002",
+          "statcan:10100006",
+          "alberta:d588a163-ac11-4402-ae15-09e49c16d6f7",
+          "alberta:8748f5f0-f553-4f80-8501-620da475cd67",
+          "alberta:3edd91c3-8f52-47ef-a368-134b3ad68c4e",
+          "statcan:33100241",
+          "statcan:10100133",
+          "alberta:cb0a4566-73dd-4522-b2f6-57823465587a",
+          "alberta:3b27b4d1-e66c-4c62-8353-f25272b091d3",
+          "alberta:2cf73a2e-1bd7-43c7-8ac1-21788ab9d58b"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 157.698875060305
+      },
+      {
+        "id": "q030",
+        "query": "10100008",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100008"
+        ],
+        "retrieved_ids": [
+          "statcan:10100002",
+          "alberta:e77b423b-dae3-492c-9eee-b55b3e50ce69",
+          "alberta:dc3efeb4-8768-40d9-a83a-25fef41b8c85",
+          "alberta:d588a163-ac11-4402-ae15-09e49c16d6f7",
+          "alberta:3edd91c3-8f52-47ef-a368-134b3ad68c4e",
+          "canada:861e8747-b928-418e-874d-6bd0f90c23b9",
+          "alberta:245e7a91-ff8c-4fe0-99d3-5862390191a0",
+          "alberta:7722596f-b97b-438c-a7e2-30c8cc92d0d4",
+          "alberta:4687189b-79e9-4db3-9b2f-6b7f4513245b",
+          "ontario:861e8747-b928-418e-874d-6bd0f90c23b9"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 127.79866601340473
+      },
+      {
+        "id": "q031",
+        "query": "CCOFOG",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:399fa7e0-8900-42db-8f34-7849fc2f647f",
+          "statcan:10100005"
+        ],
+        "retrieved_ids": [
+          "canada:399fa7e0-8900-42db-8f34-7849fc2f647f",
+          "canada:b3474aec-e8d4-4e4d-b29b-42a245bfddd9",
+          "canada:6b33e0a4-6e34-484e-8c20-112e596710fc",
+          "canada:76e0490d-5b8b-468d-a27c-475e1996ad5b",
+          "statcan:10100005",
+          "statcan:10100163",
+          "statcan:10100170",
+          "statcan:10100024",
+          "statcan:10100173",
+          "canada:5c252e65-1446-425c-84c3-753ebfdc8b77"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 107.74925001896918
+      },
+      {
+        "id": "q032",
+        "query": "GDP by income",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:00742f67-edb4-449c-aa1b-0a456f1444a8",
+          "statcan:36100430"
+        ],
+        "retrieved_ids": [
+          "canada:e7842523-c0a6-4387-ab7f-c167215ff250",
+          "canada:ce97cda1-8893-11e0-a10e-6cf049291510",
+          "canada:6814a986-c842-4367-93ac-db4e4b5ecbae",
+          "alberta:4a493355-1283-4197-9928-7bb7baa01939",
+          "canada:5f5182ad-7f42-4fbf-b679-2fb439e20b5d",
+          "statcan:36100254",
+          "statcan:36100276",
+          "statcan:36100268",
+          "canada:54f17fe2-c13e-45b9-8ba3-d52aec416392",
+          "canada:cea5fe70-8893-11e0-8697-6cf049291510"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 103.54995890520513
+      },
+      {
+        "id": "q033",
+        "query": "IRCC Permanent Residents",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:1d3963d6-eea9-4a4b-8e4a-5c7f2deb7f29",
+          "canada:2fbb56bd-eae7-4582-af7d-a197d185fc93"
+        ],
+        "retrieved_ids": [
+          "canada:0186868b-a04d-4a0e-962e-bdfbac51bfb3",
+          "canada:53105221-7652-47b1-96e2-1f85715a067c",
+          "canada:970ff3c4-50fd-4eeb-b402-f82f9ee22990",
+          "canada:ad975a26-df23-456a-8ada-756191a23695",
+          "canada:6bbf2f43-b9d5-49a0-aa8f-71e433340505",
+          "canada:63858380-265e-4948-8e96-ca50fceca2d7",
+          "canada:2fbb56bd-eae7-4582-af7d-a197d185fc93",
+          "canada:f7e5498e-0ad8-4417-85c9-9b8aff9b9eda",
+          "canada:9b34e712-513f-44e9-babf-9df4f7256550",
+          "canada:1b026aab-edb3-4d5d-8231-270a09ed4e82"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 1.0,
+          "mrr": 0.14285714285714285
+        },
+        "latency_ms": 109.13195786997676
+      },
+      {
+        "id": "q034",
+        "query": "AQHI",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:28936e1b-681f-4c73-b04a-e86d4b3917c6"
+        ],
+        "retrieved_ids": [
+          "canada:28936e1b-681f-4c73-b04a-e86d4b3917c6",
+          "canada:a563e47d-6eb9-4f7f-933c-222ae49fe57f",
+          "alberta:e86bfa3c-b656-4048-bfea-3e88ee676432",
+          "canada:cc7c255e-0a76-4aca-97ea-c14ce3ba2dd0",
+          "alberta:63bb8fd5-5ddc-4262-8221-22a5e7e8df09",
+          "canada:4a4c9b30-9e5c-4c38-8adc-92b7be88e153",
+          "canada:b0712843-8431-496c-a418-ffe6dd1adc3e",
+          "alberta:7377607e-66b4-49b8-b572-e5b5d3a2e62d",
+          "alberta:9f6cbc72-bf77-43a6-b4ae-3a994dc9f50b",
+          "alberta:cbea506f-fa70-4380-ba89-ba3a717c4c3a"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 110.8821660745889
+      },
+      {
+        "id": "q035",
+        "query": "10100003",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100003"
+        ],
+        "retrieved_ids": [
+          "alberta:61b0bd2b-9d1b-4a3b-9c3e-c55d9c4ef2e2",
+          "alberta:3edd91c3-8f52-47ef-a368-134b3ad68c4e",
+          "statcan:33100636",
+          "alberta:6899a361-6829-46a1-9e4a-e6299fc5c6e1",
+          "alberta:5cfa77b7-374f-409e-be69-55ecf8daa17b",
+          "alberta:47b390ed-a1cb-4b29-b880-a1512c4832ee",
+          "statcan:10100002",
+          "alberta:3b27b4d1-e66c-4c62-8353-f25272b091d3",
+          "alberta:96799bb8-0864-402e-81a1-677d17cfda0e",
+          "statcan:33100688"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 108.86762500740588
+      },
+      {
+        "id": "q036",
+        "query": "10100004",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100004"
+        ],
+        "retrieved_ids": [
+          "statcan:10100002",
+          "alberta:1b53b38c-a62e-4e30-81cc-8f171d665bb0",
+          "alberta:dc3efeb4-8768-40d9-a83a-25fef41b8c85",
+          "statcan:13100864",
+          "statcan:33100914",
+          "statcan:10100006",
+          "statcan:33100891",
+          "statcan:33100241",
+          "statcan:33100910",
+          "statcan:10100125"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 102.05054213292897
+      },
+      {
+        "id": "q037",
+        "query": "FTE Full-Time Equivalents",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:01d58f1a-4114-43a2-b639-afcfdfde7987"
+        ],
+        "retrieved_ids": [
+          "canada:e2e60f18-95fe-487b-9edd-d1f7bcdd9f9f",
+          "canada:4865564a-98dc-4025-8bd0-0013dafe95b7",
+          "canada:71da2e20-007a-43b3-8261-fd98fb49941f",
+          "alberta:fd9e7b40-329a-4f59-aa1f-183ab791e46d",
+          "canada:01d58f1a-4114-43a2-b639-afcfdfde7987",
+          "canada:fd9e7b40-329a-4f59-aa1f-183ab791e46d",
+          "canada:3f4186cf-a047-4f7c-aff9-9e82e13f6bdc",
+          "alberta:ffcaf092-af60-4149-aeec-005c8476e321",
+          "canada:1301dccb-a258-4653-b952-ba4c0a643f01",
+          "canada:f6144bae-803d-4afe-9b20-6ba145549f05"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.2
+        },
+        "latency_ms": 109.87570811994374
+      },
+      {
+        "id": "q038",
+        "query": "Portrait du couvert forestier du Québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:039e7efd-9a39-41a7-88bc-dcf2c40265d9"
+        ],
+        "retrieved_ids": [
+          "canada:039e7efd-9a39-41a7-88bc-dcf2c40265d9",
+          "canada:ec15823e-40bc-4f6b-b482-482427ed201a",
+          "canada:3eec3d05-61c1-4bcb-bf22-2d4bd71e2c0d",
+          "canada:d488764c-6f81-491e-b3a8-80a13a86eaac",
+          "canada:b90d077d-5df7-47b1-90c7-00c323ac25a4",
+          "canada:e0e294cf-bef2-4361-a4d3-2fcf88df69ec",
+          "canada:2c890af8-1c19-44a6-bfac-753514a9ec9d",
+          "canada:2991db70-8aff-4bba-a288-4491696f6cd4",
+          "canada:19024c70-44a1-47fb-846b-ae2b029bfc07",
+          "canada:f1dd4c82-abe6-4fdb-9ba7-584043432de5"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 114.87962491810322
+      },
+      {
+        "id": "q039",
+        "query": "évaluation foncière au québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:061c8cb7-ca4e-45be-a990-61fce7e7d2dc"
+        ],
+        "retrieved_ids": [
+          "canada:061c8cb7-ca4e-45be-a990-61fce7e7d2dc",
+          "canada:a23140bc-51bd-40e9-a25c-67a8a912bec0",
+          "alberta:1c4ff120-4c63-4066-b90a-1fcbb392b15b",
+          "alberta:e7591494-ca2e-4215-b4c4-2e2797861d01",
+          "canada:72cef028-31cb-4a2a-879f-5338d31a628a",
+          "canada:e4489c02-ab55-414b-ba00-efcacd728b49",
+          "alberta:cbb5a611-495e-47bd-bc18-af93c0dc67fe",
+          "canada:93ce9cb5-0811-48e5-885e-98dce192d293",
+          "canada:0c28fc63-33a3-44a7-8398-d93ffaf4dba3",
+          "canada:1108d83a-4c96-417a-bfa7-57b44b40cf4a"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 111.54870898462832
+      },
+      {
+        "id": "q040",
+        "query": "Indice de défavorisation du Québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:152ec6a1-8091-4b56-beac-f40789f34481"
+        ],
+        "retrieved_ids": [
+          "canada:f19b0cda-8f52-44a1-9954-a1a606daa56e",
+          "canada:d5ebdffc-77e9-44b5-9fdf-b90d144f69eb",
+          "canada:152ec6a1-8091-4b56-beac-f40789f34481",
+          "canada:004de02c-19f1-4da0-9af8-33f893e41972",
+          "canada:7ab8707d-2adb-4171-8866-ad7a05e8655e",
+          "canada:93ce9cb5-0811-48e5-885e-98dce192d293",
+          "canada:716310b2-bb1d-4cd8-b12c-39a43db15d10",
+          "canada:b42dfae7-a823-4a09-9fcb-ec479c83b0e9",
+          "alberta:56f40d9c-6354-4c34-8d53-df3748dcb1c5",
+          "canada:e94a2143-ae0c-49fa-88ae-fde868ab21cf"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        "latency_ms": 112.30699997395277
+      },
+      {
+        "id": "q041",
+        "query": "système d'information touristique hébergement et chalets québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:0cc89402-040a-47ff-a2f3-aaa29ef32f1d"
+        ],
+        "retrieved_ids": [
+          "canada:0cc89402-040a-47ff-a2f3-aaa29ef32f1d",
+          "canada:f43fbfd7-2b40-4f40-99da-2e0ac1339012",
+          "canada:4abae523-83b7-4591-868c-aee836d8e9bc",
+          "canada:96f35825-78b1-447d-85ad-82d492221325",
+          "canada:2125099f-486b-422d-bc23-f46864d9b41c",
+          "canada:3f1aef13-48f9-41d0-9575-245d931f28ea",
+          "canada:78816d00-21b0-41a5-84ef-44ccc780bd27",
+          "canada:e9e2429f-7f23-41f2-bd0e-e41a6e349aa5",
+          "canada:a7bedbb6-a127-4731-a141-8550fc77014f",
+          "canada:d834e1c2-cccd-4ef7-a3ba-cf8d4bf00cda"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 115.67341699264944
+      },
+      {
+        "id": "q042",
+        "query": "rapports financiers annuels établissements de santé québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:116d2518-57eb-415e-8d1f-d958e8fac4df"
+        ],
+        "retrieved_ids": [
+          "canada:116d2518-57eb-415e-8d1f-d958e8fac4df",
+          "canada:54b2218a-2a94-4b27-9fbf-1b19f70e124c",
+          "canada:db19916d-02bd-4684-b951-9035fa3c9544",
+          "canada:8d6bdf3a-f866-4b93-81a9-3ce2961c23bc",
+          "canada:36e29985-860d-433e-a9e3-86ad315f181d",
+          "canada:1f74efc1-6eb8-48c7-8ffd-8abeb9102639",
+          "canada:5a78b7f6-e132-4fd5-9eac-c5242cd25b28",
+          "canada:79552a7f-8688-4b3c-9dbc-6efdd7a3831e",
+          "canada:c36eb014-25d9-4e9d-9d71-e497ec996fa5",
+          "canada:53038b64-4389-4422-9ab5-b34184c2f58e"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 118.29137499444187
+      },
+      {
+        "id": "q043",
+        "query": "cadre financier pluriannuel québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:1f74efc1-6eb8-48c7-8ffd-8abeb9102639"
+        ],
+        "retrieved_ids": [
+          "canada:1f74efc1-6eb8-48c7-8ffd-8abeb9102639",
+          "canada:5a78b7f6-e132-4fd5-9eac-c5242cd25b28",
+          "canada:53038b64-4389-4422-9ab5-b34184c2f58e",
+          "canada:c36eb014-25d9-4e9d-9d71-e497ec996fa5",
+          "canada:93ce9cb5-0811-48e5-885e-98dce192d293",
+          "canada:36e29985-860d-433e-a9e3-86ad315f181d",
+          "canada:79552a7f-8688-4b3c-9dbc-6efdd7a3831e",
+          "canada:db19916d-02bd-4684-b951-9035fa3c9544",
+          "canada:7ab8707d-2adb-4171-8866-ad7a05e8655e",
+          "canada:b34de345-5bfe-4db2-a714-ed239a0c0b81"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 111.489542061463
+      },
+      {
+        "id": "q044",
+        "query": "ventes de pesticides visés par prescription agronomique québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:0f145f02-230d-419a-999b-e6706e2e1c6b"
+        ],
+        "retrieved_ids": [
+          "canada:0f145f02-230d-419a-999b-e6706e2e1c6b",
+          "canada:819687fc-4f5d-40b3-9db1-0369841aa329",
+          "canada:c2a4c800-e62e-4e62-b133-53542928b571",
+          "canada:bfec099c-d9aa-4bff-b5ad-438e48c1f8f5",
+          "canada:acc203e6-4769-4881-baa3-c30dc4df5ead",
+          "canada:7140942a-b1f3-4578-98d3-39b7ab4f90dc",
+          "canada:40af76ee-c690-4506-a01e-cce862e121ec",
+          "canada:3b559558-a05d-47c3-afe5-0eb1684c244b",
+          "canada:4d6686fb-ab52-43b0-ba80-84e45b5dfdb2",
+          "canada:23728ef9-f84e-480b-b520-c625d9cd6e24"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 110.38108402863145
+      },
+      {
+        "id": "q045",
+        "query": "hôtels et établissements touristiques au québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:2125099f-486b-422d-bc23-f46864d9b41c"
+        ],
+        "retrieved_ids": [
+          "canada:2125099f-486b-422d-bc23-f46864d9b41c",
+          "canada:e9e2429f-7f23-41f2-bd0e-e41a6e349aa5",
+          "canada:0cc89402-040a-47ff-a2f3-aaa29ef32f1d",
+          "canada:4abae523-83b7-4591-868c-aee836d8e9bc",
+          "canada:d470ab2b-deb2-4aba-86e6-85cbceab4fa8",
+          "canada:17dfa825-9515-4fac-be6b-3964d25194c3",
+          "canada:f43fbfd7-2b40-4f40-99da-2e0ac1339012",
+          "canada:3f1aef13-48f9-41d0-9575-245d931f28ea",
+          "canada:82b06c86-253a-4e77-a050-c022462e90eb",
+          "canada:c1d65779-d3cb-44e8-af0a-b9f2c5f7766d"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 110.04308285191655
+      },
+      {
+        "id": "q046",
+        "query": "liste des conventions collectives en vigueur au québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:21f39629-88f1-4cc4-bbef-cb34276d0685"
+        ],
+        "retrieved_ids": [
+          "canada:21f39629-88f1-4cc4-bbef-cb34276d0685",
+          "canada:0935bc25-0026-4c34-baa4-ca1143c28fdc",
+          "canada:860325b0-ded4-4829-a5bc-3f0bd4bc8ef6",
+          "canada:f9756c63-10cf-4e21-af29-e1d09d366d28",
+          "canada:df7add74-a741-4374-b3bd-22da8921c8b3",
+          "canada:bd7af9b5-d9aa-44bf-a8b7-c6070aa19bea",
+          "canada:aa324ca7-31df-4b5a-881d-84f92050a2ef",
+          "canada:da0e81ae-5a30-4919-9b89-ddf66a5e177b",
+          "canada:6acde2c0-6f08-407a-86e2-db49dd0bbb49",
+          "canada:2aa41a43-a289-411c-a742-8cfd342ec412"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 108.5482919588685
+      },
+      {
+        "id": "q047",
+        "query": "statistiques des bibliothèques publiques québécoises",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:231a38a8-f28e-4bef-82ea-dc98a14c1b6f"
+        ],
+        "retrieved_ids": [
+          "canada:231a38a8-f28e-4bef-82ea-dc98a14c1b6f",
+          "canada:145b3d2c-26a8-44a0-93a3-f2f2e1b2f553",
+          "canada:9c77eca3-7dd3-4ec5-adda-81c21af2ae02",
+          "canada:28294363-463e-4d2e-ad68-7d0a37ec0b0a",
+          "canada:a5a36aa3-1b1a-4dd1-a78b-23008e368ef7",
+          "canada:258c9916-1e2f-49b2-8c5c-1e2134dc403a",
+          "canada:428dd692-045c-42cb-aff6-22e3d7289eb8",
+          "canada:9724834a-d6c5-4838-af8d-7b006f92f128",
+          "canada:500fe487-3c6a-4a35-8c35-2ebc74819a68",
+          "canada:8895a2b9-6501-4e54-93d0-f1ba18590d9a"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 112.66487510874867
+      },
+      {
+        "id": "q048",
+        "query": "zones agricoles et cadastre du québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:27ad6922-03a9-42ca-b11d-eef63537cc5a"
+        ],
+        "retrieved_ids": [
+          "canada:27ad6922-03a9-42ca-b11d-eef63537cc5a",
+          "canada:25696140-f1da-4729-831e-9904628c43c6",
+          "canada:7a8b6386-0336-4711-81c6-14d019907d2c",
+          "canada:3f33cb21-037a-49c3-bea2-ca2e89bbc978",
+          "canada:667c131f-9e38-4b85-b98a-17160800c66a",
+          "canada:bd7689d5-c2ce-4671-b009-6502c89aab64",
+          "canada:24074e8a-cf7a-4cf5-abc2-dadd2b949636",
+          "canada:0d299651-2d95-4de3-b513-cf6009f51ca7",
+          "canada:ecaebecb-2529-463a-8d77-26c806f79617",
+          "canada:0d7a673a-ae29-4674-b6df-74c00a7a5b89"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 112.49112500809133
+      },
+      {
+        "id": "q049",
+        "query": "population de caribous des bois au québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:257ed865-4149-4696-98cd-a516c4fc8a4b"
+        ],
+        "retrieved_ids": [
+          "canada:257ed865-4149-4696-98cd-a516c4fc8a4b",
+          "canada:94e45ce7-d795-43b2-a527-096c95c1187b",
+          "canada:ca61c35d-9963-4f62-b963-073aa284e3bd",
+          "canada:5c23ae26-9234-440a-8052-2b64dda605af",
+          "canada:18f26f05-e2a2-4066-8f7f-4ee0db894bdf",
+          "canada:35470900-1873-4548-a66f-a0c309f3143c",
+          "canada:e0e294cf-bef2-4361-a4d3-2fcf88df69ec",
+          "canada:2474b4f2-c4aa-436e-b1fd-830f4a70cede",
+          "canada:17ec5343-6d39-45b8-9ce1-e76843daaaa4",
+          "canada:42ca63ee-aa9a-4437-8810-7d54d328229e"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 110.95712496899068
+      },
+      {
+        "id": "q050",
+        "query": "statcan central government debt",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100002"
+        ],
+        "retrieved_ids": [
+          "canada:5d9b3192-e29f-4071-8e44-94b73efd08b5",
+          "canada:4ebc3fca-7e37-3194-1fb3-e76fda655891",
+          "canada:6e9c26cb-5a28-40de-a1df-82a8c7b5a4e2",
+          "statcan:10100065",
+          "statcan:10100048",
+          "canada:8f3a80dd-e5cc-4784-b887-34e0426938bf",
+          "canada:a6f91761-0d51-aad1-29bc-c0751404339e",
+          "canada:eef52f0f-a253-4350-b210-795a3042d867",
+          "statcan:10100055",
+          "canada:a358d531-c5fa-b7ee-7cdc-5a7063f01df6"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 109.23374979756773
+      },
+      {
+        "id": "q051",
+        "query": "chartered banks foreign claims bank of canada",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100004"
+        ],
+        "retrieved_ids": [
+          "canada:e69abc47-e00b-4868-af2c-506c40bcd07c",
+          "statcan:10100004",
+          "canada:c6879faf-2bc7-4c84-999c-0626ae33ec84",
+          "statcan:10100111",
+          "canada:50e9eb6a-7484-47d1-96b0-a42931913be1",
+          "canada:de71fd96-a5e4-4534-b7fe-4173a53b1f7f",
+          "canada:441f09ce-b61a-4bbd-b29e-4f4694868d53",
+          "canada:94bd1067-3666-4e7b-8158-5928931af122",
+          "canada:c8059bb8-7622-4a5b-8b45-ce63907c486e",
+          "canada:b7152c91-1640-41ae-8b1d-04eef47055b5"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 106.7821669857949
+      },
+      {
+        "id": "q052",
+        "query": "statcan public sector employment reconciliation",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100001"
+        ],
+        "retrieved_ids": [
+          "canada:911291f2-f5b2-4129-87dd-8c38518cb340",
+          "statcan:10100038",
+          "alberta:1f4d63df-5334-45aa-ae4c-b852bae2d541",
+          "statcan:10100001",
+          "canada:b2ca726c-df84-4da2-85bc-be19bfd59da4",
+          "statcan:10100025",
+          "alberta:df76631d-e55d-435a-bad6-977b66fab1a9",
+          "alberta:2b92d9c3-5388-4a1d-9634-5f171cb16db0",
+          "canada:b38895a5-eef9-43ad-bd3f-aa2525de8d24",
+          "alberta:a2ffb412-a9de-4caa-acfa-965405622a92"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.25
+        },
+        "latency_ms": 103.44108403660357
+      },
+      {
+        "id": "q053",
+        "query": "bank of canada daily foreign exchange rates",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100008"
+        ],
+        "retrieved_ids": [
+          "statcan:33100036",
+          "statcan:10100008",
+          "canada:bb66787c-9509-456d-bd72-5016abdf39c5",
+          "canada:1bc25b1e-0e02-4a5e-afd7-7b96d6728aac",
+          "statcan:33100163",
+          "statcan:10100009",
+          "statcan:10100126",
+          "canada:eff192e2-00fc-4487-852c-6ee9f3b2fc26",
+          "canada:4233281b-2060-477b-a2ba-90f6435a6e05",
+          "statcan:10100123"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 111.21179186739028
+      },
+      {
+        "id": "q054",
+        "query": "bank of canada monthly foreign exchange rates",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100009"
+        ],
+        "retrieved_ids": [
+          "statcan:33100163",
+          "statcan:10100009",
+          "canada:4233281b-2060-477b-a2ba-90f6435a6e05",
+          "statcan:10100126",
+          "statcan:33100036",
+          "canada:eff192e2-00fc-4487-852c-6ee9f3b2fc26",
+          "statcan:10100079",
+          "statcan:10100008",
+          "statcan:10100111",
+          "statcan:10100123"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 103.9197500795126
+      },
+      {
+        "id": "q055",
+        "query": "government of canada debt securities issues and retirements",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100003"
+        ],
+        "retrieved_ids": [
+          "canada:0e8fb781-6d8d-4aad-b3ed-619a5d16a12a",
+          "canada:c3a38645-9330-425d-99a6-7685ec3da1d1",
+          "statcan:10100003",
+          "canada:cea25143-7604-43f3-80d2-6e2b03b9c52b",
+          "canada:48b3de86-09a6-48d3-aa15-3147b7ac327d",
+          "canada:7ad9170c-4ec2-4ada-a56d-e140b69304af",
+          "canada:2f6f2349-bb9c-4ea4-bbc2-ac0a4dfc690e",
+          "statcan:10100007",
+          "statcan:10100063",
+          "canada:bd3dc670-d2ee-4843-b72f-b00a5e925240"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        "latency_ms": 111.13741691224277
+      },
+      {
+        "id": "q056",
+        "query": "statement of government operations and balance sheet statistics",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100015"
+        ],
+        "retrieved_ids": [
+          "canada:8d5bcb30-99d3-4f65-aed9-3ca38f4f926e",
+          "canada:67dd31f0-c31e-43fd-9dc6-50273579b827",
+          "statcan:10100172",
+          "canada:5cee2dc0-781c-4689-a3d7-c0fd4dfa2ca4",
+          "statcan:10100015",
+          "canada:a737ce3c-0208-4fc1-bf95-3dc576390a86",
+          "canada:2e5a00fa-91d5-46d2-a2e5-72eb73e3c3c7",
+          "canada:d1640392-0a37-477a-9d28-e80da9d9dd22",
+          "canada:bd90ed88-7fc9-4184-94fe-fe12b56c19d1",
+          "canada:1631b19e-af6e-4d99-95c9-662dbe25bf28"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.2
+        },
+        "latency_ms": 114.31704112328589
+      },
+      {
+        "id": "q057",
+        "query": "canadian government finance statistics for federal government",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100016"
+        ],
+        "retrieved_ids": [
+          "canada:a737ce3c-0208-4fc1-bf95-3dc576390a86",
+          "statcan:10100016",
+          "canada:5c606da8-b70c-4ac4-9518-b6a02997f2e0",
+          "statcan:10100169",
+          "statcan:10100019",
+          "canada:cf6b6789-4dfd-4860-b45a-291842fea06f",
+          "canada:5a183c22-80e7-40ea-850d-4dc98e1748ad",
+          "canada:b28ce95f-a075-4ea9-89b9-ca955f94689d",
+          "statcan:10100020",
+          "statcan:10100162"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 106.58466699533165
+      },
+      {
+        "id": "q058",
+        "query": "government finance statistics for provincial and territorial governments",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100017"
+        ],
+        "retrieved_ids": [
+          "canada:cf6b6789-4dfd-4860-b45a-291842fea06f",
+          "canada:5c606da8-b70c-4ac4-9518-b6a02997f2e0",
+          "canada:b28ce95f-a075-4ea9-89b9-ca955f94689d",
+          "canada:ad167954-ccb8-4ba9-9638-d318653b79b2",
+          "statcan:10100169",
+          "canada:560aceb1-9a96-44ab-9028-8a507040d946",
+          "canada:b46c42f5-ebf5-426c-9bce-9db7a41d8e4a",
+          "canada:9338bd36-6d52-4aff-9231-227a84b1396a",
+          "canada:68bbf882-6cb2-465e-9875-537a9c22fec1",
+          "canada:492ac052-44fe-491c-8e3b-4ad16b2235a2"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 112.30062507092953
+      },
+      {
+        "id": "q059",
+        "query": "government finance statistics for colleges and universities",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100019"
+        ],
+        "retrieved_ids": [
+          "canada:5a183c22-80e7-40ea-850d-4dc98e1748ad",
+          "canada:b44fa7f4-36d6-47b5-8216-e8c0e552ec48",
+          "statcan:37100212",
+          "statcan:37100040",
+          "canada:d3b07d7c-7d02-462c-a3ad-dd18bc33a2eb",
+          "statcan:10100019",
+          "statcan:37100131",
+          "statcan:10100058",
+          "statcan:37100293",
+          "statcan:37100211"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 1.0,
+          "mrr": 0.16666666666666666
+        },
+        "latency_ms": 110.89912499301136
+      },
+      {
+        "id": "q060",
+        "query": "alberta weekly livestock market review",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:90297161-7a1c-4de6-b192-16f6eea98bbf"
+        ],
+        "retrieved_ids": [
+          "alberta:902547bc-7d1c-4147-b774-99a313c536a0",
+          "alberta:e80740b9-1a84-4d2e-866a-f74e62436299",
+          "alberta:ddd55b15-02b0-475b-affc-e38e8c690bbc",
+          "alberta:90297161-7a1c-4de6-b192-16f6eea98bbf",
+          "alberta:38b723e8-db70-4532-8d85-d5feae64e950",
+          "alberta:1a118df8-7860-4165-8a7a-3764a944b3a7",
+          "alberta:e80c46a8-8612-4166-8f06-dc80aa09cc56",
+          "alberta:4ccd8581-b6f0-4a1b-b6ab-d060440996f1",
+          "alberta:16e6d069-037a-47d1-a5c0-0086bbbcc944",
+          "alberta:b86cd45c-5976-47c0-ad0b-f6cc08b947c9"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.25
+        },
+        "latency_ms": 105.67900002934039
+      },
+      {
+        "id": "q061",
+        "query": "alberta weekly crop market review",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:b23eeb3f-8059-4dce-b23b-cf552736dc61"
+        ],
+        "retrieved_ids": [
+          "alberta:b23eeb3f-8059-4dce-b23b-cf552736dc61",
+          "alberta:deae699f-7721-4f24-9573-54d3d18baf65",
+          "alberta:772c08dc-e15d-4186-a6ed-afa4b49c48a8",
+          "alberta:864f86a2-a4cc-4ef6-a1e5-dc07389e4a5d",
+          "alberta:be168f37-341a-4a78-9f57-5420b4a57433",
+          "alberta:1061490e-54a7-4831-9731-589886135699",
+          "alberta:3714a545-fe0f-4561-a586-75c2b1f3a0d3",
+          "alberta:8fee0d33-50d0-4dca-88d6-b5ccde510c69",
+          "alberta:f4780aad-26c5-432c-ad83-3504dda1aa36",
+          "alberta:bc3cd1a8-7cb7-4f4a-9db7-573b4e617502"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 105.36529193632305
+      },
+      {
+        "id": "q062",
+        "query": "alberta weekly economic review",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:b92414c4-929b-4eb0-9c21-bc7e3a5e1990"
+        ],
+        "retrieved_ids": [
+          "alberta:70ba1fb3-6969-4136-b2a6-a92ebff87d60",
+          "alberta:207434dc-05fd-47fe-aa29-d42877cc418d",
+          "alberta:c60b1a54-f60b-49c5-a338-43c06e4bac0b",
+          "alberta:e61d7233-2211-4962-a3bc-5d45173e04af",
+          "alberta:ed1b730d-2603-4cd1-b829-1a52cf793071",
+          "alberta:c636d88e-ff0c-475c-acb6-5eb3f64c8388",
+          "alberta:bd34ca00-0e3b-4ae3-9b46-72c7a319e9a5",
+          "alberta:b92414c4-929b-4eb0-9c21-bc7e3a5e1990",
+          "alberta:81e6704d-4628-4aa1-9d92-a7f1df6c86a1",
+          "alberta:aee01e89-147f-4f32-90bd-c3eba4834c5c"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 1.0,
+          "mrr": 0.125
+        },
+        "latency_ms": 102.50649997033179
+      },
+      {
+        "id": "q063",
+        "query": "alberta oil royalties review",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:35dc8c68-c6ab-47c4-881d-51f60743345a"
+        ],
+        "retrieved_ids": [
+          "alberta:57231691-caac-4a7b-b2d1-551ffa71155b",
+          "alberta:ab1a2640-be92-4092-a471-c0416e4ef558",
+          "alberta:c19c17dd-0a00-4848-9dd0-f3e0df0f14eb",
+          "alberta:e07a4a53-da6e-4d9c-91fd-065ae660980a",
+          "alberta:01b3af57-350c-43ec-8c73-d70fe74523cb",
+          "alberta:8b4f3053-4697-49b6-8206-dbd976741a84",
+          "alberta:2db4e880-af02-4c94-a1a7-3bd7d78921fe",
+          "alberta:966866fa-e319-4b94-a4c6-61d55e526c9f",
+          "alberta:ee524b2f-373a-4c41-87eb-acc593f5bc5c",
+          "alberta:3ce4de02-1ef2-4f45-bc62-db92fffdc0ee"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 102.44612488895655
+      },
+      {
+        "id": "q064",
+        "query": "alberta traffic collision casualties",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:637075cb-e3f9-4d05-af19-ea2dc532eed3"
+        ],
+        "retrieved_ids": [
+          "alberta:637075cb-e3f9-4d05-af19-ea2dc532eed3",
+          "canada:637075cb-e3f9-4d05-af19-ea2dc532eed3",
+          "alberta:931928c3-04f6-43a8-abda-436cd5117afd",
+          "alberta:e942904f-e07c-432e-9b4b-b78c643c8bc6",
+          "alberta:1f6714b9-5b9f-4f75-b46e-2b5f5d21d8e9",
+          "alberta:de6bd3ec-b4e2-4e74-a8f4-26cd78642db3",
+          "alberta:cb0799a8-1f25-4a8f-b3ed-0d4a5980eed3",
+          "alberta:ee03b884-617f-416c-afea-400638a9e9f3",
+          "alberta:386a9886-e1c2-4228-8d09-0a5d911addb1",
+          "alberta:d7a2fd69-1264-4c9f-a44b-fc8dab0dbba9"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 109.18866703286767
+      },
+      {
+        "id": "q065",
+        "query": "ontario registered marriage officiants list",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:38ddc983-1bf0-4bee-ad18-07dac8cfe884"
+        ],
+        "retrieved_ids": [
+          "canada:38ddc983-1bf0-4bee-ad18-07dac8cfe884",
+          "ontario:38ddc983-1bf0-4bee-ad18-07dac8cfe884",
+          "ontario:499472dc-8526-4ed6-b267-58cc1bd774e7",
+          "canada:499472dc-8526-4ed6-b267-58cc1bd774e7",
+          "ontario:ec9ddfa5-22e7-4588-98fc-4d6cb335188f",
+          "canada:ec9ddfa5-22e7-4588-98fc-4d6cb335188f",
+          "canada:21f042c5-d6c4-44e2-9c03-f71c39b3a0e8",
+          "ontario:21f042c5-d6c4-44e2-9c03-f71c39b3a0e8",
+          "canada:759b07e9-c3ca-477b-80a9-8698b545dacd",
+          "canada:46df90d5-0425-4472-b30c-c225dcd64f1e"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 108.0599578563124
+      },
+      {
+        "id": "q066",
+        "query": "ontario water taking permits registry",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:d194c6fc-ddf0-4913-a4e4-eb7144914e52"
+        ],
+        "retrieved_ids": [
+          "ontario:dfd0d1ff-961d-400b-a01e-a90831697b7e",
+          "canada:c3413230-b784-4e4a-befd-d325840235cc",
+          "canada:dfd0d1ff-961d-400b-a01e-a90831697b7e",
+          "ontario:c3413230-b784-4e4a-befd-d325840235cc",
+          "canada:645356b2-2b7b-46e1-88f2-c5db2aaa0b37",
+          "canada:d194c6fc-ddf0-4913-a4e4-eb7144914e52",
+          "ontario:645356b2-2b7b-46e1-88f2-c5db2aaa0b37",
+          "canada:969b9309-7512-4e4c-8bab-63872abf24dd",
+          "ontario:d194c6fc-ddf0-4913-a4e4-eb7144914e52",
+          "canada:a1792615-c3a8-489a-b89e-814141c67b9d"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 1.0,
+          "mrr": 0.1111111111111111
+        },
+        "latency_ms": 105.14808306470513
+      },
+      {
+        "id": "q067",
+        "query": "ontario licensed well contractors directory",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:ef416525-abb9-4805-a596-98681d34f153"
+        ],
+        "retrieved_ids": [
+          "canada:ef416525-abb9-4805-a596-98681d34f153",
+          "ontario:ef416525-abb9-4805-a596-98681d34f153",
+          "canada:dfd0d1ff-961d-400b-a01e-a90831697b7e",
+          "ontario:dfd0d1ff-961d-400b-a01e-a90831697b7e",
+          "canada:c1a624a7-fbd4-4bc8-8e65-41b294443123",
+          "ontario:6dac9528-fea6-43a9-b644-0aa27edc7e14",
+          "ontario:c1a624a7-fbd4-4bc8-8e65-41b294443123",
+          "alberta:09b71647-f9f5-45e0-9fa5-36276471f4fc",
+          "alberta:be1ebe9f-2d5b-4069-9025-6d3ff7cba4b7",
+          "alberta:2b8847b0-22dc-4747-9599-43b1d997563d"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 103.33366715349257
+      },
+      {
+        "id": "q068",
+        "query": "ontario crown timber charges for forestry",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:e9701604-b867-4a01-9546-e2457bc90289"
+        ],
+        "retrieved_ids": [
+          "canada:e9701604-b867-4a01-9546-e2457bc90289",
+          "ontario:e9701604-b867-4a01-9546-e2457bc90289",
+          "canada:e0da8068-6f08-453f-9684-7d00cd6f6f93",
+          "alberta:b0952938-e29d-4340-a00f-d040118081c5",
+          "alberta:898a89fe-1f5c-4b51-9390-fb04ddf1e71d",
+          "alberta:7ee30a1a-b2f2-4794-844a-6ea25e61b396",
+          "alberta:51ce57fe-f83f-430d-8511-7415937c1a51",
+          "alberta:8cc775c5-8c6e-4c17-b35a-0e0bc27739db",
+          "alberta:3096c9fa-4dac-478a-8f51-5ff36ca0addc",
+          "alberta:57d9919f-bdc9-4372-b7c8-8ac8fc3aa8fc"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 103.77129190601408
+      },
+      {
+        "id": "q069",
+        "query": "ontario working at heights training providers",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:26c0f241-e307-4387-a9b4-48c5522fb8f1"
+        ],
+        "retrieved_ids": [
+          "ontario:26c0f241-e307-4387-a9b4-48c5522fb8f1",
+          "alberta:e42ff11d-1a65-45a7-8f12-df7318e75e9c",
+          "canada:9ce8373a-4bae-4c74-be9a-d8639dea9d54",
+          "ontario:9ce8373a-4bae-4c74-be9a-d8639dea9d54",
+          "canada:fadf8bde-c01d-42ee-b2d5-011f2d74c074",
+          "ontario:fadf8bde-c01d-42ee-b2d5-011f2d74c074",
+          "ontario:706a2e5c-b34c-43a4-ae32-a0d93af9afaa",
+          "canada:de141de6-2664-478d-81fb-6ba3eb5777dd",
+          "canada:15182296-fb4d-4395-a177-2936cf012ee9",
+          "canada:8db9f9ef-2416-456d-9340-f1c253b3d99e"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 108.99041686207056
+      },
+      {
+        "id": "q070",
+        "query": "ontario moose tag allocation process results",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:e9e6d7e4-cfdc-4ac2-bbe3-87e6f0504366"
+        ],
+        "retrieved_ids": [
+          "canada:e9e6d7e4-cfdc-4ac2-bbe3-87e6f0504366",
+          "ontario:e9e6d7e4-cfdc-4ac2-bbe3-87e6f0504366",
+          "canada:07fc6d4f-d197-4caa-86e5-6da30f7c1d5c",
+          "ontario:07fc6d4f-d197-4caa-86e5-6da30f7c1d5c",
+          "canada:deb6e8be-5b71-4d4e-8d50-1ae08c8dbf3c",
+          "canada:dd17d211-5038-479a-8f23-dafcb26c829b",
+          "ontario:deb6e8be-5b71-4d4e-8d50-1ae08c8dbf3c",
+          "ontario:dd17d211-5038-479a-8f23-dafcb26c829b",
+          "alberta:6f4ed10a-08c0-4e3d-bb68-0b0eae11cd10",
+          "canada:b16ef29c-a71d-4693-a2f1-8c92cc2ca438"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 107.63416718691587
+      }
+    ]
+  },
+  "hybrid_offline": {
+    "mode": "hybrid_offline",
+    "model": "BAAI/bge-small-en-v1.5",
+    "total_queries": 70,
+    "overall": {
+      "hit@1": 0.37142857142857144,
+      "hit@5": 0.6142857142857143,
+      "hit@10": 0.6571428571428571,
+      "mrr": 0.46681972789115644
+    },
+    "by_category": {
+      "acronym_code": {
+        "count": 12,
+        "hit@1": 0.3333333333333333,
+        "hit@5": 0.5,
+        "hit@10": 0.5,
+        "mrr": 0.37083333333333335
+      },
+      "french": {
+        "count": 12,
+        "hit@1": 0.9166666666666666,
+        "hit@5": 0.9166666666666666,
+        "hit@10": 0.9166666666666666,
+        "mrr": 0.9166666666666666
+      },
+      "layman": {
+        "count": 25,
+        "hit@1": 0.32,
+        "hit@5": 0.76,
+        "hit@10": 0.84,
+        "mrr": 0.5007619047619047
+      },
+      "single_portal": {
+        "count": 11,
+        "hit@1": 0.2727272727272727,
+        "hit@5": 0.36363636363636365,
+        "hit@10": 0.45454545454545453,
+        "mrr": 0.3068181818181818
+      },
+      "statcan": {
+        "count": 10,
+        "hit@1": 0.0,
+        "hit@5": 0.3,
+        "hit@10": 0.3,
+        "mrr": 0.13333333333333333
+      }
+    },
+    "by_lang": {
+      "en": {
+        "count": 58,
+        "hit@1": 0.25862068965517243,
+        "hit@5": 0.5517241379310345,
+        "hit@10": 0.603448275862069,
+        "mrr": 0.373747947454844
+      },
+      "fr": {
+        "count": 12,
+        "hit@1": 0.9166666666666666,
+        "hit@5": 0.9166666666666666,
+        "hit@10": 0.9166666666666666,
+        "mrr": 0.9166666666666666
+      }
+    },
+    "latency_ms": {
+      "mean": 127.17564947836634,
+      "p50": 126.51783297769725,
+      "p95": 137.76833401061594,
+      "min": 114.1116670332849,
+      "max": 157.58050000295043
+    },
+    "query_details": [
+      {
+        "id": "q001",
+        "query": "how much does the federal government owe in debt",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:5d9b3192-e29f-4071-8e44-94b73efd08b5",
+          "statcan:10100002"
+        ],
+        "retrieved_ids": [
+          "canada:07ed7c29-fef1-4c3b-9119-1dfef81aa460",
+          "canada:5d9b3192-e29f-4071-8e44-94b73efd08b5",
+          "canada:4ea88dab-3b85-4c64-b2f6-17423cd5e5c1",
+          "statcan:10100065",
+          "canada:c5a819e1-c577-449b-87a8-d35ccace6fa0",
+          "canada:2791f335-dc75-4a8b-9394-5b8b96c75c0a",
+          "canada:38be36d2-7c40-40c8-a782-783f4c56c4ce",
+          "canada:7803563a-d2e5-47dc-8ad6-984be99609fb",
+          "canada:8bcaa58a-8b30-4ae7-bc18-c5dca00e3528",
+          "canada:4ebc3fca-7e37-3194-1fb3-e76fda655891"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 137.76833401061594
+      },
+      {
+        "id": "q002",
+        "query": "consumer price index inflation tracker",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:007de44e-3010-4cce-a03c-92ae9f7011db",
+          "statcan:18100018"
+        ],
+        "retrieved_ids": [
+          "canada:a71262e2-0cc3-4e07-9b0f-67ffc6762349",
+          "canada:2c75c627-3eb6-41ee-bb54-7b089eade484",
+          "alberta:443b43de-b8c0-4108-9aab-bde7df7532ed",
+          "statcan:18100016",
+          "statcan:18100019",
+          "canada:e6bb7199-b8ed-4e2b-a75f-58aac3f1c19a",
+          "statcan:36100350",
+          "canada:29a55543-3e27-4d7a-8ce5-7b669305b2d8",
+          "canada:4be5f92b-8546-4e76-ad98-bcf9d4b8aeed",
+          "statcan:18100256"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 131.88979192636907
+      },
+      {
+        "id": "q003",
+        "query": "how much crude oil does canada produce by province",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:f83f252c-bb16-439d-8441-5a4157b924fd"
+        ],
+        "retrieved_ids": [
+          "canada:0b7bf4b3-423a-45d0-a92b-e69be0b81ce4",
+          "canada:f83f252c-bb16-439d-8441-5a4157b924fd",
+          "alberta:b8fea8da-848f-4d04-be0f-983787f88694",
+          "canada:cdfd1440-8893-11e0-a55f-6cf049291510",
+          "alberta:6b02f6db-f0df-4749-8a46-e0130cff4fb4",
+          "canada:2fd3ab44-59d8-446f-bf77-720037dcac4f",
+          "alberta:38ee531b-28fb-424d-bf6d-9eb272dcb53e",
+          "alberta:4ad7b5c8-8fdf-42a4-bec4-e57fae9f058e",
+          "canada:ccd699c3-14c8-4f81-8c1f-0713ed2a4f70",
+          "canada:1194620e-0154-4cbc-aceb-af0330976ca0"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 132.26283388212323
+      },
+      {
+        "id": "q004",
+        "query": "weekly cattle and livestock prices in alberta",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:90297161-7a1c-4de6-b192-16f6eea98bbf"
+        ],
+        "retrieved_ids": [
+          "alberta:e80740b9-1a84-4d2e-866a-f74e62436299",
+          "alberta:902547bc-7d1c-4147-b774-99a313c536a0",
+          "alberta:90297161-7a1c-4de6-b192-16f6eea98bbf",
+          "alberta:ddd55b15-02b0-475b-affc-e38e8c690bbc",
+          "alberta:38b723e8-db70-4532-8d85-d5feae64e950",
+          "alberta:4ccd8581-b6f0-4a1b-b6ab-d060440996f1",
+          "alberta:e80c46a8-8612-4166-8f06-dc80aa09cc56",
+          "alberta:1a118df8-7860-4165-8a7a-3764a944b3a7",
+          "alberta:16e6d069-037a-47d1-a5c0-0086bbbcc944",
+          "alberta:b86cd45c-5976-47c0-ad0b-f6cc08b947c9"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        "latency_ms": 135.90991590172052
+      },
+      {
+        "id": "q005",
+        "query": "weekly grain and crop market prices in alberta",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:b23eeb3f-8059-4dce-b23b-cf552736dc61"
+        ],
+        "retrieved_ids": [
+          "alberta:deae699f-7721-4f24-9573-54d3d18baf65",
+          "alberta:772c08dc-e15d-4186-a6ed-afa4b49c48a8",
+          "alberta:b23eeb3f-8059-4dce-b23b-cf552736dc61",
+          "alberta:be168f37-341a-4a78-9f57-5420b4a57433",
+          "alberta:864f86a2-a4cc-4ef6-a1e5-dc07389e4a5d",
+          "alberta:fa0eaebe-44ba-4ed6-90d6-6b29eb74be4a",
+          "alberta:1061490e-54a7-4831-9731-589886135699",
+          "alberta:bc3cd1a8-7cb7-4f4a-9db7-573b4e617502",
+          "alberta:3714a545-fe0f-4561-a586-75c2b1f3a0d3",
+          "alberta:14bb4c9f-73a7-479f-aa55-3f73efae56e5"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        "latency_ms": 128.31712490879
+      },
+      {
+        "id": "q006",
+        "query": "who is licensed to perform marriages in ontario",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:38ddc983-1bf0-4bee-ad18-07dac8cfe884",
+          "ontario:38ddc983-1bf0-4bee-ad18-07dac8cfe884"
+        ],
+        "retrieved_ids": [
+          "canada:38ddc983-1bf0-4bee-ad18-07dac8cfe884",
+          "ontario:499472dc-8526-4ed6-b267-58cc1bd774e7",
+          "canada:21f042c5-d6c4-44e2-9c03-f71c39b3a0e8",
+          "canada:46df90d5-0425-4472-b30c-c225dcd64f1e",
+          "canada:ec9ddfa5-22e7-4588-98fc-4d6cb335188f",
+          "canada:ef416525-abb9-4805-a596-98681d34f153",
+          "canada:759b07e9-c3ca-477b-80a9-8698b545dacd",
+          "ontario:9eff0886-2630-490c-a307-a7018c545142",
+          "canada:8bd823df-4657-4ce5-be13-096145b20dad",
+          "canada:562d4f1d-a60c-412e-8bee-7a53c463b147"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 122.1118331886828
+      },
+      {
+        "id": "q007",
+        "query": "certified fall protection and working at heights training providers",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:26c0f241-e307-4387-a9b4-48c5522fb8f1"
+        ],
+        "retrieved_ids": [
+          "ontario:26c0f241-e307-4387-a9b4-48c5522fb8f1",
+          "alberta:3c3a0002-6c18-4b7a-804d-6ca5b62f9280",
+          "alberta:44ec45ce-84b7-4a35-ab6f-581fca5700cd",
+          "ontario:9ce8373a-4bae-4c74-be9a-d8639dea9d54",
+          "alberta:1918b0f2-5faf-46be-a648-081838155ff8",
+          "alberta:e42ff11d-1a65-45a7-8f12-df7318e75e9c",
+          "alberta:70e1b3a4-114b-4b6f-9da0-67c58dafc999",
+          "alberta:ba252cdd-b500-418c-bd3c-619bf4f0bea5",
+          "alberta:9e99bc82-e782-471b-92bd-547883bc2a47",
+          "alberta:418365c5-ac2c-4781-9e74-e56f1929850d"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 124.6882090345025
+      },
+      {
+        "id": "q008",
+        "query": "how many new houses are being built in canada",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:00f345a6-87ac-4efc-9735-0994574899fd",
+          "canada:1cc59f60-12e3-44e8-84ff-9c6c3d2c73c7",
+          "canada:2568854d-6019-4ee4-863f-805e0b63dd69",
+          "canada:392cc982-f113-4c0c-90a4-095914f99293",
+          "canada:440be770-8816-4956-9a9d-8c4c97e35242",
+          "canada:55528bfa-6557-4296-a1aa-36bbb36e756d",
+          "canada:80b0050e-7c37-4f68-8955-3c98e76f904a",
+          "canada:930cd004-6053-4903-be8d-159c1674b461",
+          "canada:96ace35b-4641-488f-b33d-10c390ff77e8",
+          "canada:ca800086-37a9-4475-bbd6-02ae8ae2e942",
+          "canada:ce77d11e-f70b-4203-ad99-b47e30378b19",
+          "canada:d0e77820-0bd2-4fcd-9098-17fb3283ae12",
+          "canada:dc3e885d-ad81-4280-80f7-c06d6fcadfbb",
+          "statcan:34100096",
+          "statcan:34100103",
+          "statcan:34100104",
+          "statcan:34100125",
+          "statcan:34100126",
+          "statcan:34100134",
+          "statcan:34100135",
+          "statcan:34100136",
+          "statcan:34100138",
+          "statcan:34100143",
+          "statcan:34100151",
+          "statcan:34100154",
+          "statcan:34100155"
+        ],
+        "retrieved_ids": [
+          "canada:caec84e1-f84f-4125-9554-46c7b89e9665",
+          "canada:cde5899d-7205-4d37-90dc-b0c37f848a88",
+          "canada:fac4c175-38b3-4667-b1ca-f002382f9b78",
+          "canada:a60d8e24-7ca7-4f8a-80a0-797ece622fe3",
+          "alberta:f7de8782-5384-4f72-8df8-4471fb13b1b7",
+          "alberta:b20227a4-8bbd-4e7c-9e43-4f5a8d6ed180",
+          "canada:930cd004-6053-4903-be8d-159c1674b461",
+          "canada:77ac513f-a65a-4cf0-b889-31be6ddb6f46",
+          "canada:1c853df7-0c35-4794-80a7-2d784d0497e0",
+          "canada:c3125e58-5920-45d3-be29-2f2e1f1dabc1"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 1.0,
+          "mrr": 0.14285714285714285
+        },
+        "latency_ms": 132.8745000064373
+      },
+      {
+        "id": "q009",
+        "query": "alberta economic indicators dashboard",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:4e2302c8-8d45-4da7-bf6b-f7617c7bc5e4"
+        ],
+        "retrieved_ids": [
+          "alberta:4e2302c8-8d45-4da7-bf6b-f7617c7bc5e4",
+          "alberta:584e78a6-c4f9-498a-9457-60641acec959",
+          "canada:601d303a-b77b-4cb4-a23e-4f872b9bc96f",
+          "alberta:51710c00-0277-47e3-b368-c8e1f8955c09",
+          "alberta:30cc4dc9-8927-4df0-a3ec-fc076b12ccc5",
+          "alberta:cfe4dfd5-ac18-4808-9623-e3f06e2ea940",
+          "alberta:b5ce80b2-fd67-498c-a7a3-0efa25c58a36",
+          "alberta:863fe59c-ec5c-4be2-b2e9-7b0195504797",
+          "alberta:3ddd0af0-da89-4b44-b378-b466ec9e38f9",
+          "alberta:d0fac07d-9789-4d87-abf5-0c813fd7b157"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 123.96774999797344
+      },
+      {
+        "id": "q010",
+        "query": "electric vehicle rebate program statistics",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:23344072-7118-4715-84a9-daf630ec76c8"
+        ],
+        "retrieved_ids": [
+          "canada:23344072-7118-4715-84a9-daf630ec76c8",
+          "canada:d70e2d11-60f0-031b-7c3d-ec05f1f4886b",
+          "canada:42986a95-be23-436e-af15-7c6bf292a2e1",
+          "alberta:15563111-60c6-428b-a110-d0d3cf3df169",
+          "canada:d99abc15-afb0-471e-b2a2-8d00d8caac2d",
+          "canada:8edfcbdd-fc20-6ac8-2d57-362283024bfd",
+          "canada:12a904df-773f-4e50-87ee-de3ac7d5da0c",
+          "canada:5c5f481e-0b3f-4bda-9e7d-01a66c8141f3",
+          "alberta:a7319f81-f4ab-4f06-9cff-42f31ef94a50",
+          "canada:30fdf9c3-b7cc-462e-bd98-3fc5499b1c37"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 141.52004080824554
+      },
+      {
+        "id": "q011",
+        "query": "water permits and taking in ontario",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:d194c6fc-ddf0-4913-a4e4-eb7144914e52",
+          "ontario:d194c6fc-ddf0-4913-a4e4-eb7144914e52"
+        ],
+        "retrieved_ids": [
+          "canada:c3413230-b784-4e4a-befd-d325840235cc",
+          "canada:dfd0d1ff-961d-400b-a01e-a90831697b7e",
+          "canada:d194c6fc-ddf0-4913-a4e4-eb7144914e52",
+          "canada:645356b2-2b7b-46e1-88f2-c5db2aaa0b37",
+          "canada:af3d0f22-ce38-4137-9bc9-61bb3ea75085",
+          "alberta:6f89990b-6088-4ed6-9df9-4b0d609e7c88",
+          "ontario:9eff0886-2630-490c-a307-a7018c545142",
+          "canada:773b00e7-9c07-4eb9-ab69-c4edecfdbb50",
+          "alberta:b1cee122-e187-4ba9-8587-9f0f1e24db91",
+          "canada:d750abf2-9d66-47e6-a4f0-7a215f765ae0"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        "latency_ms": 132.31479097157717
+      },
+      {
+        "id": "q012",
+        "query": "fees paid by forestry companies for cutting timber in ontario",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:e9701604-b867-4a01-9546-e2457bc90289",
+          "ontario:e9701604-b867-4a01-9546-e2457bc90289"
+        ],
+        "retrieved_ids": [
+          "canada:e9701604-b867-4a01-9546-e2457bc90289",
+          "alberta:b0952938-e29d-4340-a00f-d040118081c5",
+          "alberta:898a89fe-1f5c-4b51-9390-fb04ddf1e71d",
+          "alberta:c18ef1f7-d50f-4c6d-9889-08c33f238946",
+          "alberta:dd834bc8-91dd-4380-a5e0-daff31e4b603",
+          "alberta:64504bb0-0d90-4708-b9ba-f7ba61812e05",
+          "alberta:68a34ff1-83d3-49fc-9f83-7781db846dff",
+          "alberta:3191686b-2dd2-41d8-9863-ee13d3ee4c9c",
+          "alberta:81d9c265-dd25-496c-b589-7435e55c552e",
+          "alberta:57701de7-e973-400c-8b15-0bfd9e6e190d"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 126.0146249551326
+      },
+      {
+        "id": "q013",
+        "query": "municipal potable water assets and drinking water advisories",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:01fe8fa7-8cf1-40cf-9ff7-07a9f6d46078",
+          "canada:047c2377-be5b-475d-8db9-d189626f2301",
+          "canada:969b9309-7512-4e4c-8bab-63872abf24dd",
+          "canada:d750abf2-9d66-47e6-a4f0-7a215f765ae0",
+          "statcan:34100204",
+          "statcan:34100205",
+          "statcan:34100208",
+          "statcan:34100209"
+        ],
+        "retrieved_ids": [
+          "canada:85cb9e62-a388-4fd6-b669-c83fa9ff51b2",
+          "canada:01fe8fa7-8cf1-40cf-9ff7-07a9f6d46078",
+          "canada:047c2377-be5b-475d-8db9-d189626f2301",
+          "canada:969b9309-7512-4e4c-8bab-63872abf24dd",
+          "canada:a1792615-c3a8-489a-b89e-814141c67b9d",
+          "canada:d750abf2-9d66-47e6-a4f0-7a215f765ae0",
+          "canada:5efb989f-2223-43d0-9782-a2ae0dda4725",
+          "canada:b1a9efdb-91b0-4710-8fe6-0e5a967f42db",
+          "alberta:fb416ece-3341-431b-909e-f4875bd5a34b",
+          "canada:7f6b5a22-cdf6-4476-8e37-7f2435cbe3af"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 129.87733399495482
+      },
+      {
+        "id": "q014",
+        "query": "summary of permanent residents admitted to canada",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:082f05ba-e333-4132-ba42-72828d95200b"
+        ],
+        "retrieved_ids": [
+          "canada:0186868b-a04d-4a0e-962e-bdfbac51bfb3",
+          "canada:52e4b14b-597a-4ecf-a184-23a6e69b0d57",
+          "canada:1b026aab-edb3-4d5d-8231-270a09ed4e82",
+          "canada:f7e5498e-0ad8-4417-85c9-9b8aff9b9eda",
+          "canada:082f05ba-e333-4132-ba42-72828d95200b",
+          "canada:2fbb56bd-eae7-4582-af7d-a197d185fc93",
+          "canada:1d3963d6-eea9-4a4b-8e4a-5c7f2deb7f29",
+          "canada:2bf9f856-20fe-4644-bf74-c8e45b3d94bd",
+          "canada:052642bb-3fd9-4828-b608-c81dff7e539c",
+          "canada:9b34e712-513f-44e9-babf-9df4f7256550"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.2
+        },
+        "latency_ms": 127.822499955073
+      },
+      {
+        "id": "q015",
+        "query": "tourism contribution to provincial gross domestic product",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:005a5def-2265-43fc-9e25-0e3003afeedb",
+          "statcan:24100042"
+        ],
+        "retrieved_ids": [
+          "canada:005a5def-2265-43fc-9e25-0e3003afeedb",
+          "canada:5388a95a-fc3c-46ca-9f73-ea7b4e06730a",
+          "ontario:2ae0a7b5-8655-42ff-8339-0b757bf9394c",
+          "statcan:24100044",
+          "canada:b2aabe1d-22e0-469f-89d8-983de8f8b003",
+          "alberta:bdfecac0-0dda-4e8c-8321-7002a5edb11c",
+          "canada:d24cd0fe-0f47-4ee2-acd0-ea481bd5f05c",
+          "alberta:eaba46fa-eb1a-487b-9ebf-fa9f7314236e",
+          "canada:51411701-4b08-4740-a190-3a316f082eb7",
+          "statcan:38100141"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 126.59645802341402
+      },
+      {
+        "id": "q016",
+        "query": "how much alcohol is sold across canadian provinces",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:e1fdc8ed-e0a4-4e6a-8961-2db60a9fc886",
+          "statcan:10100010"
+        ],
+        "retrieved_ids": [
+          "canada:7bf160c9-f884-4443-bd48-fcb773b11c56",
+          "canada:cc26db54-a195-4eff-b61e-830cc191f112",
+          "canada:c5004d74-90f3-49eb-82b8-30394d00913b",
+          "statcan:10100164",
+          "canada:6168fcf1-5dbc-4216-b6ce-a7672562a840",
+          "canada:fb74ce82-afa2-45ca-acc2-83cdf8c10b85",
+          "canada:ce13ad55-1471-4a4c-9922-94a68ad15cb2",
+          "statcan:10100028",
+          "canada:84cad733-e663-4c4f-9d71-544ca8812ffb",
+          "canada:cfc9136a-859a-422f-bbcd-70ee33851b54"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 128.272291040048
+      },
+      {
+        "id": "q017",
+        "query": "police reported organized crime incidents across canada",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:08322e85-beea-4c69-921f-67cd87f9eb9a",
+          "statcan:35100062"
+        ],
+        "retrieved_ids": [
+          "canada:08322e85-beea-4c69-921f-67cd87f9eb9a",
+          "alberta:2b4837f9-0877-4581-a00f-9d9c1d5a1794",
+          "alberta:0d3f05fd-9dd7-4bbc-b954-1d64e9a3a825",
+          "canada:9671bee4-4f73-48a0-a4c1-5d23dd0e901a",
+          "canada:47466568-c38d-8bb9-26d9-331079dad727",
+          "canada:377d2c17-d92b-4135-9244-4a609cd8fb80",
+          "alberta:cd180a7a-ecd5-4602-8eb1-06d7898fa8cd",
+          "canada:8dd89cd2-5397-48b3-9e59-c609333c3c5d",
+          "canada:672466fb-08d3-402c-b88f-41364ef7b101",
+          "canada:53977bb8-f368-1ffd-9bcf-7bffa7ea7df3"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 132.48350005596876
+      },
+      {
+        "id": "q018",
+        "query": "postsecondary student enrolments by visible minority group",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:161cae65-8f2f-4587-be95-0e5bfe57e878",
+          "canada:fc3c31eb-91fa-430a-a029-c8714ed6bf73",
+          "statcan:37100267",
+          "statcan:37100268"
+        ],
+        "retrieved_ids": [
+          "canada:c591105f-8938-40b4-bd98-07e0c64fef11",
+          "canada:161cae65-8f2f-4587-be95-0e5bfe57e878",
+          "canada:290f8991-9043-4ba9-bb1a-c3041e38a94f",
+          "canada:fc3c31eb-91fa-430a-a029-c8714ed6bf73",
+          "statcan:37100292",
+          "canada:5de46dd1-5019-4d42-a238-d12301196a04",
+          "canada:92d1453a-6650-44bb-b599-497a9e80ca10",
+          "canada:f3e7aaa2-bf52-4119-a9e4-a13437b319c6",
+          "canada:46ed5240-5120-4b9f-a7b4-c4dbb908f7ee",
+          "statcan:37100247"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 127.55637499503791
+      },
+      {
+        "id": "q019",
+        "query": "average life expectancy at birth and age 65",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:006ec1cd-5682-435a-ba80-e61408f9afb9",
+          "canada:0cb06537-2ec0-451c-81d7-d417c5e97efe",
+          "canada:17dde99f-75ce-46b6-baa6-6ca5c8ce3f13",
+          "canada:f0db9bca-efaf-4bcb-b33c-76695ae1fbf8",
+          "canada:fa518eb5-609a-41b7-8724-684bcc16c3a9",
+          "statcan:13100008",
+          "statcan:13100010",
+          "statcan:13100013",
+          "statcan:13100020",
+          "statcan:13100032"
+        ],
+        "retrieved_ids": [
+          "canada:00c99f50-4f07-4e8c-b61d-9e188a51ed82",
+          "canada:cea10eaf-d07d-428b-9586-7e6610439ffc",
+          "alberta:a20ed785-6987-406e-8792-7f675b3c1c03",
+          "canada:1662e1f0-596b-4131-8a95-c371d17a5b3a",
+          "canada:006ec1cd-5682-435a-ba80-e61408f9afb9",
+          "canada:13e027ad-2bc0-4245-82f2-12cff76674b6",
+          "canada:f72615e7-25c1-4a7e-87bc-7214d2c90e83",
+          "alberta:4ccda9ab-f3b5-4a34-86c0-5a9a6ae675cb",
+          "canada:64ea4e97-ae18-4020-98f9-1e1b7c75341d",
+          "alberta:7f054e8f-91f0-4307-bf12-1af03978452f"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.2
+        },
+        "latency_ms": 128.63595900125802
+      },
+      {
+        "id": "q020",
+        "query": "farm household income distribution by farm type",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:1066b6ba-1bf3-4a41-ab02-d633ac9711ab",
+          "canada:3de3af5d-90ef-42a3-8f76-a92f749ec943",
+          "statcan:32100030",
+          "statcan:32100401"
+        ],
+        "retrieved_ids": [
+          "canada:439899ea-7ec6-4050-88af-242174b890d9",
+          "canada:1787121b-3a1c-4440-9a5e-440bd1024146",
+          "canada:84483ae3-b5c3-4bbd-8a36-5767fb0befbb",
+          "canada:50ed685e-766f-4c32-b32a-720f043a192e",
+          "canada:40a77b84-f901-495d-9519-18bd386671b1",
+          "canada:f6097fc5-bb02-4944-9050-c3b64512a9ab",
+          "canada:a750f346-f6ef-4961-a66b-db9fa8ea08ec",
+          "canada:76985b79-d7d2-4866-9f7a-2fa37886335c",
+          "canada:6e7bcf1a-141f-47f0-b878-1fc235d9f329",
+          "canada:deac3df1-034d-44b4-a522-45482ef62866"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 128.9117499254644
+      },
+      {
+        "id": "q021",
+        "query": "retail sales monthly seasonally adjusted trends",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:00280a6a-48d8-4b99-9a44-e4ceed819a58",
+          "statcan:20100030"
+        ],
+        "retrieved_ids": [
+          "canada:352bb9e6-714c-499e-9e3f-74613d1daf43",
+          "canada:13d4574a-bdc4-4a77-9769-bb5de4c186ac",
+          "canada:7a13fdb8-6221-422b-a7cd-85f49b265800",
+          "canada:aa8b1fe3-53d2-4542-96e1-1dd0a8630ccb",
+          "canada:9a72c101-0101-4fae-a404-3719b0e406df",
+          "canada:877dbd4f-f80c-4734-ad21-d135dcf4af1e",
+          "canada:00280a6a-48d8-4b99-9a44-e4ceed819a58",
+          "canada:41cc7b50-d2ea-42c1-9221-1b311a08325e",
+          "statcan:20100056",
+          "alberta:a5da1d67-d5fe-407b-bf9c-6f28e6d680d2"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 1.0,
+          "mrr": 0.14285714285714285
+        },
+        "latency_ms": 124.45137510076165
+      },
+      {
+        "id": "q022",
+        "query": "income of refugee and asylum claimants across provinces",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:47b3005b-d149-424f-a9e1-37d6c2b61c03",
+          "canada:e217fe84-3930-48bc-8dd7-692f2800a482",
+          "statcan:43100019",
+          "statcan:43100028"
+        ],
+        "retrieved_ids": [
+          "canada:e217fe84-3930-48bc-8dd7-692f2800a482",
+          "canada:47b3005b-d149-424f-a9e1-37d6c2b61c03",
+          "canada:b6cbcf4d-f763-4924-a2fb-8cc4a06e3de4",
+          "canada:179c92d4-810c-4d3f-8586-05f3ac8af6c3",
+          "canada:395accee-37c3-47e4-b597-90f1425a11c6",
+          "alberta:b5037e42-7ccc-4a94-b9f1-66946166cd2a",
+          "canada:a25c4711-d853-4956-90b6-d95ae644ac73",
+          "canada:8c68c653-2043-4655-b40f-ed031c0aa108",
+          "canada:7a911b19-73fd-4ffa-9638-931d97cedd7a",
+          "canada:1bedfb8d-e012-4ba2-86cc-d65da068b82c"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 131.771125132218
+      },
+      {
+        "id": "q023",
+        "query": "monthly labour force unemployment and participation numbers",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:17b836c1-e7ec-48b9-b7a3-f370f1006975",
+          "statcan:14100017"
+        ],
+        "retrieved_ids": [
+          "canada:ee0c0ab7-4897-494b-a1f7-0bf0e919f126",
+          "canada:20247182-253b-4fb6-9ef2-572fa4252c84",
+          "canada:dea96934-9d93-4507-ab92-653a692c4654",
+          "canada:8b0d916a-530f-4046-95a6-ccc919ea86e8",
+          "canada:21c01404-676d-4490-b7ee-cacaf3cb5a2e",
+          "canada:e787f292-9c54-4850-af0c-d0f323aa5e71",
+          "canada:442a6b08-bcd5-46af-b13d-cd02811b3b20",
+          "canada:7932d6c3-9c5f-461e-9bc8-124bf7ca4de7",
+          "canada:c47567d9-20d2-4b9e-9898-dfb4b7ca7aec",
+          "canada:2e1a7bce-4010-4a17-9e6c-50ca3abd95fe"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 126.40191707760096
+      },
+      {
+        "id": "q024",
+        "query": "air quality monitoring observations and health index",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:28936e1b-681f-4c73-b04a-e86d4b3917c6"
+        ],
+        "retrieved_ids": [
+          "canada:1a2cc5c7-42b9-4448-a775-8dd5c2bde3af",
+          "alberta:f011df9e-55d9-4abd-84ad-52bfed9cc43c",
+          "canada:28936e1b-681f-4c73-b04a-e86d4b3917c6",
+          "alberta:85c3e7a8-a8f5-46f3-8fc2-b5c307ba95d6",
+          "alberta:304aa0f8-0504-41e7-bfee-bd0bd508d869",
+          "alberta:f4b316d2-85e6-4114-9a4c-f86e4e8a1a8d",
+          "alberta:63bb8fd5-5ddc-4262-8221-22a5e7e8df09",
+          "alberta:db8c1774-4e1f-4e0e-8fcb-9eb1d3401014",
+          "canada:ecc29fa2-e235-4974-a86d-38da36e6238b",
+          "canada:fd123309-419b-4126-9f23-eec02ee55d49"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        "latency_ms": 133.2149589434266
+      },
+      {
+        "id": "q025",
+        "query": "social housing near public transit stops",
+        "category": "layman",
+        "lang": "en",
+        "expected_ids": [
+          "canada:00f413fd-1b3a-41a1-bb13-386812c467dd",
+          "statcan:46100014"
+        ],
+        "retrieved_ids": [
+          "statcan:46100013",
+          "statcan:46100014",
+          "alberta:14c842b3-0cdf-44f3-8aef-541042e6350c",
+          "canada:b6f070c5-2d72-4bc3-8e37-e871b40aad31",
+          "canada:749149bb-3c43-4018-bb2c-43568f272ba6",
+          "statcan:23100313",
+          "statcan:34100297",
+          "statcan:23100286",
+          "statcan:34100296",
+          "canada:b8241e15-2872-4a63-9d36-3083d03e8474"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 131.62495894357562
+      },
+      {
+        "id": "q026",
+        "query": "CPI",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:007de44e-3010-4cce-a03c-92ae9f7011db",
+          "statcan:18100018"
+        ],
+        "retrieved_ids": [
+          "canada:2c75c627-3eb6-41ee-bb54-7b089eade484",
+          "alberta:443b43de-b8c0-4108-9aab-bde7df7532ed",
+          "canada:a71262e2-0cc3-4e07-9b0f-67ffc6762349",
+          "statcan:18100256",
+          "statcan:36100350",
+          "statcan:18100019",
+          "statcan:18100241",
+          "statcan:18100016",
+          "canada:404aac07-25e9-4699-8d2f-95402ab9be69",
+          "statcan:18100244"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 125.92179188504815
+      },
+      {
+        "id": "q027",
+        "query": "EVAP",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:23344072-7118-4715-84a9-daf630ec76c8"
+        ],
+        "retrieved_ids": [
+          "canada:23344072-7118-4715-84a9-daf630ec76c8",
+          "alberta:43a72007-d860-444c-9fe9-0892a26c3db6",
+          "alberta:95b3b990-c4fd-4b97-b6c0-ad8df920be5a",
+          "alberta:e7591494-ca2e-4215-b4c4-2e2797861d01",
+          "canada:a23140bc-51bd-40e9-a25c-67a8a912bec0",
+          "alberta:cbb5a611-495e-47bd-bc18-af93c0dc67fe",
+          "alberta:02a49796-8311-45cf-affc-c80bc08cc5bc",
+          "alberta:e74d8549-37b9-44ae-8c89-e56e77d83569",
+          "alberta:49cd2d77-4153-41bd-b0fc-059627b0a7a9",
+          "alberta:9759643e-0211-4463-84a3-4bd7c72fd62a"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 125.997583149001
+      },
+      {
+        "id": "q028",
+        "query": "10100002",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100002"
+        ],
+        "retrieved_ids": [
+          "statcan:10100002",
+          "alberta:6562caea-dab0-4537-8d8d-f5c2c78788ec",
+          "alberta:4bd359c7-a43b-4176-89b8-6510dfc41389",
+          "alberta:6a37ea76-b7ac-4d0d-aaba-7debc6b797d6",
+          "alberta:92556a1b-9904-4bc1-8a16-9af3219cf537",
+          "alberta:9b41d89e-c94b-40ab-99a9-215a4d300e10",
+          "alberta:33a01bee-c9b7-46b9-aa01-205c49d7c341",
+          "canada:10a23a4b-06f7-4a31-82af-c0c65f0ff7f2",
+          "alberta:3edd91c3-8f52-47ef-a368-134b3ad68c4e",
+          "alberta:dc3efeb4-8768-40d9-a83a-25fef41b8c85"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 126.6687500756234
+      },
+      {
+        "id": "q029",
+        "query": "10100001",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100001"
+        ],
+        "retrieved_ids": [
+          "statcan:10100002",
+          "statcan:10100006",
+          "alberta:d588a163-ac11-4402-ae15-09e49c16d6f7",
+          "alberta:8748f5f0-f553-4f80-8501-620da475cd67",
+          "alberta:3edd91c3-8f52-47ef-a368-134b3ad68c4e",
+          "statcan:33100241",
+          "statcan:10100133",
+          "alberta:cb0a4566-73dd-4522-b2f6-57823465587a",
+          "alberta:3b27b4d1-e66c-4c62-8353-f25272b091d3",
+          "alberta:2cf73a2e-1bd7-43c7-8ac1-21788ab9d58b"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 157.58050000295043
+      },
+      {
+        "id": "q030",
+        "query": "10100008",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100008"
+        ],
+        "retrieved_ids": [
+          "statcan:10100002",
+          "alberta:e77b423b-dae3-492c-9eee-b55b3e50ce69",
+          "alberta:dc3efeb4-8768-40d9-a83a-25fef41b8c85",
+          "alberta:d588a163-ac11-4402-ae15-09e49c16d6f7",
+          "alberta:3edd91c3-8f52-47ef-a368-134b3ad68c4e",
+          "canada:861e8747-b928-418e-874d-6bd0f90c23b9",
+          "alberta:245e7a91-ff8c-4fe0-99d3-5862390191a0",
+          "alberta:7722596f-b97b-438c-a7e2-30c8cc92d0d4",
+          "alberta:4687189b-79e9-4db3-9b2f-6b7f4513245b",
+          "statcan:10100006"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 143.05491698905826
+      },
+      {
+        "id": "q031",
+        "query": "CCOFOG",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:399fa7e0-8900-42db-8f34-7849fc2f647f",
+          "statcan:10100005"
+        ],
+        "retrieved_ids": [
+          "canada:399fa7e0-8900-42db-8f34-7849fc2f647f",
+          "canada:b3474aec-e8d4-4e4d-b29b-42a245bfddd9",
+          "canada:6b33e0a4-6e34-484e-8c20-112e596710fc",
+          "canada:76e0490d-5b8b-468d-a27c-475e1996ad5b",
+          "statcan:10100173",
+          "canada:5c252e65-1446-425c-84c3-753ebfdc8b77",
+          "alberta:4c7b3b1e-45e0-4e67-a11c-4dc96571d797",
+          "alberta:2155732b-c3cb-4a4f-a14a-55966464f020",
+          "canada:7efe1be8-8350-4623-b49d-feff29229663",
+          "alberta:b465d56e-0c46-4efe-a2d7-7025d7847448"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 129.47670789435506
+      },
+      {
+        "id": "q032",
+        "query": "GDP by income",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:00742f67-edb4-449c-aa1b-0a456f1444a8",
+          "statcan:36100430"
+        ],
+        "retrieved_ids": [
+          "canada:e7842523-c0a6-4387-ab7f-c167215ff250",
+          "canada:ce97cda1-8893-11e0-a10e-6cf049291510",
+          "canada:6814a986-c842-4367-93ac-db4e4b5ecbae",
+          "alberta:4a493355-1283-4197-9928-7bb7baa01939",
+          "canada:5f5182ad-7f42-4fbf-b679-2fb439e20b5d",
+          "statcan:36100254",
+          "statcan:36100268",
+          "canada:54f17fe2-c13e-45b9-8ba3-d52aec416392",
+          "canada:cea5fe70-8893-11e0-8697-6cf049291510",
+          "statcan:36100253"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 122.55979189649224
+      },
+      {
+        "id": "q033",
+        "query": "IRCC Permanent Residents",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:1d3963d6-eea9-4a4b-8e4a-5c7f2deb7f29",
+          "canada:2fbb56bd-eae7-4582-af7d-a197d185fc93"
+        ],
+        "retrieved_ids": [
+          "canada:0186868b-a04d-4a0e-962e-bdfbac51bfb3",
+          "canada:970ff3c4-50fd-4eeb-b402-f82f9ee22990",
+          "canada:ad975a26-df23-456a-8ada-756191a23695",
+          "canada:2fbb56bd-eae7-4582-af7d-a197d185fc93",
+          "canada:f7e5498e-0ad8-4417-85c9-9b8aff9b9eda",
+          "canada:9b34e712-513f-44e9-babf-9df4f7256550",
+          "canada:1b026aab-edb3-4d5d-8231-270a09ed4e82",
+          "canada:31ef4cab-d2b3-4dba-8e91-48fe64211ec5",
+          "canada:1d3963d6-eea9-4a4b-8e4a-5c7f2deb7f29",
+          "canada:52e4b14b-597a-4ecf-a184-23a6e69b0d57"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.25
+        },
+        "latency_ms": 130.40333287790418
+      },
+      {
+        "id": "q034",
+        "query": "AQHI",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:28936e1b-681f-4c73-b04a-e86d4b3917c6"
+        ],
+        "retrieved_ids": [
+          "canada:28936e1b-681f-4c73-b04a-e86d4b3917c6",
+          "alberta:e86bfa3c-b656-4048-bfea-3e88ee676432",
+          "canada:cc7c255e-0a76-4aca-97ea-c14ce3ba2dd0",
+          "alberta:63bb8fd5-5ddc-4262-8221-22a5e7e8df09",
+          "canada:4a4c9b30-9e5c-4c38-8adc-92b7be88e153",
+          "canada:b0712843-8431-496c-a418-ffe6dd1adc3e",
+          "alberta:7377607e-66b4-49b8-b572-e5b5d3a2e62d",
+          "alberta:9f6cbc72-bf77-43a6-b4ae-3a994dc9f50b",
+          "alberta:cbea506f-fa70-4380-ba89-ba3a717c4c3a",
+          "canada:1ad42319-01e4-4ee9-9ffc-a3260f454c54"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 130.0864580553025
+      },
+      {
+        "id": "q035",
+        "query": "10100003",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100003"
+        ],
+        "retrieved_ids": [
+          "alberta:61b0bd2b-9d1b-4a3b-9c3e-c55d9c4ef2e2",
+          "alberta:3edd91c3-8f52-47ef-a368-134b3ad68c4e",
+          "statcan:33100636",
+          "alberta:6899a361-6829-46a1-9e4a-e6299fc5c6e1",
+          "alberta:5cfa77b7-374f-409e-be69-55ecf8daa17b",
+          "alberta:47b390ed-a1cb-4b29-b880-a1512c4832ee",
+          "statcan:10100002",
+          "alberta:3b27b4d1-e66c-4c62-8353-f25272b091d3",
+          "alberta:96799bb8-0864-402e-81a1-677d17cfda0e",
+          "statcan:33100688"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 122.01508390717208
+      },
+      {
+        "id": "q036",
+        "query": "10100004",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100004"
+        ],
+        "retrieved_ids": [
+          "statcan:10100002",
+          "alberta:1b53b38c-a62e-4e30-81cc-8f171d665bb0",
+          "alberta:dc3efeb4-8768-40d9-a83a-25fef41b8c85",
+          "statcan:13100864",
+          "statcan:33100914",
+          "statcan:10100006",
+          "statcan:33100891",
+          "statcan:33100241",
+          "statcan:33100910",
+          "statcan:10100125"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 119.6412080898881
+      },
+      {
+        "id": "q037",
+        "query": "FTE Full-Time Equivalents",
+        "category": "acronym_code",
+        "lang": "en",
+        "expected_ids": [
+          "canada:01d58f1a-4114-43a2-b639-afcfdfde7987"
+        ],
+        "retrieved_ids": [
+          "canada:e2e60f18-95fe-487b-9edd-d1f7bcdd9f9f",
+          "canada:4865564a-98dc-4025-8bd0-0013dafe95b7",
+          "canada:71da2e20-007a-43b3-8261-fd98fb49941f",
+          "alberta:fd9e7b40-329a-4f59-aa1f-183ab791e46d",
+          "canada:01d58f1a-4114-43a2-b639-afcfdfde7987",
+          "canada:3f4186cf-a047-4f7c-aff9-9e82e13f6bdc",
+          "alberta:ffcaf092-af60-4149-aeec-005c8476e321",
+          "canada:1301dccb-a258-4653-b952-ba4c0a643f01",
+          "canada:f6144bae-803d-4afe-9b20-6ba145549f05",
+          "canada:38ceac57-9d80-4962-8bd7-b86b7ce1c0be"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.2
+        },
+        "latency_ms": 130.38591714575887
+      },
+      {
+        "id": "q038",
+        "query": "Portrait du couvert forestier du Québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:039e7efd-9a39-41a7-88bc-dcf2c40265d9"
+        ],
+        "retrieved_ids": [
+          "canada:039e7efd-9a39-41a7-88bc-dcf2c40265d9",
+          "canada:ec15823e-40bc-4f6b-b482-482427ed201a",
+          "canada:3eec3d05-61c1-4bcb-bf22-2d4bd71e2c0d",
+          "canada:d488764c-6f81-491e-b3a8-80a13a86eaac",
+          "canada:b90d077d-5df7-47b1-90c7-00c323ac25a4",
+          "canada:e0e294cf-bef2-4361-a4d3-2fcf88df69ec",
+          "canada:2c890af8-1c19-44a6-bfac-753514a9ec9d",
+          "canada:2991db70-8aff-4bba-a288-4491696f6cd4",
+          "canada:f1dd4c82-abe6-4fdb-9ba7-584043432de5",
+          "canada:2d3b8f09-7a0f-4740-a190-ee767c27b3be"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 125.0391248613596
+      },
+      {
+        "id": "q039",
+        "query": "évaluation foncière au québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:061c8cb7-ca4e-45be-a990-61fce7e7d2dc"
+        ],
+        "retrieved_ids": [
+          "canada:061c8cb7-ca4e-45be-a990-61fce7e7d2dc",
+          "canada:a23140bc-51bd-40e9-a25c-67a8a912bec0",
+          "alberta:1c4ff120-4c63-4066-b90a-1fcbb392b15b",
+          "alberta:e7591494-ca2e-4215-b4c4-2e2797861d01",
+          "canada:72cef028-31cb-4a2a-879f-5338d31a628a",
+          "canada:e4489c02-ab55-414b-ba00-efcacd728b49",
+          "alberta:cbb5a611-495e-47bd-bc18-af93c0dc67fe",
+          "canada:93ce9cb5-0811-48e5-885e-98dce192d293",
+          "canada:0c28fc63-33a3-44a7-8398-d93ffaf4dba3",
+          "canada:1108d83a-4c96-417a-bfa7-57b44b40cf4a"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 125.16662501730025
+      },
+      {
+        "id": "q040",
+        "query": "Indice de défavorisation du Québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:152ec6a1-8091-4b56-beac-f40789f34481"
+        ],
+        "retrieved_ids": [
+          "canada:f19b0cda-8f52-44a1-9954-a1a606daa56e",
+          "canada:d5ebdffc-77e9-44b5-9fdf-b90d144f69eb",
+          "canada:004de02c-19f1-4da0-9af8-33f893e41972",
+          "canada:7ab8707d-2adb-4171-8866-ad7a05e8655e",
+          "canada:93ce9cb5-0811-48e5-885e-98dce192d293",
+          "canada:716310b2-bb1d-4cd8-b12c-39a43db15d10",
+          "canada:b42dfae7-a823-4a09-9fcb-ec479c83b0e9",
+          "alberta:56f40d9c-6354-4c34-8d53-df3748dcb1c5",
+          "canada:e94a2143-ae0c-49fa-88ae-fde868ab21cf",
+          "canada:12b932d4-2c84-443f-8d5e-a267b02e26b1"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 125.85195922292769
+      },
+      {
+        "id": "q041",
+        "query": "système d'information touristique hébergement et chalets québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:0cc89402-040a-47ff-a2f3-aaa29ef32f1d"
+        ],
+        "retrieved_ids": [
+          "canada:0cc89402-040a-47ff-a2f3-aaa29ef32f1d",
+          "canada:f43fbfd7-2b40-4f40-99da-2e0ac1339012",
+          "canada:4abae523-83b7-4591-868c-aee836d8e9bc",
+          "canada:96f35825-78b1-447d-85ad-82d492221325",
+          "canada:2125099f-486b-422d-bc23-f46864d9b41c",
+          "canada:3f1aef13-48f9-41d0-9575-245d931f28ea",
+          "canada:78816d00-21b0-41a5-84ef-44ccc780bd27",
+          "canada:e9e2429f-7f23-41f2-bd0e-e41a6e349aa5",
+          "canada:a7bedbb6-a127-4731-a141-8550fc77014f",
+          "canada:d834e1c2-cccd-4ef7-a3ba-cf8d4bf00cda"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 125.65408390946686
+      },
+      {
+        "id": "q042",
+        "query": "rapports financiers annuels établissements de santé québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:116d2518-57eb-415e-8d1f-d958e8fac4df"
+        ],
+        "retrieved_ids": [
+          "canada:116d2518-57eb-415e-8d1f-d958e8fac4df",
+          "canada:54b2218a-2a94-4b27-9fbf-1b19f70e124c",
+          "canada:db19916d-02bd-4684-b951-9035fa3c9544",
+          "canada:8d6bdf3a-f866-4b93-81a9-3ce2961c23bc",
+          "canada:36e29985-860d-433e-a9e3-86ad315f181d",
+          "canada:1f74efc1-6eb8-48c7-8ffd-8abeb9102639",
+          "canada:5a78b7f6-e132-4fd5-9eac-c5242cd25b28",
+          "canada:79552a7f-8688-4b3c-9dbc-6efdd7a3831e",
+          "canada:c36eb014-25d9-4e9d-9d71-e497ec996fa5",
+          "canada:53038b64-4389-4422-9ab5-b34184c2f58e"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 130.65108307637274
+      },
+      {
+        "id": "q043",
+        "query": "cadre financier pluriannuel québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:1f74efc1-6eb8-48c7-8ffd-8abeb9102639"
+        ],
+        "retrieved_ids": [
+          "canada:1f74efc1-6eb8-48c7-8ffd-8abeb9102639",
+          "canada:5a78b7f6-e132-4fd5-9eac-c5242cd25b28",
+          "canada:53038b64-4389-4422-9ab5-b34184c2f58e",
+          "canada:c36eb014-25d9-4e9d-9d71-e497ec996fa5",
+          "canada:93ce9cb5-0811-48e5-885e-98dce192d293",
+          "canada:36e29985-860d-433e-a9e3-86ad315f181d",
+          "canada:79552a7f-8688-4b3c-9dbc-6efdd7a3831e",
+          "canada:db19916d-02bd-4684-b951-9035fa3c9544",
+          "canada:7ab8707d-2adb-4171-8866-ad7a05e8655e",
+          "canada:b34de345-5bfe-4db2-a714-ed239a0c0b81"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 131.97983289137483
+      },
+      {
+        "id": "q044",
+        "query": "ventes de pesticides visés par prescription agronomique québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:0f145f02-230d-419a-999b-e6706e2e1c6b"
+        ],
+        "retrieved_ids": [
+          "canada:0f145f02-230d-419a-999b-e6706e2e1c6b",
+          "canada:819687fc-4f5d-40b3-9db1-0369841aa329",
+          "canada:c2a4c800-e62e-4e62-b133-53542928b571",
+          "canada:bfec099c-d9aa-4bff-b5ad-438e48c1f8f5",
+          "canada:acc203e6-4769-4881-baa3-c30dc4df5ead",
+          "canada:7140942a-b1f3-4578-98d3-39b7ab4f90dc",
+          "canada:40af76ee-c690-4506-a01e-cce862e121ec",
+          "canada:3b559558-a05d-47c3-afe5-0eb1684c244b",
+          "canada:4d6686fb-ab52-43b0-ba80-84e45b5dfdb2",
+          "canada:23728ef9-f84e-480b-b520-c625d9cd6e24"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 124.34987514279783
+      },
+      {
+        "id": "q045",
+        "query": "hôtels et établissements touristiques au québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:2125099f-486b-422d-bc23-f46864d9b41c"
+        ],
+        "retrieved_ids": [
+          "canada:2125099f-486b-422d-bc23-f46864d9b41c",
+          "canada:e9e2429f-7f23-41f2-bd0e-e41a6e349aa5",
+          "canada:0cc89402-040a-47ff-a2f3-aaa29ef32f1d",
+          "canada:4abae523-83b7-4591-868c-aee836d8e9bc",
+          "canada:d470ab2b-deb2-4aba-86e6-85cbceab4fa8",
+          "canada:17dfa825-9515-4fac-be6b-3964d25194c3",
+          "canada:f43fbfd7-2b40-4f40-99da-2e0ac1339012",
+          "canada:3f1aef13-48f9-41d0-9575-245d931f28ea",
+          "canada:82b06c86-253a-4e77-a050-c022462e90eb",
+          "canada:c1d65779-d3cb-44e8-af0a-b9f2c5f7766d"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 124.7499999590218
+      },
+      {
+        "id": "q046",
+        "query": "liste des conventions collectives en vigueur au québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:21f39629-88f1-4cc4-bbef-cb34276d0685"
+        ],
+        "retrieved_ids": [
+          "canada:21f39629-88f1-4cc4-bbef-cb34276d0685",
+          "canada:0935bc25-0026-4c34-baa4-ca1143c28fdc",
+          "canada:860325b0-ded4-4829-a5bc-3f0bd4bc8ef6",
+          "canada:f9756c63-10cf-4e21-af29-e1d09d366d28",
+          "canada:df7add74-a741-4374-b3bd-22da8921c8b3",
+          "canada:bd7af9b5-d9aa-44bf-a8b7-c6070aa19bea",
+          "canada:aa324ca7-31df-4b5a-881d-84f92050a2ef",
+          "canada:da0e81ae-5a30-4919-9b89-ddf66a5e177b",
+          "canada:6acde2c0-6f08-407a-86e2-db49dd0bbb49",
+          "canada:2aa41a43-a289-411c-a742-8cfd342ec412"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 126.51783297769725
+      },
+      {
+        "id": "q047",
+        "query": "statistiques des bibliothèques publiques québécoises",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:231a38a8-f28e-4bef-82ea-dc98a14c1b6f"
+        ],
+        "retrieved_ids": [
+          "canada:231a38a8-f28e-4bef-82ea-dc98a14c1b6f",
+          "canada:145b3d2c-26a8-44a0-93a3-f2f2e1b2f553",
+          "canada:9c77eca3-7dd3-4ec5-adda-81c21af2ae02",
+          "canada:28294363-463e-4d2e-ad68-7d0a37ec0b0a",
+          "canada:a5a36aa3-1b1a-4dd1-a78b-23008e368ef7",
+          "canada:258c9916-1e2f-49b2-8c5c-1e2134dc403a",
+          "canada:428dd692-045c-42cb-aff6-22e3d7289eb8",
+          "canada:9724834a-d6c5-4838-af8d-7b006f92f128",
+          "canada:500fe487-3c6a-4a35-8c35-2ebc74819a68",
+          "canada:8895a2b9-6501-4e54-93d0-f1ba18590d9a"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 128.2464589457959
+      },
+      {
+        "id": "q048",
+        "query": "zones agricoles et cadastre du québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:27ad6922-03a9-42ca-b11d-eef63537cc5a"
+        ],
+        "retrieved_ids": [
+          "canada:27ad6922-03a9-42ca-b11d-eef63537cc5a",
+          "canada:25696140-f1da-4729-831e-9904628c43c6",
+          "canada:7a8b6386-0336-4711-81c6-14d019907d2c",
+          "canada:3f33cb21-037a-49c3-bea2-ca2e89bbc978",
+          "canada:667c131f-9e38-4b85-b98a-17160800c66a",
+          "canada:bd7689d5-c2ce-4671-b009-6502c89aab64",
+          "canada:24074e8a-cf7a-4cf5-abc2-dadd2b949636",
+          "canada:0d299651-2d95-4de3-b513-cf6009f51ca7",
+          "canada:ecaebecb-2529-463a-8d77-26c806f79617",
+          "canada:0d7a673a-ae29-4674-b6df-74c00a7a5b89"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 123.69345803745091
+      },
+      {
+        "id": "q049",
+        "query": "population de caribous des bois au québec",
+        "category": "french",
+        "lang": "fr",
+        "expected_ids": [
+          "canada:257ed865-4149-4696-98cd-a516c4fc8a4b"
+        ],
+        "retrieved_ids": [
+          "canada:257ed865-4149-4696-98cd-a516c4fc8a4b",
+          "canada:94e45ce7-d795-43b2-a527-096c95c1187b",
+          "canada:ca61c35d-9963-4f62-b963-073aa284e3bd",
+          "canada:5c23ae26-9234-440a-8052-2b64dda605af",
+          "canada:35470900-1873-4548-a66f-a0c309f3143c",
+          "canada:e0e294cf-bef2-4361-a4d3-2fcf88df69ec",
+          "canada:2474b4f2-c4aa-436e-b1fd-830f4a70cede",
+          "canada:17ec5343-6d39-45b8-9ce1-e76843daaaa4",
+          "canada:42ca63ee-aa9a-4437-8810-7d54d328229e",
+          "canada:039e7efd-9a39-41a7-88bc-dcf2c40265d9"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 123.40179202146828
+      },
+      {
+        "id": "q050",
+        "query": "statcan central government debt",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100002"
+        ],
+        "retrieved_ids": [
+          "canada:5d9b3192-e29f-4071-8e44-94b73efd08b5",
+          "canada:4ebc3fca-7e37-3194-1fb3-e76fda655891",
+          "canada:6e9c26cb-5a28-40de-a1df-82a8c7b5a4e2",
+          "statcan:10100065",
+          "statcan:10100048",
+          "canada:8f3a80dd-e5cc-4784-b887-34e0426938bf",
+          "canada:a6f91761-0d51-aad1-29bc-c0751404339e",
+          "canada:eef52f0f-a253-4350-b210-795a3042d867",
+          "statcan:10100055",
+          "canada:a358d531-c5fa-b7ee-7cdc-5a7063f01df6"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 130.2277089562267
+      },
+      {
+        "id": "q051",
+        "query": "chartered banks foreign claims bank of canada",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100004"
+        ],
+        "retrieved_ids": [
+          "canada:e69abc47-e00b-4868-af2c-506c40bcd07c",
+          "canada:c6879faf-2bc7-4c84-999c-0626ae33ec84",
+          "statcan:10100111",
+          "canada:50e9eb6a-7484-47d1-96b0-a42931913be1",
+          "canada:441f09ce-b61a-4bbd-b29e-4f4694868d53",
+          "canada:94bd1067-3666-4e7b-8158-5928931af122",
+          "canada:c8059bb8-7622-4a5b-8b45-ce63907c486e",
+          "canada:b7152c91-1640-41ae-8b1d-04eef47055b5",
+          "canada:b744b0c2-0ee5-4af0-9fb1-5c6d5ebd36a0",
+          "canada:85a1c2de-8355-4d58-a419-0d849a6cc7b5"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 124.9838329385966
+      },
+      {
+        "id": "q052",
+        "query": "statcan public sector employment reconciliation",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100001"
+        ],
+        "retrieved_ids": [
+          "canada:911291f2-f5b2-4129-87dd-8c38518cb340",
+          "alberta:1f4d63df-5334-45aa-ae4c-b852bae2d541",
+          "statcan:10100001",
+          "statcan:10100025",
+          "alberta:df76631d-e55d-435a-bad6-977b66fab1a9",
+          "alberta:2b92d9c3-5388-4a1d-9634-5f171cb16db0",
+          "alberta:a2ffb412-a9de-4caa-acfa-965405622a92",
+          "alberta:2bc2bace-5ccd-4f6d-abeb-297e7f6e3dad",
+          "canada:0ce0b7a7-9a8d-b6ca-0a05-0fc3a1f5fa92",
+          "alberta:f92ce237-8b61-490a-938e-fe4f21d265ea"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.3333333333333333
+        },
+        "latency_ms": 130.3068338893354
+      },
+      {
+        "id": "q053",
+        "query": "bank of canada daily foreign exchange rates",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100008"
+        ],
+        "retrieved_ids": [
+          "statcan:33100036",
+          "statcan:10100008",
+          "statcan:33100163",
+          "statcan:10100009",
+          "statcan:10100126",
+          "statcan:10100123",
+          "statcan:10100087",
+          "statcan:10100139",
+          "statcan:10100138",
+          "statcan:10100079"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 133.43262486159801
+      },
+      {
+        "id": "q054",
+        "query": "bank of canada monthly foreign exchange rates",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100009"
+        ],
+        "retrieved_ids": [
+          "statcan:33100163",
+          "statcan:10100009",
+          "statcan:10100126",
+          "statcan:33100036",
+          "statcan:10100079",
+          "statcan:10100008",
+          "statcan:10100111",
+          "statcan:10100123",
+          "statcan:10100087",
+          "statcan:36100034"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.5
+        },
+        "latency_ms": 117.6236248575151
+      },
+      {
+        "id": "q055",
+        "query": "government of canada debt securities issues and retirements",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100003"
+        ],
+        "retrieved_ids": [
+          "canada:0e8fb781-6d8d-4aad-b3ed-619a5d16a12a",
+          "canada:c3a38645-9330-425d-99a6-7685ec3da1d1",
+          "canada:cea25143-7604-43f3-80d2-6e2b03b9c52b",
+          "canada:48b3de86-09a6-48d3-aa15-3147b7ac327d",
+          "canada:7ad9170c-4ec2-4ada-a56d-e140b69304af",
+          "canada:2f6f2349-bb9c-4ea4-bbc2-ac0a4dfc690e",
+          "statcan:10100007",
+          "statcan:10100063",
+          "canada:2dcdb650-8f9b-4375-8273-c2f764bca6a4",
+          "canada:afa8351f-2d07-49a1-a93c-311cdc021b59"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 129.53541707247496
+      },
+      {
+        "id": "q056",
+        "query": "statement of government operations and balance sheet statistics",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100015"
+        ],
+        "retrieved_ids": [
+          "canada:8d5bcb30-99d3-4f65-aed9-3ca38f4f926e",
+          "canada:67dd31f0-c31e-43fd-9dc6-50273579b827",
+          "canada:5cee2dc0-781c-4689-a3d7-c0fd4dfa2ca4",
+          "canada:a737ce3c-0208-4fc1-bf95-3dc576390a86",
+          "canada:2e5a00fa-91d5-46d2-a2e5-72eb73e3c3c7",
+          "canada:d1640392-0a37-477a-9d28-e80da9d9dd22",
+          "canada:bd90ed88-7fc9-4184-94fe-fe12b56c19d1",
+          "canada:1631b19e-af6e-4d99-95c9-662dbe25bf28",
+          "canada:5c606da8-b70c-4ac4-9518-b6a02997f2e0",
+          "canada:e1f0a205-46f9-47bf-bba8-86390ec2f481"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 121.63216690532863
+      },
+      {
+        "id": "q057",
+        "query": "canadian government finance statistics for federal government",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100016"
+        ],
+        "retrieved_ids": [
+          "canada:a737ce3c-0208-4fc1-bf95-3dc576390a86",
+          "canada:5c606da8-b70c-4ac4-9518-b6a02997f2e0",
+          "statcan:10100169",
+          "statcan:10100019",
+          "canada:cf6b6789-4dfd-4860-b45a-291842fea06f",
+          "canada:b28ce95f-a075-4ea9-89b9-ca955f94689d",
+          "canada:7a9591cc-9df6-463c-9934-aad6dbc0eb12",
+          "statcan:10100055",
+          "canada:94703147-8ea9-49fc-af50-c7f71e67f5a3",
+          "statcan:10100018"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 118.38949983939528
+      },
+      {
+        "id": "q058",
+        "query": "government finance statistics for provincial and territorial governments",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100017"
+        ],
+        "retrieved_ids": [
+          "canada:cf6b6789-4dfd-4860-b45a-291842fea06f",
+          "canada:5c606da8-b70c-4ac4-9518-b6a02997f2e0",
+          "canada:b28ce95f-a075-4ea9-89b9-ca955f94689d",
+          "canada:ad167954-ccb8-4ba9-9638-d318653b79b2",
+          "statcan:10100169",
+          "canada:560aceb1-9a96-44ab-9028-8a507040d946",
+          "canada:b46c42f5-ebf5-426c-9bce-9db7a41d8e4a",
+          "canada:68bbf882-6cb2-465e-9875-537a9c22fec1",
+          "canada:492ac052-44fe-491c-8e3b-4ad16b2235a2",
+          "canada:28e11903-385b-4ab3-9890-1a35f7bea817"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 126.30833289586008
+      },
+      {
+        "id": "q059",
+        "query": "government finance statistics for colleges and universities",
+        "category": "statcan",
+        "lang": "en",
+        "expected_ids": [
+          "statcan:10100019"
+        ],
+        "retrieved_ids": [
+          "canada:5a183c22-80e7-40ea-850d-4dc98e1748ad",
+          "canada:b44fa7f4-36d6-47b5-8216-e8c0e552ec48",
+          "statcan:37100212",
+          "statcan:37100040",
+          "statcan:37100131",
+          "statcan:10100058",
+          "statcan:37100293",
+          "statcan:37100211",
+          "canada:3de8ac2c-227f-4f22-a2a7-7fef1ec20da5",
+          "statcan:37100270"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 114.1116670332849
+      },
+      {
+        "id": "q060",
+        "query": "alberta weekly livestock market review",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:90297161-7a1c-4de6-b192-16f6eea98bbf"
+        ],
+        "retrieved_ids": [
+          "alberta:902547bc-7d1c-4147-b774-99a313c536a0",
+          "alberta:e80740b9-1a84-4d2e-866a-f74e62436299",
+          "alberta:ddd55b15-02b0-475b-affc-e38e8c690bbc",
+          "alberta:90297161-7a1c-4de6-b192-16f6eea98bbf",
+          "alberta:38b723e8-db70-4532-8d85-d5feae64e950",
+          "alberta:1a118df8-7860-4165-8a7a-3764a944b3a7",
+          "alberta:e80c46a8-8612-4166-8f06-dc80aa09cc56",
+          "alberta:4ccd8581-b6f0-4a1b-b6ab-d060440996f1",
+          "alberta:16e6d069-037a-47d1-a5c0-0086bbbcc944",
+          "alberta:b86cd45c-5976-47c0-ad0b-f6cc08b947c9"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 0.25
+        },
+        "latency_ms": 119.23483293503523
+      },
+      {
+        "id": "q061",
+        "query": "alberta weekly crop market review",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:b23eeb3f-8059-4dce-b23b-cf552736dc61"
+        ],
+        "retrieved_ids": [
+          "alberta:b23eeb3f-8059-4dce-b23b-cf552736dc61",
+          "alberta:deae699f-7721-4f24-9573-54d3d18baf65",
+          "alberta:772c08dc-e15d-4186-a6ed-afa4b49c48a8",
+          "alberta:864f86a2-a4cc-4ef6-a1e5-dc07389e4a5d",
+          "alberta:be168f37-341a-4a78-9f57-5420b4a57433",
+          "alberta:1061490e-54a7-4831-9731-589886135699",
+          "alberta:3714a545-fe0f-4561-a586-75c2b1f3a0d3",
+          "alberta:8fee0d33-50d0-4dca-88d6-b5ccde510c69",
+          "alberta:f4780aad-26c5-432c-ad83-3504dda1aa36",
+          "alberta:bc3cd1a8-7cb7-4f4a-9db7-573b4e617502"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 114.95487508364022
+      },
+      {
+        "id": "q062",
+        "query": "alberta weekly economic review",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:b92414c4-929b-4eb0-9c21-bc7e3a5e1990"
+        ],
+        "retrieved_ids": [
+          "alberta:70ba1fb3-6969-4136-b2a6-a92ebff87d60",
+          "alberta:207434dc-05fd-47fe-aa29-d42877cc418d",
+          "alberta:c60b1a54-f60b-49c5-a338-43c06e4bac0b",
+          "alberta:e61d7233-2211-4962-a3bc-5d45173e04af",
+          "alberta:ed1b730d-2603-4cd1-b829-1a52cf793071",
+          "alberta:c636d88e-ff0c-475c-acb6-5eb3f64c8388",
+          "alberta:bd34ca00-0e3b-4ae3-9b46-72c7a319e9a5",
+          "alberta:b92414c4-929b-4eb0-9c21-bc7e3a5e1990",
+          "alberta:81e6704d-4628-4aa1-9d92-a7f1df6c86a1",
+          "alberta:aee01e89-147f-4f32-90bd-c3eba4834c5c"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 1.0,
+          "mrr": 0.125
+        },
+        "latency_ms": 118.90925001353025
+      },
+      {
+        "id": "q063",
+        "query": "alberta oil royalties review",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:35dc8c68-c6ab-47c4-881d-51f60743345a"
+        ],
+        "retrieved_ids": [
+          "alberta:57231691-caac-4a7b-b2d1-551ffa71155b",
+          "alberta:ab1a2640-be92-4092-a471-c0416e4ef558",
+          "alberta:c19c17dd-0a00-4848-9dd0-f3e0df0f14eb",
+          "alberta:e07a4a53-da6e-4d9c-91fd-065ae660980a",
+          "alberta:01b3af57-350c-43ec-8c73-d70fe74523cb",
+          "alberta:8b4f3053-4697-49b6-8206-dbd976741a84",
+          "alberta:2db4e880-af02-4c94-a1a7-3bd7d78921fe",
+          "alberta:966866fa-e319-4b94-a4c6-61d55e526c9f",
+          "alberta:ee524b2f-373a-4c41-87eb-acc593f5bc5c",
+          "alberta:3ce4de02-1ef2-4f45-bc62-db92fffdc0ee"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 126.87049992382526
+      },
+      {
+        "id": "q064",
+        "query": "alberta traffic collision casualties",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "alberta:637075cb-e3f9-4d05-af19-ea2dc532eed3"
+        ],
+        "retrieved_ids": [
+          "alberta:637075cb-e3f9-4d05-af19-ea2dc532eed3",
+          "alberta:931928c3-04f6-43a8-abda-436cd5117afd",
+          "alberta:e942904f-e07c-432e-9b4b-b78c643c8bc6",
+          "alberta:1f6714b9-5b9f-4f75-b46e-2b5f5d21d8e9",
+          "alberta:de6bd3ec-b4e2-4e74-a8f4-26cd78642db3",
+          "alberta:cb0799a8-1f25-4a8f-b3ed-0d4a5980eed3",
+          "alberta:ee03b884-617f-416c-afea-400638a9e9f3",
+          "alberta:386a9886-e1c2-4228-8d09-0a5d911addb1",
+          "alberta:d7a2fd69-1264-4c9f-a44b-fc8dab0dbba9",
+          "alberta:323beb87-f08b-4fc3-8dc7-ebde46a8805c"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 116.5147500578314
+      },
+      {
+        "id": "q065",
+        "query": "ontario registered marriage officiants list",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:38ddc983-1bf0-4bee-ad18-07dac8cfe884"
+        ],
+        "retrieved_ids": [
+          "canada:38ddc983-1bf0-4bee-ad18-07dac8cfe884",
+          "ontario:499472dc-8526-4ed6-b267-58cc1bd774e7",
+          "ontario:ec9ddfa5-22e7-4588-98fc-4d6cb335188f",
+          "canada:21f042c5-d6c4-44e2-9c03-f71c39b3a0e8",
+          "canada:759b07e9-c3ca-477b-80a9-8698b545dacd",
+          "canada:46df90d5-0425-4472-b30c-c225dcd64f1e",
+          "statcan:39100018",
+          "canada:109fd02f-6ec8-4bf7-bcd5-3936b5d21d14",
+          "canada:562d4f1d-a60c-412e-8bee-7a53c463b147",
+          "canada:e7b6d7fc-86c1-424a-a5fd-b832ff67fde1"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 125.27208402752876
+      },
+      {
+        "id": "q066",
+        "query": "ontario water taking permits registry",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:d194c6fc-ddf0-4913-a4e4-eb7144914e52"
+        ],
+        "retrieved_ids": [
+          "ontario:dfd0d1ff-961d-400b-a01e-a90831697b7e",
+          "canada:c3413230-b784-4e4a-befd-d325840235cc",
+          "canada:645356b2-2b7b-46e1-88f2-c5db2aaa0b37",
+          "canada:d194c6fc-ddf0-4913-a4e4-eb7144914e52",
+          "canada:969b9309-7512-4e4c-8bab-63872abf24dd",
+          "canada:a1792615-c3a8-489a-b89e-814141c67b9d",
+          "ontario:9eff0886-2630-490c-a307-a7018c545142",
+          "canada:85cb9e62-a388-4fd6-b669-c83fa9ff51b2",
+          "canada:af3d0f22-ce38-4137-9bc9-61bb3ea75085",
+          "canada:01fe8fa7-8cf1-40cf-9ff7-07a9f6d46078"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 120.92724977992475
+      },
+      {
+        "id": "q067",
+        "query": "ontario licensed well contractors directory",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:ef416525-abb9-4805-a596-98681d34f153"
+        ],
+        "retrieved_ids": [
+          "canada:ef416525-abb9-4805-a596-98681d34f153",
+          "canada:dfd0d1ff-961d-400b-a01e-a90831697b7e",
+          "canada:c1a624a7-fbd4-4bc8-8e65-41b294443123",
+          "ontario:6dac9528-fea6-43a9-b644-0aa27edc7e14",
+          "ontario:c1a624a7-fbd4-4bc8-8e65-41b294443123",
+          "alberta:09b71647-f9f5-45e0-9fa5-36276471f4fc",
+          "alberta:be1ebe9f-2d5b-4069-9025-6d3ff7cba4b7",
+          "alberta:2b8847b0-22dc-4747-9599-43b1d997563d",
+          "canada:af3d0f22-ce38-4137-9bc9-61bb3ea75085",
+          "alberta:b86f55b7-0040-4c36-a326-f2df7df930d9"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 126.29645899869502
+      },
+      {
+        "id": "q068",
+        "query": "ontario crown timber charges for forestry",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:e9701604-b867-4a01-9546-e2457bc90289"
+        ],
+        "retrieved_ids": [
+          "canada:e9701604-b867-4a01-9546-e2457bc90289",
+          "canada:e0da8068-6f08-453f-9684-7d00cd6f6f93",
+          "alberta:b0952938-e29d-4340-a00f-d040118081c5",
+          "alberta:898a89fe-1f5c-4b51-9390-fb04ddf1e71d",
+          "alberta:7ee30a1a-b2f2-4794-844a-6ea25e61b396",
+          "alberta:51ce57fe-f83f-430d-8511-7415937c1a51",
+          "alberta:8cc775c5-8c6e-4c17-b35a-0e0bc27739db",
+          "alberta:3096c9fa-4dac-478a-8f51-5ff36ca0addc",
+          "alberta:57d9919f-bdc9-4372-b7c8-8ac8fc3aa8fc",
+          "alberta:a9c3e470-1efb-4bd4-8a5b-17c4a17021ff"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 116.79387488402426
+      },
+      {
+        "id": "q069",
+        "query": "ontario working at heights training providers",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:26c0f241-e307-4387-a9b4-48c5522fb8f1"
+        ],
+        "retrieved_ids": [
+          "ontario:26c0f241-e307-4387-a9b4-48c5522fb8f1",
+          "alberta:e42ff11d-1a65-45a7-8f12-df7318e75e9c",
+          "canada:9ce8373a-4bae-4c74-be9a-d8639dea9d54",
+          "canada:fadf8bde-c01d-42ee-b2d5-011f2d74c074",
+          "ontario:706a2e5c-b34c-43a4-ae32-a0d93af9afaa",
+          "canada:de141de6-2664-478d-81fb-6ba3eb5777dd",
+          "canada:15182296-fb4d-4395-a177-2936cf012ee9",
+          "canada:8db9f9ef-2416-456d-9340-f1c253b3d99e",
+          "canada:8fe711a1-9782-434d-a901-ee7ef33de26b",
+          "alberta:bc4f26b4-7ff3-40a1-8df2-cc15bc34856f"
+        ],
+        "metrics": {
+          "hit@1": 1.0,
+          "hit@5": 1.0,
+          "hit@10": 1.0,
+          "mrr": 1.0
+        },
+        "latency_ms": 121.13562482409179
+      },
+      {
+        "id": "q070",
+        "query": "ontario moose tag allocation process results",
+        "category": "single_portal",
+        "lang": "en",
+        "expected_ids": [
+          "ontario:e9e6d7e4-cfdc-4ac2-bbe3-87e6f0504366"
+        ],
+        "retrieved_ids": [
+          "canada:e9e6d7e4-cfdc-4ac2-bbe3-87e6f0504366",
+          "canada:07fc6d4f-d197-4caa-86e5-6da30f7c1d5c",
+          "canada:deb6e8be-5b71-4d4e-8d50-1ae08c8dbf3c",
+          "canada:dd17d211-5038-479a-8f23-dafcb26c829b",
+          "alberta:6f4ed10a-08c0-4e3d-bb68-0b0eae11cd10",
+          "canada:b16ef29c-a71d-4693-a2f1-8c92cc2ca438",
+          "canada:173006c2-d77c-43c6-a40d-b79387bafba7",
+          "alberta:2cd403b6-ab9c-40d6-9901-272a01cba1f3",
+          "alberta:2fe23743-8059-40bd-b8ad-ba2bda050b81",
+          "alberta:84fc6b83-b817-48ef-bf01-8b705e7820d9"
+        ],
+        "metrics": {
+          "hit@1": 0.0,
+          "hit@5": 0.0,
+          "hit@10": 0.0,
+          "mrr": 0.0
+        },
+        "latency_ms": 122.47983389534056
+      }
+    ]
+  }
+}

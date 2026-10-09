@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 QUERYABLE_FILE_FORMATS = {
     "CSV",
     "JSON",
+    "GEOJSON",
     "PARQUET",
     "PDF",
     "TXT",
@@ -16,6 +17,8 @@ QUERYABLE_FILE_FORMATS = {
     "XLSX",
     "TEXT/CSV",
     "APPLICATION/JSON",
+    "APPLICATION/GEO+JSON",
+    "APPLICATION/VND.GEO+JSON",
     "APPLICATION/PARQUET",
     "APPLICATION/VND.APACHE.PARQUET",
     "APPLICATION/VND.MS-EXCEL",
@@ -23,7 +26,7 @@ QUERYABLE_FILE_FORMATS = {
 }
 
 QUERYABLE_SUFFIXES = {
-    ".csv", ".json", ".parquet", ".pdf", ".txt", ".xls", ".xlsx", ".zip"
+    ".csv", ".json", ".geojson", ".parquet", ".pdf", ".txt", ".xls", ".xlsx", ".zip"
 }
 EXCLUDED_FORMATS = {"SHP", "SHAPEFILE", "WMS", "WFS", "HTML", "HTM", "KML", "KMZ", "GPKG"}
 GEOSPATIAL_ZIP_HINTS = ("shapefile", "shape file", ".shp", "geodatabase", ".gdb")

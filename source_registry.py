@@ -51,6 +51,30 @@ SOURCE_REGISTRY: Dict[str, SourceConfig] = {
         page_template="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid={native_id}01",
         language_priority=("en", "fr"),
     ),
+    "bc": SourceConfig(
+        id="bc",
+        name="Government of British Columbia Data Catalogue",
+        source_type="ckan",
+        api_base="https://catalogue.data.gov.bc.ca/api/3/action",
+        page_template="https://catalogue.data.gov.bc.ca/dataset/{native_id}",
+        language_priority=("en",),
+    ),
+    "toronto": SourceConfig(
+        id="toronto",
+        name="City of Toronto Open Data",
+        source_type="ckan",
+        api_base="https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action",
+        page_template="https://open.toronto.ca/dataset/{native_id}",
+        language_priority=("en",),
+    ),
+    "quebec": SourceConfig(
+        id="quebec",
+        name="Données Québec",
+        source_type="ckan",
+        api_base="https://www.donneesquebec.ca/recherche/api/3/action",
+        page_template="https://www.donneesquebec.ca/recherche/dataset/{native_id}",
+        language_priority=("fr", "en"),
+    ),
     "boc": SourceConfig(
         id="boc",
         name="Bank of Canada Valet API",
@@ -107,6 +131,11 @@ def split_dataset_id(dataset_id: str, default_source: str = "canada") -> Tuple[s
             if len(pid_value) == 10 and pid_value.endswith("01"):
                 return "statcan", pid_value[:-2]
             raise ValueError(f"Could not find a Statistics Canada PID in URL: {value}")
+        if host in ("www.bankofcanada.ca", "bankofcanada.ca"):
+            parts = [part for part in parsed.path.split("/") if part]
+            if parts:
+                return "boc", parts[-1]
+            raise ValueError(f"Could not find a Bank of Canada series or group name in URL: {value}")
         parts = [part for part in parsed.path.split("/") if part]
         try:
             native = parts[parts.index("dataset") + 1]
@@ -118,6 +147,12 @@ def split_dataset_id(dataset_id: str, default_source: str = "canada") -> Tuple[s
             return "alberta", native
         if host == "data.ontario.ca":
             return "ontario", native
+        if host in ("catalogue.data.gov.bc.ca", "data.gov.bc.ca"):
+            return "bc", native
+        if host == "open.toronto.ca":
+            return "toronto", native
+        if host in ("www.donneesquebec.ca", "donneesquebec.ca"):
+            return "quebec", native
         raise ValueError(f"Dataset URL host is not registered: {host}")
 
     if ":" in value:

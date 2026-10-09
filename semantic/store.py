@@ -1,10 +1,11 @@
 import os
 import json
 import logging
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 import duckdb
 
 from source_registry import page_url, qualify_dataset_id, split_dataset_id
+from semantic.embed import EMBED_DIM, MODEL_NAME, PROMPT_VERSION
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -13,9 +14,10 @@ logger = logging.getLogger(__name__)
 # Locate the database relative to this file (project root)
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "catalog.duckdb")
 
+
 def init_db(conn: duckdb.DuckDBPyConnection) -> None:
     """Initialize and migrate the datasets table schema in DuckDB."""
-    conn.execute("""
+    conn.execute(f"""
         CREATE TABLE IF NOT EXISTS datasets (
             id VARCHAR PRIMARY KEY,
             title VARCHAR,
@@ -29,7 +31,25 @@ def init_db(conn: duckdb.DuckDBPyConnection) -> None:
             native_id VARCHAR,
             page_url VARCHAR,
             metadata_json VARCHAR,
-            embedding FLOAT[384]
+            embedding FLOAT[{EMBED_DIM}]
+        );
+    """)
+    conn.execute(f"""
+        CREATE TABLE IF NOT EXISTS dataset_assets (
+            asset_id VARCHAR PRIMARY KEY,
+            dataset_id VARCHAR,
+            kind VARCHAR,
+            source_url VARCHAR,
+            title VARCHAR,
+            text VARCHAR,
+            metadata_json VARCHAR,
+            embedding FLOAT[{EMBED_DIM}]
+        );
+    """)
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS catalog_meta (
+            key VARCHAR PRIMARY KEY,
+            value VARCHAR
         );
     """)
     columns = {
@@ -58,6 +78,85 @@ def init_db(conn: duckdb.DuckDBPyConnection) -> None:
     """)
     conn.execute("DELETE FROM datasets WHERE source_id = 'curated'")
     logger.info("DuckDB schema initialized.")
+
+
+def get_catalog_meta(conn: Optional[duckdb.DuckDBPyConnection] = None) -> Dict[str, str]:
+    """Retrieve catalog metadata (embed_model, embed_dim, prompt_version, etc.)."""
+    close_after = False
+    if conn is None:
+        if not os.path.exists(DB_PATH):
+            return {}
+        conn = duckdb.connect(DB_PATH, read_only=True)
+        close_after = True
+    try:
+        tables = {row[0] for row in conn.execute("SHOW TABLES").fetchall()}
+        if "catalog_meta" not in tables:
+            # Infer dimension from datasets schema if catalog_meta does not exist yet
+            if "datasets" in tables:
+                for col in conn.execute("PRAGMA table_info('datasets')").fetchall():
+                    if col[1] == "embedding":
+                        type_str = str(col[2])
+                        dim = 384
+                        if "[" in type_str and "]" in type_str:
+                            try:
+                                dim = int(type_str.split("[")[-1].split("]")[0])
+                            except ValueError:
+                                pass
+                        return {
+                            "embed_model": "BAAI/bge-small-en-v1.5" if dim == 384 else "unknown",
+                            "embed_dim": str(dim),
+                            "prompt_version": "legacy",
+                        }
+            return {}
+        rows = conn.execute("SELECT key, value FROM catalog_meta").fetchall()
+        return {r[0]: r[1] for r in rows}
+    finally:
+        if close_after:
+            conn.close()
+
+
+def set_catalog_meta(meta: Dict[str, str], conn: Optional[duckdb.DuckDBPyConnection] = None) -> None:
+    """Store or update catalog metadata."""
+    close_after = False
+    if conn is None:
+        conn = duckdb.connect(DB_PATH)
+        close_after = True
+    try:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS catalog_meta (
+                key VARCHAR PRIMARY KEY,
+                value VARCHAR
+            );
+        """)
+        for k, v in meta.items():
+            conn.execute("""
+                INSERT OR REPLACE INTO catalog_meta (key, value) VALUES (?, ?);
+            """, [k, str(v)])
+    finally:
+        if close_after:
+            conn.close()
+
+
+def check_catalog_compatibility() -> Optional[Dict[str, Any]]:
+    """
+    Check if the local catalog.duckdb matches the expected embed_model and embed_dim.
+    Returns None if compatible or catalog missing, or a dict with details if mismatched.
+    """
+    if not os.path.exists(DB_PATH):
+        return None
+    meta = get_catalog_meta()
+    if not meta:
+        return None
+    catalog_model = meta.get("embed_model")
+    catalog_dim = meta.get("embed_dim")
+    if (catalog_model and catalog_model != MODEL_NAME) or (catalog_dim and str(catalog_dim) != str(EMBED_DIM)):
+        return {
+            "expected_model": MODEL_NAME,
+            "expected_dim": EMBED_DIM,
+            "catalog_model": catalog_model,
+            "catalog_dim": catalog_dim,
+        }
+    return None
 
 
 def _has_source_columns(conn: duckdb.DuckDBPyConnection) -> bool:
@@ -103,19 +202,17 @@ def _normalized_record(row: tuple, *, has_sources: bool,
         "topic": topic,
         "resources": json.loads(resources_json) if resources_json else [],
         "metadata_modified": modified,
+        "distance": float(distance) if distance is not None else None,
         "source_id": source_id,
         "source_type": source_type,
         "native_id": native_id,
         "page_url": public_page,
         "metadata": json.loads(metadata_json) if metadata_json else {},
-        "distance": distance,
     }
 
+
 def save_datasets(datasets_data: List[Dict[str, Any]]) -> None:
-    """
-    Save a batch of dataset records and their embeddings to the database.
-    Performs bulk insertion using transaction blocks.
-    """
+    """Save processed datasets with embeddings to DuckDB."""
     if not datasets_data:
         return
         
@@ -124,7 +221,6 @@ def save_datasets(datasets_data: List[Dict[str, Any]]) -> None:
         init_db(conn)
         conn.execute("BEGIN TRANSACTION;")
         
-        # Prepare rows for insertion
         rows = []
         for ds in datasets_data:
             source_id, native_id = split_dataset_id(
@@ -150,13 +246,20 @@ def save_datasets(datasets_data: List[Dict[str, Any]]) -> None:
                 ds["embedding"]
             ))
             
+        # Determine embedding dimension from data if present, otherwise default to EMBED_DIM
+        record_dim = EMBED_DIM
+        for ds in datasets_data:
+            if ds.get("embedding"):
+                record_dim = len(ds["embedding"])
+                break
+
         # Perform bulk upsert
-        conn.executemany("""
+        conn.executemany(f"""
             INSERT OR REPLACE INTO datasets (
                 id, title, org, notes, topic, resources_json, metadata_modified,
                 source_id, source_type, native_id, page_url, metadata_json, embedding
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::FLOAT[384]);
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::FLOAT[{record_dim}]);
         """, rows)
         
         conn.execute("COMMIT;")
@@ -199,6 +302,7 @@ def prune_source_records(source_id: str, keep_ids: List[str]) -> None:
     finally:
         conn.close()
 
+
 def top_k(query_vec: List[float], k: int = 8) -> List[Dict[str, Any]]:
     """
     Retrieve the top-K datasets closest to the query vector.
@@ -218,10 +322,11 @@ def top_k(query_vec: List[float], k: int = 8) -> List[Dict[str, Any]]:
             ", source_id, source_type, native_id, page_url" if has_sources else ""
         )
         metadata_select = ", metadata_json" if has_sources and has_metadata else ""
+        query_dim = len(query_vec) if query_vec else EMBED_DIM
         res = conn.execute(f"""
             SELECT id, title, org, notes, topic, resources_json, metadata_modified
                    {source_select}{metadata_select},
-                   array_cosine_distance(embedding, ?::FLOAT[384]) AS dist
+                   array_cosine_distance(embedding, ?::FLOAT[{query_dim}]) AS dist
             FROM datasets
             ORDER BY dist ASC
             LIMIT ?
@@ -237,6 +342,7 @@ def top_k(query_vec: List[float], k: int = 8) -> List[Dict[str, Any]]:
         ]
     finally:
         conn.close()
+
 
 def get_by_ids(ids: List[str]) -> Dict[str, Dict[str, Any]]:
     """
@@ -279,3 +385,153 @@ def get_by_ids(ids: List[str]) -> Dict[str, Dict[str, Any]]:
         return results
     finally:
         conn.close()
+
+
+def save_dataset_assets(assets_data: List[Dict[str, Any]]) -> None:
+    """Save enriched child assets (schemas, PDFs, map context) with embeddings."""
+    if not assets_data:
+        return
+        
+    conn = duckdb.connect(DB_PATH)
+    try:
+        init_db(conn)
+        conn.execute("BEGIN TRANSACTION;")
+        
+        rows = []
+        for asset in assets_data:
+            rows.append((
+                asset["asset_id"],
+                asset["dataset_id"],
+                asset.get("kind", "schema"),
+                asset.get("source_url", ""),
+                asset.get("title", ""),
+                asset.get("text", ""),
+                json.dumps(asset.get("metadata", {}), ensure_ascii=False),
+                asset["embedding"]
+            ))
+            
+        record_dim = EMBED_DIM
+        for asset in assets_data:
+            if asset.get("embedding"):
+                record_dim = len(asset["embedding"])
+                break
+
+        conn.executemany(f"""
+            INSERT OR REPLACE INTO dataset_assets (
+                asset_id, dataset_id, kind, source_url, title, text, metadata_json, embedding
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?::FLOAT[{record_dim}]);
+        """, rows)
+        
+        conn.execute("COMMIT;")
+        logger.info(f"Successfully saved {len(assets_data)} dataset assets to {DB_PATH}")
+    except Exception as e:
+        conn.execute("ROLLBACK;")
+        logger.error(f"Failed to save dataset assets to DuckDB: {e}")
+        raise
+    finally:
+        conn.close()
+
+
+def top_k_assets(query_vec: List[float], k: int = 10) -> List[Dict[str, Any]]:
+    """Retrieve the top-K child assets closest to the query vector."""
+    if not os.path.exists(DB_PATH):
+        return []
+    conn = duckdb.connect(DB_PATH, read_only=True)
+    try:
+        tables = {row[0] for row in conn.execute("SHOW TABLES").fetchall()}
+        if "dataset_assets" not in tables:
+            return []
+        query_dim = len(query_vec) if query_vec else EMBED_DIM
+        res = conn.execute(f"""
+            SELECT asset_id, dataset_id, kind, source_url, title, text, metadata_json,
+                   array_cosine_distance(embedding, ?::FLOAT[{query_dim}]) AS dist
+            FROM dataset_assets
+            ORDER BY dist ASC
+            LIMIT ?
+        """, (query_vec, k)).fetchall()
+
+        results = []
+        for row in res:
+            metadata = json.loads(row[6]) if row[6] else {}
+            results.append({
+                "asset_id": row[0],
+                "dataset_id": row[1],
+                "kind": row[2],
+                "source_url": row[3],
+                "title": row[4],
+                "text": row[5],
+                "metadata": metadata,
+                "distance": float(row[7]) if row[7] is not None else None,
+            })
+        return results
+    finally:
+        conn.close()
+
+
+def bm25_search(query: str, k: int = 10) -> List[Dict[str, Any]]:
+    """Perform BM25 full-text keyword search across datasets."""
+    if not os.path.exists(DB_PATH) or not query.strip():
+        return []
+    
+    # Sanitize query for DuckDB FTS: keep alphanumeric terms
+    clean_query = " ".join([w for w in query.replace("'", " ").replace('"', ' ').split() if w.isalnum()])
+    if not clean_query:
+        return []
+
+    conn = duckdb.connect(DB_PATH, read_only=True)
+    try:
+        tables = {row[0] for row in conn.execute("SHOW TABLES").fetchall()}
+        if "fts_main_datasets" not in tables:
+            return []
+        has_sources = _has_source_columns(conn)
+        has_metadata = _has_metadata_column(conn)
+        source_select = (
+            ", source_id, source_type, native_id, page_url" if has_sources else ""
+        )
+        metadata_select = ", metadata_json" if has_sources and has_metadata else ""
+        res = conn.execute(f"""
+            SELECT id, title, org, notes, topic, resources_json, metadata_modified
+                   {source_select}{metadata_select},
+                   score
+            FROM (
+                SELECT *, fts_main_datasets.match_bm25(id, ?) AS score
+                FROM datasets
+            )
+            WHERE score IS NOT NULL
+            ORDER BY score DESC
+            LIMIT ?
+        """, (clean_query, k)).fetchall()
+
+        return [
+            _normalized_record(
+                row, has_sources=has_sources, has_metadata=has_metadata,
+                distance=None
+            )
+            for row in res
+        ]
+    except Exception as e:
+        logger.debug(f"BM25 search skipped: {e}")
+        return []
+    finally:
+        conn.close()
+
+
+def create_fts_index(conn: Optional[duckdb.DuckDBPyConnection] = None) -> None:
+    """Create or rebuild the DuckDB FTS index on the datasets table."""
+    close_after = False
+    if conn is None:
+        conn = duckdb.connect(DB_PATH)
+        close_after = True
+    try:
+        conn.execute("INSTALL fts; LOAD fts;")
+        conn.execute(
+            "PRAGMA create_fts_index('datasets', 'id', 'title', 'notes', 'topic', 'org', overwrite=1);"
+        )
+        logger.info("DuckDB FTS BM25 index created successfully on datasets.")
+    except Exception as e:
+        logger.warning(f"Failed to create DuckDB FTS index: {e}")
+    finally:
+        if close_after:
+            conn.close()
+

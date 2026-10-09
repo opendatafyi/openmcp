@@ -8,10 +8,13 @@ __pycache__/
 *.pyd
 
 # Local Database & Data dumps
-catalog.duckdb
-catalog.duckdb.tmp
+*.duckdb
+*.duckdb.tmp
+*.duckdb.wal
+semantic/enrich_cache/
 *.jsonl.gz
 *.jsonl
+!semantic/eval/*.jsonl
 
 # Private analysis workspace (never commit or deploy)
 /analysis/
@@ -35,4 +38,6 @@ frontend/
 # Internal docs
 WEBSITE_CONTENT.md
 ROADMAP.md
+to_do.md
+
 
