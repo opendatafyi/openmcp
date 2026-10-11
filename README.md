@@ -1,12 +1,15 @@
 # opendata.fyi — Explore public data with your AI assistant
 
-**Current release: v1.1.0 · August 3, 2026** · [Changelog](CHANGELOG.md)
+**Current release: v1.2.0 · October 2026** · [Changelog](CHANGELOG.md)
 
 An open-source MCP server that lets AI assistants and MCP clients (Claude,
 Cursor, Codex, ChatGPT, Gemini CLI, Zed, and others) discover and query public
 datasets from [open.canada.ca](https://open.canada.ca),
 [open.alberta.ca](https://open.alberta.ca),
-[data.ontario.ca](https://data.ontario.ca), the complete
+[data.ontario.ca](https://data.ontario.ca),
+[catalogue.data.gov.bc.ca](https://catalogue.data.gov.bc.ca),
+[open.toronto.ca](https://open.toronto.ca),
+[donneesquebec.ca](https://www.donneesquebec.ca), the complete
 [Statistics Canada Web Data Service](https://www.statcan.gc.ca/en/developers/wds)
 table inventory, and the [Bank of Canada Valet API](https://www.bankofcanada.ca/valet/docs).
 
@@ -15,24 +18,28 @@ use opendata.fyi to find relevant datasets, query their resources, and answer
 with source links—without manual downloads or hunting through the portal.
 
 **Zero API keys required.** Semantic search runs on a local embedding model
-(bge-small-en-v1.5 via [fastembed](https://github.com/qdrant/fastembed)); data
-querying is powered by the public CKAN and StatCan WDS APIs plus DuckDB.
+(google/embeddinggemma-2); data querying is powered by the public CKAN and
+StatCan WDS APIs plus DuckDB.
 
 ## Source coverage
 
-The v1.1.0 catalogue contains **74,728 queryable datasets and statistical
-tables** in a single searchable index. Counts reflect the current release and
-will change as source catalogues are refreshed.
+The v1.2.0 catalogue contains **65,092 queryable datasets and statistical
+tables** in a single searchable index across 7 Canadian open data sources.
+Counts reflect the current release and will change as source catalogues are
+refreshed.
 
 | Source | Indexed records | Discovery and access |
 |---|---:|---|
-| [Government of Canada Open Data](https://open.canada.ca/en/open-data) | 34,326 | Semantic index + live CKAN keyword search and datastore queries |
-| [Alberta Open Data](https://open.alberta.ca) | 31,341 | Semantic index + live CKAN keyword search and datastore/file queries |
-| [Ontario Open Data](https://data.ontario.ca) | 846 | Semantic index + live CKAN keyword search and datastore/file queries |
-| [Statistics Canada data tables](https://www.statcan.gc.ca/en/developers/wds) | 8,215 | Complete WDS table inventory, full-table CSV ZIPs, metadata, vectors, coordinates, and time-series data |
+| [Government of Canada Open Data](https://open.canada.ca/en/open-data) | 34,425 | Semantic index + live CKAN keyword search and datastore queries |
+| [Alberta Open Data](https://open.alberta.ca) | 17,799 | Semantic index + live CKAN keyword search and datastore/file queries |
+| [Statistics Canada data tables](https://www.statcan.gc.ca/en/developers/wds) | 8,226 | Complete WDS table inventory, full-table CSV ZIPs, metadata, vectors, coordinates, and time-series data |
+| [British Columbia Data Catalogue](https://catalogue.data.gov.bc.ca) | 1,732 | Semantic index + live CKAN keyword search and datastore/file queries |
+| [Données Québec](https://www.donneesquebec.ca) | 1,532 | Semantic index + live CKAN keyword search and datastore/file queries |
+| [Ontario Open Data](https://data.ontario.ca) | 850 | Semantic index + live CKAN keyword search and datastore/file queries |
+| [City of Toronto Open Data](https://open.toronto.ca) | 528 | Semantic index + live CKAN keyword search and datastore/file queries |
 
 All sources share collision-safe IDs such as `canada:…`, `alberta:…`,
-`ontario:…`, and `statcan:17100009`.
+`ontario:…`, `bc:…`, `toronto:…`, `quebec:…`, and `statcan:17100009`.
 
 The indexed counts intentionally include records with a supported MCP query
 path. Live CKAN keyword discovery still searches the broader portal catalogues.
@@ -54,8 +61,8 @@ embedding index.
         ▼
 semantic_search_datasets ──── hybrid search: shared local vector index
         │                     (all sources) fused with concurrent live CKAN
-        │                     keyword searches (Canada, Alberta, Ontario)
-        │                     via Reciprocal Rank Fusion
+        │                     keyword searches (Canada, Alberta, Ontario,
+        │                     BC, Toronto, Quebec) via Reciprocal Rank Fusion
         ▼
 get_dataset ────────────────── resources + which are API-queryable
         │
@@ -130,7 +137,7 @@ Add this standard JSON block to your client's MCP configuration file (e.g. `clau
 | Tool | What it does |
 |---|---|
 | `semantic_search_datasets(query)` | Hybrid semantic + keyword dataset discovery (RRF) |
-| `search_datasets(query, source_id)` | Plain keyword search of one CKAN portal (`canada`, `alberta`, or `ontario`) |
+| `search_datasets(query, source_id)` | Plain keyword search of one CKAN portal (`canada`, `alberta`, `ontario`, `bc`, `toronto`, or `quebec`) |
 | `get_dataset(id)` | A dataset's resources + which are API-queryable |
 | `query_statcan_wds(method, ...)` | Read-only access to the official StatCan WDS methods |
 | `query_boc_valet(resource, ...)` | Read-only access to the Bank of Canada Valet API (series, groups, observations) |
@@ -238,26 +245,26 @@ exclusive with each other and with `start_date`/`end_date`.
   series, group, and observation resources with validated inputs and bounded
   MCP responses, mirroring the StatCan WDS gateway's design.
 - **The vector "database" is one DuckDB file.** Records from every enabled
-  source share 384-dimensional vectors; no external vector service is needed.
+  source share 768-dimensional vectors with HNSW indexing; no external vector
+  service is needed.
 - **Real-world Excel/CSV handling**: multi-sheet workbooks, title rows before
   headers (auto-detected), bilingual descriptions, zipped StatCan bulk tables,
   multiple encodings.
 - **Read-only by construction**: SQL is screened against write/DDL patterns;
   CKAN access is GET-only.
-- **Source-qualified IDs** (`canada:…`, `alberta:…`, `ontario:…`,
-  `statcan:…`) prevent collisions. Existing bare federal IDs and known dataset
-  page URLs remain valid inputs to `get_dataset`.
+- **Source-qualified IDs** (`canada:…`, `alberta:…`, `ontario:…`, `bc:…`,
+  `toronto:…`, `quebec:…`, `statcan:…`) prevent collisions. Existing bare
+  federal IDs and known dataset page URLs remain valid inputs to `get_dataset`.
 - **Refresh** the index without a full rebuild:
   `venv/bin/python semantic/build_index.py --refresh 1000` re-indexes up to the
   1000 most recently modified records per enabled catalog source. To harvest
-  and index the complete Statistics Canada table
-  inventory, run:
-  `venv/bin/python semantic/build_index.py --sources statcan`.
+  and index selected sources:
+  `venv/bin/python semantic/build_index.py --sources statcan,bc,toronto,quebec`.
 - **Rebuilding from scratch** is optional — most users should just download the
   release asset. If you want to: `venv/bin/python semantic/build_index.py`
   (download and embedding time depend on the selected sources). The indexer
-  uses PyTorch to auto-detect MPS on Apple Silicon or CUDA on supported NVIDIA
-  systems, and falls back to FastEmbed on CPU when neither is available.
+  uses `google/embeddinggemma-2` with PyTorch (auto-detecting MPS on Apple
+  Silicon or CUDA on supported NVIDIA systems).
 
 ## Limitations
 

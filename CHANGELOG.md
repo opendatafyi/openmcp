@@ -4,16 +4,22 @@ All notable changes to opendata.fyi OpenMCP are documented here.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [1.2.0] - 2026-10-09
 
 ### Added
 
-- `query_boc_valet`, a validated read-only gateway to the Bank of Canada
-  Valet API (series, groups, and observations) for interest rates, exchange
-  rates, and other financial series. No API key required. Live-query only —
-  not part of the semantic index or `get_dataset`.
-- Tests for the Valet request builder, mutually-exclusive range parameters,
-  and response bounding.
+- Expanded source coverage with British Columbia (`bc`), City of Toronto (`toronto`), and Données Québec (`quebec`) CKAN catalogues.
+- `query_boc_valet`, a validated read-only gateway to the Bank of Canada Valet API (series, groups, and observations) for interest rates, exchange rates, and other financial series. No API key required.
+- Upgraded semantic embedding pipeline to `google/embeddinggemma-2` with asymmetric query/document prompts and Matryoshka Representation Learning (MRL).
+- Automated LLM metadata enrichment pipeline (`semantic/enrich.py`) with persistent disk caching.
+- HNSW vector index support in DuckDB with `catalog_meta` compatibility gating (`semantic/store.py`).
+- Retrieval evaluation suite and benchmark datasets in `semantic/eval/` measuring MRR and Hit@K.
+- Tests for Bank of Canada Valet API, expanded source registries, and index schemas.
+
+### Changed
+
+- Rebuilt the downloadable semantic index (`catalog.duckdb`) covering 65,092 queryable datasets and statistical tables across 7 Canadian open data sources.
+- Hybrid discovery fuses the shared local semantic index with concurrent live keyword search across federal, provincial, and municipal CKAN portals.
 
 ## [1.1.0] - 2026-08-03
 
