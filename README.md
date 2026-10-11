@@ -102,7 +102,7 @@ venv/bin/pip install -r requirements.txt
 ### Get the search index
 
 The semantic index (`catalog.duckdb`) is too large for git. Download it
-from the [latest release](https://github.com/opendatafyi/openmcp/releases) and put it in the project root.
+from the [latest release](https://github.com/opendatafyi/openmcp/releases) and place it in the project root (if downloading `catalog.duckdb.gz`, extract it with `gzip -d catalog.duckdb.gz`).
 
 ### Updating an existing local install
 
